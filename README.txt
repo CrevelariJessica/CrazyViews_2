@@ -14,7 +14,7 @@
 	Ação Necessária: Nenhuma alteração manual é necessária neste arquivo. A conexão será estabelecida automaticamente assim que os contêineres do Docker estiverem rodando.
 
 4. Comando de Inicialização:
-	- Para iniciar o projeto, o avaliador deve apenas abrir o terminal na pasta raiz e executar o comando:
+	- Para iniciar o projeto, se deve apenas abrir o terminal na pasta raiz e executar o comando:
       	> `docker-compose up -d`
 
 ***
