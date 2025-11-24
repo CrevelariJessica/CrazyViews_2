@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style2.css">
+    <title>#</title>
+</head>
+<body class="back_uniq">
+    <div class="back_image">
+        <div class="page_read">
+            <header id="controls">
+                <div class="cont_mode">
+                    <button id="mode-pages-btn" class="nav-button active-mode">Modo Páginas</button>
+                    <button id="mode-vertical-btn" class="nav-button">Modo Vertical</button>
+                </div>
+                
+                <div id="page-navigation-controls"> 
+                    <button id="prev-btn" class="nav-button" disabled>Página Anterior</button>
+                    <span id="page-counter">Página 0 de 0</span>
+                    <button id="next-btn" class="nav-button" disabled>Próxima Página</button>
+                </div>
+
+                <div id="zoom-controls">
+                    <button id="zoom-out-btn" class="nav-button">- Zoom</button>
+                    <button id="zoom-reset-btn" class="nav-button">100%</button>
+                    <button id="zoom-in-btn" class="nav-button">+ Zoom</button>
+                </div>
+            </header>
+
+            <div id="reader-container">
+                <div id="pages-mode" class="reader-mode">
+                    <img id="page-image" src="" alt="Página da História" />
+                </div>
+
+                <div id="vertical-mode" class="reader-mode" style="display: none;">
+                    <p style="color: gray; text-align: center;">Carregando todas as páginas...</p>
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+    <script src="../assets/js/read.js"></script>
+</body>
+</html>

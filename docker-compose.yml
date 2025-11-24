@@ -1,0 +1,47 @@
+services:
+  mysql:
+    image: mariadb:10.4.32
+    container_name: hq_app_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hq_data
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  php:
+    image: php:8.2-apache
+    container_name: hq_app_php
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      - DOCKER_CONTAINER=true
+    command: >
+      bash -c "docker-php-ext-install mysqli pdo pdo_mysql
+      && a2enmod rewrite
+      && echo 'ServerName localhost' >> /etc/apache2/apache2.conf
+      && echo 'upload_max_filesize = 100M' >> /usr/local/etc/php/conf.d/uploads.ini
+      && echo 'post_max_size = 100M' >> /usr/local/etc/php/conf.d/uploads.ini
+      && echo 'max_execution_time = 300' >> /usr/local/etc/php/conf.d/uploads.ini
+      && echo 'max_input_time = 300' >> /usr/local/etc/php/conf.d/uploads.ini
+      && echo 'memory_limit = 256M' >> /usr/local/etc/php/conf.d/uploads.ini
+      && echo 'max_file_uploads = 50' >> /usr/local/etc/php/conf.d/uploads.ini
+      && apache2-foreground"
+
+volumes:
+  mysql_data:
+

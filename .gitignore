@@ -1,0 +1,5 @@
+# configurações locais do Netbeans
+nbproject/
+
+#arquivos enviados pelo usuário fica dentro desta pasta
+files/*

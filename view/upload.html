@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Enviar HQ</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../assets/css/style2.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+    <body>
+        <div class="background-page-png">
+        <form action="../php/processa_hq.php" method="POST" enctype="multipart/form-data" onsubmit="return validateinitialUploadForm">
+            
+            <div class="page_all">
+                <div class="page_allUp">
+
+                    <header>
+                        <div class="h_logo"><a href="#"><img src="../Crazy_Views_logo.png" alt="Logo do site" class="logo"></a></div>
+
+                        <div class="h_menus">
+                            <nav class="h_mainMenuMidle">
+                                <ul>
+                                    <li><a href="../index.html">Início</a></li>
+                                    <li><a href="favorite.html">Favoritos</a></li>
+                                    <li><a href="titlesUp.html">Títulos Enviados</a></li>
+                                </ul>
+                            </nav>                    
+                        </div>
+
+                        <div class="h_menusUp">
+                            <nav class="h_mainMenu">
+                                <ul id="nav">
+                                    <li><a id="headerUp" href="#">Enviar Título</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </header>
+
+                    <div></div>
+
+                    <div class="id_all">
+                    <div class="id_ContainerbotForm">
+                        <div class="id_Form">
+                            <h2>Adicionar Novo Título</h2>
+                            <div class="id_ContainerGroup">
+                                <div class="id_FormLeft">
+                                    <label for="txt_TitleLocal">Título Local:</label>
+                                </div>
+                                <div class="id_FormRight">
+                                    <input type="text" id="txt_TitleLocal" name="tituloLocal" maxlength="100" required>
+                                    <div class="help btn-help" data-target-id="msgHelpTitle"><p>?</p></div>
+                                </div>                        
+                            </div>
+                            <div class="id_Cont_Help">
+                                <span id="msgHelpTitle" class="id_Help">O título local é como o quadrinho é conhecido na região de publicação.</span>
+                            </div>
+                            <div class="cont_error">
+                                <div class="id_ContErr">
+                                    <span id="ErrorTitle"></span>
+                                </div>
+                            </div>
+
+                            <div class="id_ContainerGroup">
+                                <div class="id_FormLeft"> 
+                                    <label for="txt_TitleOriginal">Título Original:</label>
+                                </div>
+                                <div class="id_FormRight"> 
+                                    <input type="text" id="txt_TitleOriginal" name="tituloOriginal" maxlength="100" required>
+                                    <div class="help btn-help" data-target-id="msgHelpOriginal"><p>?</p></div>
+                                </div>                        
+                            </div>
+                            <div class="id_Cont_Help">
+                                <span id="msgHelpOriginal" class="id_Help">O título original é o nome da obra em seu país de origem.</span>
+                            </div>
+                            <div class="cont_error">
+                                <div class="id_ContErr">
+                                    <span id="ErrorOriginal"></span>
+                                </div>
+                            </div>
+
+                            <div class="id_ContainerGroup">
+                                <div class="id_FormLeft"> 
+                                    <label for="txt_ReleaseYe">Ano de Lançamento:</label>
+                                </div>                        
+                                <div class="id_FormRight"> 
+                                    <input type="text" id="txt_ReleaseYe" name="lancamentoAno" onblur="validateYear(event)" oninput="maskNunberOnly(this, 4)" maxlength="4" required pattern="\d{4}">
+                                    <div class="help btn-help" data-target-id="msgHelpYear"><p>?</p></div>
+                                </div>
+                            </div>
+                            <div class="id_Cont_Help">
+                                <span id="msgHelpYear" class="id_Help">Ano de lançamento original da primeira edição (formato AAAA).</span>
+                            </div>
+                            <div class="cont_error">
+                                <div class="id_ContErr">
+                                    <span id="ErrorMensageYearRelease" class="messageErro" style="display:none;"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="id_ContainerGroup">
+                                <div class="id_FormLeft"> 
+                                    <label for="txt_Gender">Gênero:</label>
+                                </div>
+                                <div class="id_FormRight"> 
+                                    <input type="text" id="txt_Gender" name="gender" maxlength="50" required>
+                                    <div class="help btn-help" data-target-id="msgHelpGender"><p>?</p></div>
+                                </div>
+                            </div>
+                            <div class="id_Cont_Help">
+                                <span id="msgHelpGender" class="id_Help">Ex: Ação, Aventura, Fantasia, Ficção Científica.</span>
+                            </div>
+                            <div class="cont_error">
+                                <div class="id_ContErr">
+                                    <span id="ErrorGender"></span>
+                                </div>
+                            </div>
+
+                            <div class="id_ContainerGroup">
+                                <div class="id_FormLeft"> 
+                                    <label for="txt_Publisher">Editora:</label>
+                                </div>                        
+                                <div class="id_FormRight"> 
+                                    <input type="text" id="txt_Publisher" name="publisher" maxlength="50" required>
+                                    <div class="help btn-help" data-target-id="msgHelpPub"><p>?</p></div>
+                                </div>
+                            </div>
+                            <div class="id_Cont_Help">
+                                <span id="msgHelpPub" class="id_Help">Nome da editora que publicou a obra.</span>
+                            </div>
+                            <div class="cont_error">
+                                <div class="id_ContErr">
+                                    <span id="ErrorPubl"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="id_FormButton">
+                        <button type="submit" class="id_ButtUp"> Cadastrar</button>
+                    </div>
+                    </div>
+                    
+                        
+                </div>
+                </div>
+                    <footer>
+                        <div class="footer-info">
+                            <p>&copy; 2025</p>
+                            <p>Crazy Views</p>
+                            <p>Desenvolvido por: Jessica Rosa da Cruz Crevelari | RA: 2225106159</p>
+                            <p>Disciplina: PROJETO DE EXTENSÃO EM DESENVOLVIMENTO - UNINOVE</p>
+                        </div>
+                        <div class="footer-links">
+                            
+                        </div>
+                    </footer>
+                </div>
+              
+        </form>
+        <script src="../assets/js/page_upload.js"> </script>
+        <script src="../assets/js/global_scripts.js"></script>
+        </div>
+    </body>
+</html>
