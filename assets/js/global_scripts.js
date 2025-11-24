@@ -1,5 +1,5 @@
 let buttonDarkMode = null;
-const PROJECT_BASE_PATH = '/hq_app';
+const PROJECT_BASE_PATH = '/Crazy_Views';
 
 function setDarkMode(dark) {
     if (dark) {
