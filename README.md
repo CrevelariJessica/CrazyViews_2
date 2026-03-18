@@ -1,197 +1,402 @@
-CRAZY VIEWS - Sistema de Gerenciamento de HQ
+# Documentação de Melhorias em Projeto Existente
 
-# CONFIGURAÇÃO DO AMBIENTE E BANCO DE DADOS
+## Informações Básicas
+### Nome do projeto Original 
+`Crazy Views`
 
-## Requisito de Execução:
-	Para executar o projeto, é necessário ter o Docker e Docker Compose instalados no ambiente (Windows, Mac ou Linux).
+### Nome da Iniciativa de Melhorias
+`Crazy Views 2.0`
 
-## Configuração do Banco de Dados (Totalmente Automatizada):
-	O projeto utiliza Docker Compose para iniciar automaticamente o banco de dados MySQL/MariaDB.
-	O arquivo `init.sql` (que contém a criação do banco de dados `hq_data` e o usuário padrão) é importado automaticamente na inicialização do serviço de banco de dados.
-	NÃO é necessário instalar o XAMPP ou importar o arquivo SQL manualmente.
+### Equipe de Melhorias
+Nome | GitHub | Papel Principal
+Jessica Crevelari | http://github.com/CrevelariJessica | Desenvolvimento, Arquitetura e Documentação
 
-## Credenciais de Conexão no Código (Pronto para Usar):
-	O arquivo `config.php` já está configurado com as credenciais de serviço necessárias (`DB_SERVER`, `DB_USERNAME`, `DB_PASSWORD`) especificadas no `docker-compose.yml`.
-	Ação Necessária: Nenhuma alteração manual é necessária neste arquivo. A conexão será estabelecida automaticamente assim que os contêineres do Docker estiverem rodando.
+## Repositórios
+- Projeto Original: (https://github.com/CrevelariJessica/Crazy_Views)
+- Novo Repositório: (https://github.com/CrevelariJessica/CrazyViews_2)
 
-## Comando de Inicialização:
-### Iniciar com Docker: 
-	Para iniciar o projeto, se deve apenas abrir o terminal na pasta raiz e executar o comando:
-      	> `docker-compose up -d`
+### 1. Descrição do Projeto Original
 
-### Método Alternativo (Execução via XAMPP/Local):
-	É possível rodar o projeto em um ambiente XAMPP/MAMP/WAMP, mas requer passos manuais:
-        	1.  Copie os arquivos para o diretório `htdocs` (ou similar).
-       		2.  Adicione manualmente o banco de dados `hq_data`. O arquivo 'hq_data.sql' com a estrutura e os dados do banco está anexado à entrega e deve ser IMPORTADO antes da execução do sistema.
-        	3.  Importe manualmente o arquivo `init.sql` para este banco.
-        	4.  Se o XAMPP não estiver usando a porta e credenciais padrão, deverá editar o arquivo `config.php` com suas credenciais locais (`localhost`, porta, usuário, senha).
+#### Propósito
+O Crazy Views é um sistema web para gerenciamento e leitura de HQs digitais (CBR, CBZ, PDF e imagens), permitindo organizar títulos e edições, visualizar páginas em um leitor integrado e gerenciar favoritos.
 
+#### Origem do Projeto
+- [X] Projeto de outra disciplina: PROJETO DE EXTENSÃO EM DESENVOLVIMENTO DE APLICAÇÕES MULTIPLATAFORMA
 
-# INFORMAÇÕES ESPECIFICAS
-## Extensões/Bibliotecas de Terceiros Necessárias (Instalação Obrigatória):
+**Detalhes:**
+- Quando foi criado: Setembro/2025
+- Contexto: Criado para por em pratica conhecimentos de banco de dados mysql, lógica de programação e funcionalidades de desenvolvimento web envolvendo html, php, javascript e css.
+- Desenvolvedor original: Jessica Rosa da Cruz Crevelari
+- Status atual: Em manutenção e evolução
 
-As seguintes extensões PHP e bibliotecas externas são obrigatórias para que o sistema de extração/conversão de arquivos funcione:
+2. Funcionalidades Existentes
 
-1.  Extensão `php_rar` (Para arquivos .cbr/.rar):
-    - Função: Essencial para processar e extrair imagens de arquivos RAR compactados.
-    - Instalação: Precisa ser baixada e instalada de fontes externas, pois não vem nativa no PHP. É crucial que a versão seja compatível com a versão do PHP e a arquitetura (x86/x64) do XAMPP do avaliador.
-    - Referência: Recomenda-se pesquisar por "php rar extension [Versão do PHP]" (Ex: php rar extension 8.2) no Google para obter o arquivo correto.
+#### Funcionalidades Implementadas
+- ✅ **Upload e gerenciamento de HQs** em múltiplos formatos (CBR, CBZ, PDF e imagens)
+- ✅ **Extração automática de páginas** de arquivos ZIP, RAR e PDF
+- ✅ **Leitor de HQ integrado** com modo vertical ou página a página e controle de zoom
+- ✅ **Sistema de favoritos e filtros avançados** para navegação entre títulos
+- ✅ **Modo escuro e modo claro persistente**
+- ✅ **Dashboard com estatísticas do sistema**
+- ✅ **Banco de dados automatizado com Docker**
 
-2.  `imagick` e `ghostscript` (Para arquivos .pdf):
-    - Função: Permite ao PHP ler, manipular e converter arquivos PDF em imagens.
-    - Instalação do Ghostscript: Deve ser instalado como um software no sistema operacional.
-    - Instalação do Imagick: Deve ser ativado como extensão do PHP (`php_imagick.dll`).
-    - Referência: Instruções detalhadas para instalação (incluindo o caminho correto do `Ghostscript`) podem ser facilmente encontradas pesquisando "install imagick xampp [Versão do PHP]".
+### 3. Stack Tecnológica Original
 
-3. Arquivos `.zip` e `.cbz` (Sem Extensão Adicional):
-    - Não é necessária nenhuma extensão externa (como `php_rar`) para processar arquivos `.zip` ou `.cbz`.
-	O PHP possui uma extensão nativa (interna) chamada `ZipArchive` que já faz parte da instalação padrão. O sistema utiliza essa funcionalidade nativa para a extração de imagens de arquivos ZIP, garantindo maior compatibilidade e dispensando passos adicionais de configuração para este formato.
+| Componente | Tecnologia | Versão |
+|------------|------------|--------|
+| Frontend | HTML, JavaScript, SCSS | - |
+| Backend | PHP | 8.x |
+| Banco de Dados | MySQL/MariaDB | - |
+| Infraestrutura | Docker / Docker Compose | - |
 
-## Formatos de Arquivos Suportados pelo sistema:
-- Arquivos de Imagem: `.png`, `.jpg`, `.jpeg`
-- Arquivos ZIP: `.cbz`, `.zip`
-- Arquivos RAR: `.cbr`, `.rar`
-- Documentos: `.pdf`
+### 4. Arquitetura Atual
+Browser
+   |
+   ▼
+Frontend (HTML + JS + CSS)
+   |
+   ▼
+Backend (PHP)
+   |
+   ▼
+Banco de Dados (MySQL)
 
+**Descrição dos componentes**
 
-# SOBRE O SISTEMA
-## Arquitetura de Usuário (Importante):
-    - O sistema é projetado para uso por um único usuário administrador. Não há funcionalidades de cadastro ou login de múltiplos usuários.
-    - Usuário Padrão Único: O sistema opera com um usuário padrão fixo (ID 1, ou similar) que não deve ser alterado ou deletado do banco de dados.
-    - Justificativa: Essa arquitetura de usuário único foi adotada para simplificar a lógica de controle de acesso e evitar problemas de duplicação ou conflito de dados (como Favoritos e histórico de informações) que poderiam ocorrer em um ambiente multiusuário.
+- **Frontend:** Interface de navegação, leitura de HQ e gerenciamento de títulos.
+- **Backend:** Processamento de uploads, extração de arquivos e lógica do sistema.
+- **Banco de dados:** Armazena informações de títulos, edições, páginas e favoritos.
 
-## Funções:
-1- Enviar Título com informações:
-	- Título Local
-	- Título Original
-	- Ano de lançamento
-	- Gênero
-	- Editora
+## 5. Limitações
+### Limitação 1: Ausência de suporte multiusuário
+Categoria: Funcional
 
-2- Cada título possui página unica dedicada.
+Descrição:
+O sistema foi projetado para uso de um único usuário administrador, não possuindo autenticação ou gerenciamento de múltiplas contas.
 
-3- Adicionar nova edição com informações:
-	- Numero da Edição
-	- Data da Edição
-	- Unico Seletor de Arquivo, na qual reconhece qual é o formato enviado para fazer a extração/conversão das imagens.
+Impacto:
+Limita o uso do sistema em ambientes compartilhados ou em servidores públicos.
 
-4- Leitor de páginas com funções:
-	- Modo Vertical/ Modo Avançar página
-	- Zoom +, -, 100%
-	- Mostra número da página atual
+Frequência: Média
 
-5- Sistema de alterar informações:
-	- EDIÇÕES: Mudar número da edição; mudar data de lançamento da edição.
-	- TÍTULOS:
+### Limitação 2: Organização manual da biblioteca
+Categoria: Usabilidade
 
-6- Sistema de Delete:
-	- EDIÇÕES:
-		- Pode ser deletado 1 por vez.
-		- Ordem do script para delete: páginas -> edição -> apagar pastas e arquivos.
+Descrição:
+O sistema depende totalmente da inserção manual de metadados dos títulos, como ano, editora e gênero.
 
-	- TÍTULOS:
-		- Pode ser deletado 1 por vez.
-		- Ordem do script de dados para delete: remover do favoritos -> todas as páginas de todas as edições -> todas as edições -> título -> apagar pastas e arquivos.
+Impacto:
+Pode tornar o cadastro de grandes bibliotecas mais demorado.
 
-7- Visualização de Informações Gerais:
-	- Mostra:
-		- Títulos totais cadastrados
-		- Títulos totais favoritados
-		- Edições totais cadastrados
+### Limitação 3: Edição de páginas de uma edição
+Categoria: Funcional
 
-8- Pesquisa de Título com opções de filtro:
-	- Nome Localizado
-	- Nome Original
-	- Data Lançamento do título
-	- Editora
-	- Gênero
-	- Quantidade de páginas (0-30, 31-60, 61-99, 100+)
-	- Se esta no favoritos
-	- Possui edições cadastradas? (check sim/não)
+Descrição:
+Após o envio de uma edição, o sistema extrai automaticamente todas as páginas do arquivo enviado e as armazena no diretório correspondente. No entanto, não existe atualmente uma funcionalidade que permita editar ou remover páginas individualmente.
 
-9- Sistema de Favoritos
-	- Qualquer Título enviado pode ser adicionado/removido dos Favoritos
-	- Título marcados como favoritos aparece uma cópia de acesso em página dedicada.
+Caso o usuário envie uma edição contendo páginas duplicadas, páginas fora de ordem ou páginas incorretas, a única forma de correção é excluir completamente a edição e realizar um novo upload do arquivo.
 
-10 - Filtro de Título Localizado por seção A-Z, 0-9. (todos os títulos)
+Impacto:
+Essa limitação pode tornar a correção de erros mais trabalhosa, especialmente em arquivos compactados (.cbr ou .cbz), nos quais a extração manual das páginas pode ser menos intuitiva para o usuário.
 
-11- Opção para 'MOSTRAR MAIS':
-	- Edições: é mostrado por padrão 10 edições, podendo carregar mais 10 por vez.
-	- Títulos enviados: é mostrado 20 por padrão, podendo carregar mais 20 por vez.
-	- Pesquisa por filtro: é mostrado 40 por padrão, podendo carregar mais 40 por vez.
+Frequência: Média
 
- 12- Voltar para o topo da página rolagem suave:
-	- Página index: clicar em início
-	- Página Favoritos: clicar em Favoritos
-	- Página Títulos Enviados: clicar em Títulos Enviados
-	- Página Enviar Título: clicar em Enviar Título
-	- Página título dedicado: clicar em imagem da Logo Crazy Views
+### Limitação 4: Ausência de mecanismos de segurança para ambiente público
+Categoria: Segurança
 
-13. Sistema de Dark Mode / Light Mode:
-	- Funcionalidade: O usuário pode alternar entre o tema escuro (Dark Mode) e o tema claro (Light Mode) através de um botão com ícone de Sol/Lua, localizado no cabeçalho superior.
-	- Persistência: O sistema salva a preferência do usuário (Dark/Light) no `localStorage` do navegador, garantindo que o modo seja mantido ao recarregar a página ou navegar entre as diferentes telas do sistema.
+Descrição:
+O sistema foi projetado para uso local por um único usuário e não possui mecanismos robustos de segurança, como autenticação, controle de acesso, proteção contra uploads maliciosos ou limitação de requisições.
 
+Devido a essas características, o sistema não é adequado para ser implantado diretamente em um servidor público na internet.
 
-# PERSONALIZAÇÃO
-1- Capa dos Títulos:
-	- Pega a primeira imagem da primeira edição encontrada na lista.
+Impacto:
+Caso fosse disponibilizado publicamente sem camadas adicionais de segurança, o sistema poderia ser alvo de ataques automatizados, upload de arquivos maliciosos ou exploração de vulnerabilidades.
 
-2- Capa das Edições:
-	- Pega a primeira imagem encontrada na lista de páginas.
+Frequência: Alta (caso exposto à internet)
 
-3- Banner da página de título dedicada:
-	- Pega imagens aleatórias da primeira edição encontrada na lista, mostrando posições x, y aleatórias. Muda sempre que recarregar página(F5).
+### Limitação 5: Organização limitada da lista de favoritos
+Categoria: Usabilidade
 
-4- Paleta de Cores do sistema:
-	- Azul: #256EFF
-	- Laranja: #F56416
-	- Roxo: #46237A
-	- Amarelo: #F4D35E
-	- Branco: #FCFCFC
-	Alternância: O sistema utiliza variáveis CSS (`var(--...)`) para alternar as cores primárias/secundárias (Azul/Laranja) com cores neutras no modo escuro, garantindo uma transição suave entre os temas.
+Descrição:
+A página de favoritos exibe apenas uma lista simples de títulos marcados pelo usuário. Atualmente não existem ferramentas internas de filtragem, ordenação ou busca dentro dessa página.
 
+Quando o número de títulos favoritados cresce significativamente, a navegação e localização de itens específicos pode se tornar mais difícil.
 
-# PÁGINAS
+Impacto:
+Usuários com bibliotecas maiores podem precisar recorrer aos filtros disponíveis na página inicial para localizar títulos específicos, o que reduz a eficiência da navegação dentro da própria seção de favoritos.
 
-1- Index
-2- Favoritos
-3- Títulos enviados
-4- Enviar Título
-5- Página dedicada ao título, onde tem as edições (template único)
-6- Leitor de HQ
+Frequência: Média
 
-Conteúdo da página Index:
-1- Informações Gerais
-2- Barra de pesquisa com opção  de filtro
+### Limitação 6: Dependência de bibliotecas externas para processamento de arquivos
+Categoria: Técnica
 
-Conteúdo da página Favoritos:
-1- Lista de Títulos marcados como favorito
-2- Cada Título que é mostrado na lista tem opções de desmarcar do favorito, editar informações de título, deletar e acessar página do título dedicada.
+Descrição:
+O sistema depende de extensões externas como php_rar, imagick e ghostscript para processamento de determinados formatos de arquivos.
 
-Conteúdo da página Títulos Enviados:
-1- Ao abrir mostra todos os títulos enviados, mostrando os primeiros 20, podendo carregar mais 20 por vez. Rolagem infinita.
-2- Filtro de títulos Localizados A-Z 0-9
-3- Cada Título possui opção de marcar/desmarcar como favorito, editar informações de de título, deletar e acessar página do título dedicada.
+Impacto:
+A instalação dessas dependências pode exigir configuração adicional no ambiente do usuário, o que pode dificultar a implantação em alguns sistemas.
 
-Conteúdo da página Enviar Título
-1- Formulário para preencher com informações essenciais do título:
-	- Título Local
-	- Título Original
-	- Ano de Lançamento
-	- Gênero
-	- Editora
+### Limitação 7: Processamento síncrono de uploads e extração de arquivos
+Categoria: Arquitetura / Performance
 
-Conteúdo da página de Título Dedicada:
-1- Banner interativo;
-2- Capa de Título interativo;
-3- Capa de edição interativa;
-4- formulário para enviar nova edição com informações básicas especificas:
-	- Numero da edição
-	- Data que lançou a edição
-	- Caixa para selecionar arquivo das páginas
-5- Cada edição possui opções de editar informações da edição, deletar edição e link para leitor.
+Descrição:
+O processamento dos uploads ocorre de forma síncrona durante a requisição HTTP. Isso inclui:
+- upload do arquivo
+- detecção de formato
+- extração das páginas
+- conversão de PDF em imagens
 
-Conteúdo da página Leitor de hq:
-- Mostra todas as páginas enviadas da edição cadastrada escolhida para ler
-- Função modo vertical e modo páginas
-- Modo páginas possui opção de avançar, recuar páginas, zoom +, zoom -, zoom 100%
+Todo esse processamento ocorre dentro da mesma execução do script PHP responsável pelo envio da edição.
+
+Impacto:
+- uploads grandes podem aumentar significativamente o tempo de resposta
+- risco de timeout em arquivos muito grandes
+- consumo elevado de CPU durante a requisição
+- impossibilidade de processar múltiplos uploads simultaneamente com eficiência
+
+Esse modelo funciona bem em ambientes locais ou com poucos usuários, mas pode apresentar limitações em cenários com maior volume de arquivos ou requisições.
+
+Frequência: Média
+
+### Limitação 8: Forte acoplamento entre armazenamento de arquivos e estrutura do sistema
+Categoria: Arquitetura
+
+Descrição:
+O sistema armazena diretamente no sistema de arquivos do servidor todas as páginas extraídas das edições enviadas. A estrutura de diretórios está diretamente vinculada à organização lógica do sistema (títulos, edições e páginas).
+
+Isso cria um forte acoplamento entre:
+- estrutura do banco de dados
+- estrutura de diretórios no servidor
+- lógica de leitura das páginas
+- Qualquer alteração na forma de organização dos arquivos exige também alterações na lógica do sistema e na estrutura de armazenamento.
+
+Impacto:
+- dificulta migração para outros tipos de armazenamento (ex: cloud storage)
+- dificulta reorganização da biblioteca
+- aumenta risco de inconsistência entre banco de dados e arquivos físicos. Por exemplo, se um diretório for removido manualmente, o banco de dados pode continuar apontando para páginas inexistentes.
+
+Frequência: Média
+
+### Limitação 9: Folha de estilos centralizada e pouco modular
+Categoria: Arquitetura / Manutenibilidade
+
+Descrição:
+Durante o desenvolvimento inicial do sistema, todos os estilos CSS foram implementados em um único arquivo centralizado. Com o crescimento do projeto e a adição de novas páginas e componentes, esse arquivo passou a concentrar uma grande quantidade de regras, dificultando a manutenção e organização do código.
+
+Impacto:
+- dificuldade para localizar estilos específicos
+- maior risco de conflitos entre seletores
+- baixa modularidade do frontend
+
+## 6. Melhorias Propostas
+### Melhoria 1: Modularização do sistema de estilos com SCSS
+Categoria: Arquitetura / Manutenibilidade
+Status: Em implementação (Refatoração de arquitetura CSS).
+
+Problema atual:
+O sistema atualmente utiliza uma única folha de estilos CSS centralizada. Com o crescimento do projeto e o aumento do número de páginas e componentes, esse arquivo tornou-se extenso e difícil de manter, dificultando a organização do código e a reutilização de estilos.
+
+Solução implementada:
+Substituição do arquivo style2.css (+1000 linhas) por uma arquitetura modular baseada em SASS/SCSS. A nova estrutura utiliza o conceito de partials para separar lógica de variáveis, mixins de responsividade e estilos específicos por componente.
+
+Destaque Técnico: Implementação de Design System simplificado com variáveis centralizadas para a paleta "Comic Book" e uso de filtros SVG fractais para texturização de interface sem perda de performance.
+
+Estrutura proposta:
+style/
+   └──scss/
+   |  ├── base/
+   |  │   ├── _global.scss
+   |  │   ├── _reset.scss
+   |  │   ├── _typography.scss   
+   |  │
+   |  ├── components/
+   |  │   ├── _button.scss
+   |  │   ├── _card.scss
+   |  │   ├── _footer.scss
+   |  │   ├── _header.scss
+   |  │   ├── _input.scss
+   |  │   ├── _modal.scss
+   |  │   ├── _tooltip.scss
+   |  │
+   |  ├── config/
+   |  │   ├── _mixins.scss
+   |  │   ├── _variables.scss
+   |  │
+   |  ├── pages/
+   |  │   ├── _dashboard.scss
+   |  │   ├── _favorite.scss
+   |  │   ├── _read.scss
+   |  │   ├── _templateUpdate.scss
+   |  │   ├── _titlesUp.scss
+   |  │   ├── _upload-update.scss
+   |  │
+   |  └── main.scss
+   ├── main.css
+   ├── main_css.map
+
+Impacto esperado:
+- melhor organização do código
+- maior facilidade de manutenção
+- reutilização de estilos e variáveis
+- Otimização de Assets: Uso de texturização procedural via filtros SVG, reduzindo a dependência de imagens de fundo externas e melhorando a performance de carregamento.
+
+### Melhoria 2: Redesign visual inspirado em quadrinhos
+Categoria: Interface / Experiência do Usuário
+
+Problema atual:
+A interface atual do sistema possui um estilo visual genérico que não explora plenamente o tema de quadrinhos do projeto.
+
+Solução proposta:
+Implementar um novo design visual inspirado em elementos gráficos característicos de quadrinhos, como:
+- painéis com bordas marcadas
+- paleta de cores mais vibrante
+- tipografia estilizada
+- elementos visuais que remetam à estética de HQs
+
+Sempre que possível, serão utilizadas técnicas avançadas de CSS (gradients, pseudo-elementos e efeitos visuais) para evitar o uso excessivo de imagens, reduzindo o peso das páginas e melhorando o desempenho de carregamento.
+
+Impacto esperado:
+- identidade visual mais coerente com o tema do sistema
+- melhoria da experiência do usuário
+- redução do número de requisições HTTP
+
+### Melhoria 3: Arquitetura de Navegação Híbrida (SPA-like) e Transições Dinâmicas
+Categoria: Experiência do Usuário (UX) / Arquitetura Frontend
+Status: Em planejamento / Prototipagem.
+
+Problema atual:
+O sistema opera no modelo tradicional de MPA (Multi-Page Application), onde cada clique no menu dispara uma nova requisição HTTP completa. Isso causa o "flash" branco na tela, reinicia o estado dos scripts e interrompe a imersão do usuário, especialmente durante a leitura de HQs.
+
+Solução proposta:
+Implementar uma interface de página única (Single Page Interface) utilizando o conceito de Client-Side Routing.
+- Container Principal: A principal.html atuará como um "Shell App", permanecendo fixa enquanto apenas o conteúdo central (Dashboard, Favoritos, Leitor) é trocado.
+- Carregamento Dinâmico (AJAX/Fetch): O conteúdo das seções será requisitado via JavaScript e injetado em um container específico (#main-content).
+- Animações de Transição: Utilização de CSS Transitions para criar o efeito de "slide lateral" entre as telas, proporcionando uma percepção de continuidade similar a aplicativos mobile nativos.
+
+Destaque Técnico: O desafio do ciclo de vida (Lifecycle):
+Como o navegador não recarrega mais, foi necessário criar a função iniciarFiltros() e sistemas de cleanup para garantir que, ao trocar de "página", os eventos do JavaScript antigo sejam removidos e os novos sejam anexados corretamente aos novos elementos do DOM.
+
+Impacto esperado:
+- Performance Percebida: Redução drástica no tempo de resposta visual, já que o navegador não precisa baixar novamente o Header, Footer e Scripts base.
+- Fluidez: Navegação ininterrupta e transições suaves que reforçam a identidade visual de "aplicativo".
+- Persistência de Estado: Possibilidade de manter um player de música ou o progresso de leitura ativo enquanto o usuário navega por outras seções do site.
+
+### Melhoria 4: Implementação de sistema multiusuário com autenticação via Google
+Categoria: Funcional / Segurança
+Status: Não iniciado.
+
+Problema atual:
+O sistema atual foi projetado para uso de um único usuário administrador e não possui suporte a múltiplas contas.
+
+Solução proposta:
+Implementar suporte a múltiplos usuários utilizando autenticação via Google OAuth.
+
+Esse método permite que usuários realizem login utilizando suas contas Google, evitando a necessidade de implementar e manter um sistema próprio de gerenciamento de senhas.
+
+Os dados armazenados para cada usuário incluirão apenas informações essenciais, como:
+- identificador Google (Google ID)
+- nome
+- e-mail
+
+Impacto esperado:
+- suporte a múltiplos usuários
+- simplificação do sistema de autenticação
+- maior segurança no processo de login
+
+### Melhoria 5: Sistema de processamento assíncrono de uploads
+Categoria: Arquitetura / Performance
+Status: Não iniciado.
+
+Problema atual:
+O envio e processamento de arquivos ocorre de forma síncrona durante a requisição HTTP, o que pode gerar longos tempos de espera, especialmente ao lidar com arquivos grandes (por exemplo, arquivos .cbz com centenas de megabytes).
+
+Solução proposta:
+Implementar um sistema de processamento assíncrono baseado em fila de tarefas.
+
+Nesse modelo:
+- o arquivo é enviado pelo usuário e registrado na fila de processamento
+- um processo interno (worker) executa a extração e conversão das páginas em segundo plano
+- o sistema atualiza o status do processamento no banco de dados
+
+Dessa forma, o usuário não precisa permanecer na página aguardando a conclusão do processamento.
+
+Impacto esperado:
+- melhor experiência de uso
+- suporte mais eficiente a arquivos grandes
+- redução de risco de timeout de requisições
+
+### Melhoria 6: Fortalecimento da segurança no envio de arquivos
+Categoria: Segurança
+Status: não iniciado.
+
+Problema atual:
+O sistema atual possui validações básicas de upload, mas pode ser aprimorado para reduzir riscos associados ao envio de arquivos potencialmente maliciosos.
+
+Solução proposta:
+Implementar camadas adicionais de validação no sistema de upload, incluindo:
+- verificação de tipo MIME real do arquivo
+- validação de extensões permitidas
+- limitação de tamanho de arquivo
+- limitação de frequência de uploads por usuário (rate limiting)
+
+Essas medidas reduzem o risco de exploração do sistema por meio de uploads maliciosos ou uso abusivo do serviço.
+
+Impacto esperado:
+- maior segurança no processamento de arquivos
+- redução do risco de ataques baseados em upload
+
+### Melhoria 7: Sistema de edição de páginas de edições
+Categoria: Funcional / Usabilidade
+Status: não iniciado.
+
+Problema atual:
+Atualmente, após o envio de uma edição, não é possível editar ou remover páginas individualmente. Caso exista algum erro (como páginas duplicadas ou fora de ordem), o usuário precisa excluir toda a edição e realizar um novo envio.
+
+Solução proposta:
+Implementar um sistema de gerenciamento de páginas que permita:
+- remover páginas individuais
+- reorganizar a ordem das páginas
+- substituir páginas específicas
+
+Essa funcionalidade permitirá corrigir erros sem necessidade de reenviar toda a edição.
+
+Impacto esperado:
+- maior flexibilidade no gerenciamento de edições
+- redução do retrabalho para o usuário
+- melhoria geral na usabilidade do sistema
+
+### Melhoria 8: Desacoplamento e Modularização do JavaScript (ES6+ Events)
+Categoria: Arquitetura Frontend / Manutenibilidade
+Status: Em progresso (Refatoração estrutural).
+
+Problema atual:
+Anteriormente, a lógica de interação (favoritar, deletar, editar) estava concentrada em arquivos globais densos (api_t.js), dificultando a depuração e causando conflitos de eventos quando novos elementos eram carregados dinamicamente via AJAX.
+
+Solução em implementação:
+Migração para um modelo de Arquitetura Baseada em Componentes e Delegação de Eventos. Cada funcionalidade crítica foi isolada em seu próprio módulo:
+
+- btn_favorite.js: Gerencia exclusivamente a lógica de persistência de favoritos.
+- btn_delete.js: Centraliza as confirmações e chamadas de exclusão.
+- btn_edit.js: Controla a abertura e submissão de formulários de edição.
+
+Mudança de Paradigma (Lifecycle):
+Com a transição para a principal.html como container central, foi implementado um sistema de "Iniciadores de Filtros" (iniciarFiltros()). Isso garante que os ouvintes de eventos sejam anexados corretamente apenas quando o conteúdo do Dashboard é injetado no DOM, evitando memory leaks e seletores órfãos.
+
+Impacto esperado:
+- Código DRY (Don't Repeat Yourself): Reutilização de funções de CRUD em diferentes partes do sistema.
+- Performance: Carregamento seletivo de scripts conforme a necessidade da página.
+- Escalabilidade: Facilidade para adicionar futuras novas ações (ex: "marcar como lido") sem tocar no código de outras funcionalidades.
+
+## 7. Plano de Implementação
+Fase 1
+- Análise do código existente
+- Planejamento das melhorias
+
+Fase 2
+- Implementação das novas funcionalidades
+
+Fase 3
+- Refatoração e testes
+
+Fase 4
+- Documentação final e comparação antes/depois
