@@ -202,37 +202,35 @@ Substituição do arquivo style2.css (+1000 linhas) por uma arquitetura modular 
 Destaque Técnico: Implementação de Design System simplificado com variáveis centralizadas para a paleta "Comic Book" e uso de filtros SVG fractais para texturização de interface sem perda de performance.
 
 Estrutura proposta:
+```text
 style/
-   └──scss/
-   |  ├── base/
-   |  │   ├── _global.scss
-   |  │   ├── _reset.scss
-   |  │   ├── _typography.scss   
-   |  │
-   |  ├── components/
-   |  │   ├── _button.scss
-   |  │   ├── _card.scss
-   |  │   ├── _footer.scss
-   |  │   ├── _header.scss
-   |  │   ├── _input.scss
-   |  │   ├── _modal.scss
-   |  │   ├── _tooltip.scss
-   |  │
-   |  ├── config/
-   |  │   ├── _mixins.scss
-   |  │   ├── _variables.scss
-   |  │
-   |  ├── pages/
-   |  │   ├── _dashboard.scss
-   |  │   ├── _favorite.scss
-   |  │   ├── _read.scss
-   |  │   ├── _templateUpdate.scss
-   |  │   ├── _titlesUp.scss
-   |  │   ├── _upload-update.scss
-   |  │
-   |  └── main.scss
-   ├── main.css
-   ├── main_css.map
+└── scss/
+    ├── base/
+    │   ├── _global.scss
+    │   ├── _reset.scss
+    │   └── _typography.scss
+    ├── components/
+    │   ├── _button.scss
+    │   ├── _card.scss
+    │   ├── _footer.scss
+    │   ├── _header.scss
+    │   ├── _input.scss
+    │   ├── _modal.scss
+    │   └── _tooltip.scss
+    ├── config/
+    │   ├── _mixins.scss
+    │   └── _variables.scss
+    ├── pages/
+    │   ├── _dashboard.scss
+    │   ├── _favorite.scss
+    │   ├── _read.scss
+    │   ├── _templateUpdate.scss
+    │   ├── _titlesUp.scss
+    │   └── _upload-update.scss
+    └── main.scss
+├── main.css
+└── main_css.map
+`
 
 Impacto esperado:
 - melhor organização do código
