@@ -230,7 +230,7 @@ style/
     └── main.scss
 ├── main.css
 └── main_css.map
-`
+```
 
 Impacto esperado:
 - melhor organização do código
