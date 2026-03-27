@@ -1,0 +1,91 @@
+.background-page-png {
+    /* Estilos do formulário de cadastro */
+    .background-page-png {
+        background-image: url('../img/ph_banner01.png');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        min-height: 100vh;
+        z-index: 10;
+    }
+    .background-page-png::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color-quaternary-hex, 0.4);
+        backdrop-filter: blur(7px);
+        -webkit-backdrop-filter: blur(7px);
+        z-index: 50;
+    }
+    .page_allUp {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 900px;
+    }
+    .id_all {
+        height: 700px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        gap: 20px;
+        top: 90px;
+        z-index: 100;
+    }
+    .id_ContainerbotForm {
+        display: flex;
+        position: relative;
+        min-width: 700px;
+        min-height: 600px;
+        margin: auto;
+        height: auto;
+        padding: 30px;
+        flex-direction: column;
+        background-color: $bg;
+    }
+    .id_ContainerGroup {
+    color: $color-gray-slate-hex;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    }
+    .id_FormLeft {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+    #txt_ReleaseYe {
+        width: 70px;
+    }
+    #txt_TitleOriginal,
+    #txt_TitleLocal {
+        width: 400px;
+    }
+    #txt_Publisher,
+    #txt_Gender {
+        width: 120px;
+    }
+    .id_Form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        position: relative;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        width: 300px;
+        height: 25px;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid $color-gray-medium-hex;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+}

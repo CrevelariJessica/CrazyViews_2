@@ -1,0 +1,23 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+ul, ol { 
+    list-style: none;
+    padding: 0; // Garante que o recuo padrão do navegador suma
+    margin: 0;
+}
+
+img { 
+    max-width: 100%; 
+    display: block; 
+    height: auto; // Mantém a proporção da imagem
+}
+
+// Remove contornos chatos de botões e inputs se desejar
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+}

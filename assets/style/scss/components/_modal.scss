@@ -1,0 +1,132 @@
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    background-color: rgba($color-black-hex, 0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--quaternary-color);
+    max-width: 500px;
+    max-height: 90vh;
+    color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba($color-black-hex, 0.2);
+}
+
+.modal-content h2 {
+    padding: 5px;
+    justify-self: center;
+}
+
+#modalEditionNumber {
+    width: 70px;
+}
+
+#modalEditionDate {
+    width: 90px;
+}
+
+.modal-edit-style {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-edit-style h3 {
+    padding: 5px;
+    text-align: center;
+}
+
+#formEdicaoTitulo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.modal-row-group {
+    display: flex;
+    gap: 10px;
+}
+
+.id_ContainerGroupFav {
+    display: flex;
+    flex-direction: column;
+    color: $bg;
+}
+
+#edit_lancamento {
+    color: var(--primary-color);
+    width: 60px;
+}
+
+#edit_genero {
+    color: var(--primary-color);
+    width: 190px;
+}
+
+#edit_original,
+#edit_titulo {
+    color: var(--primary-color);
+}
+
+#edit_Publisher {
+    color: var(--primary-color);
+    width: 100px;
+}
+
+.modal-actions-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-delete-style {
+    gap: 15px;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.modal-delete-style h3 {
+    color: var(--tertiary-color);
+    padding: 10px;
+    margin: 10px auto;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.modal-delete-style p {
+    padding: 6px;
+}
+
+.modal-delete-style strong {
+    color: $bg;
+    background-color: $danger;
+}
+
+.modal-style-hq{
+    border-radius: 4px;
+    border: 4px solid $gray-dark;
+    box-shadow: 4px 8px 0px $gray-dark;
+}
+
+.modal-actions {
+    display: flex;
+    padding: 10px;
+    gap: 20px;
+    justify-content: center;
+}

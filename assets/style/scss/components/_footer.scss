@@ -1,0 +1,17 @@
+.footer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: auto;
+    z-index: 350;
+}
+
+.footer-info {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 20px;
+    align-items: center;
+    font-size: 0.9em;
+    
+}

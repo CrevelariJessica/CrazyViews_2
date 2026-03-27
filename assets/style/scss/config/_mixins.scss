@@ -1,0 +1,9 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin comic-shadow {
+  box-shadow: 4px 4px 0px $black;
+}

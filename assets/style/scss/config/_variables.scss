@@ -1,0 +1,73 @@
+:root {
+    --background-color: #FCFCFC;
+    --text-color: #333; //cinza 1
+    --primary-color: #46237A; //roxo
+    --secondary-color: #F4D35E; //amarelo 1
+    --tertiary-color: #F56416; //laranja
+    --quaternary-color: #256EFF; //azul 1
+    --quinary-color: #666; //cinza 2
+    --senary-color: #777; //cinza 3
+    
+    --white-color: #ffffff;
+    --black-color: #000000;
+    --danger-color: #d90429; //vermelho
+    --success-color: #2ecc71; //verde
+    --warning-color: #efb700; //amarelo 2
+    --info-color: #29a9ff; //azul 2
+    --gray-light: #F8F8F8; //branco
+    --gray-medium: #ccc;
+    --gray-dark: #333;
+}
+
+
+.dark-mode {
+    --background-color: #1a1a1a;
+    --text-color: #f0f0f0;
+}
+
+// Base HEX Variables (for calculations)
+$color-bg-hex: #FCFCFC;
+$color-text-hex: #333;
+$color-primary-hex: #46237A;
+$color-secondary-hex: #F4D35E;
+$color-tertiary-hex: #F56416;
+$color-quaternary-hex: #256EFF;
+$color-quinary-hex: #666;
+$color-senary-hex: #777;
+$color-white-hex: #ffffff;
+$color-black-hex: #000000;
+$color-danger-hex: #d90429;
+$color-success-hex: #2ecc71;
+$color-warning-hex: #efb700;
+$color-info-hex: #29a9ff;
+$color-bg-dark-hex: #1a1a1a;
+$color-primary-light-hex: #7d2ae8;
+$color-primary-lighter-hex: #d3bcff;
+$color-gray-light-hex: #F8F8F8;
+$color-gray-medium-hex: #ccc;
+$color-gray-semidark-hex: #999;
+$color-gray-slate-hex: #374151;
+$color-bg-light-hex: #E9E6EE;
+$color-gray-lighter-hex: #eee;
+$color-aliceblue-hex: #F0F8FF;
+$color-overlay-dark-hex: #262D38;
+
+// SCSS Variables mapped to CSS Variables
+$bg: var(--background-color);
+$text: var(--text-color);
+$primary: var(--primary-color);
+$secondary: var(--secondary-color);
+$tertiary: var(--tertiary-color);
+$quaternary: var(--quaternary-color);
+$quinary: var(--quinary-color);
+$senary: var(--senary-color);
+
+$white: var(--white-color);
+$black: var(--black-color);
+$danger: var(--danger-color);
+$success: var(--success-color);
+$warning: var(--warning-color);
+$info: var(--info-color);
+$gray-light: var(--gray-light);
+$gray-medium: var(--gray-medium);
+$gray-dark: var(--gray-dark);

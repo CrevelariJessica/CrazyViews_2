@@ -1,0 +1,182 @@
+/*--------------------------------------------------------------------------- */
+/* botoes de Info */
+
+/* Container relativo para posicionar o conteúdo */
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Estilo e Animação do Ícone */
+.icon {
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+
+.tooltip-trigger:hover .icon {
+  transform: rotate(360deg) scale(1.1);
+}
+
+/* Balão do Tooltip */
+.tooltip-content {
+  position: absolute;
+  left: 50%;
+  bottom: 2rem; /* Posição inicial levemente abaixo */
+  transform: translateX(-50%);
+  width: 160px;
+  background-color: var(--text-color);
+  color: var(--white-color);
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none; /* Evita que o mouse interaja com ele invisível */
+  transition: all 0.5s;
+  z-index: 10;
+}
+
+/* A "Setinha" do balão (o before:rotate-45 do Tailwind) */
+.tooltip-content::before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 16px;
+  height: 16px;
+  background-color: var(--text-color);
+}
+
+/* Efeito de Hover: Aparecer e subir */
+.tooltip-trigger:hover + .tooltip-content {
+  opacity: 1;
+  bottom: 3.3rem; /* Posição final */
+}
+/*--------------------------------------------------------------------------- */
+/* botoes de favorito/editar/deletar */
+.example-2 {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+
+  .icon-content {
+  position: relative;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+
+  // O BOTÃO (Círculo Perfeito)
+  a {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: $white;
+    border: 2px solid #e8e8e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; // Corta o preenchimento quadrado!
+    transition: all 0.3s ease;
+    z-index: 2;
+
+    svg {
+        width: 20px;
+        height: 20px;
+        z-index: 3;
+        position: relative;
+        transition: transform 0.3s ease;
+        fill: var(--gray-medium);
+        color: var(--gray-medium);
+
+        // Garante que o preenchimento não "engula" o ícone
+        pointer-events: none; 
+      }
+
+      &:hover svg {
+        transform: scale(2); // Efeito de leve pulo no hover
+        fill: var(--gray-dark);
+      }
+
+    // O preenchimento colorido
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0; left: 0; width: 100%; height: 0;
+      z-index: 1;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &:hover {
+        color: white;
+        &::before { height: 100%; }
+        svg { transform: scale(1.1); }
+        border: 3px solid var(--black-color); // Borda preta e mais grossa estilo gibi
+        transform: scale(1.05);  // Dá um leve zoom no botão inteiro
+    }
+    
+  }
+
+  // TOOLTIP (Fora do círculo)
+  .tooltip {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    color: var(--gray-light);
+    font-size: 1.2em;
+    border-radius: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    z-index: 10;
+    border: 3px solid var(--black-color);
+    pointer-events: none;
+    
+        &::after {
+        content: "";
+        position: absolute;
+        bottom: -10px; // Conecta o balão ao botão
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+        width: 12px;
+        height: 12px;
+        background: inherit; // Pega a cor (orange, yellow, red) automaticamente
+        border-style: solid;
+        box-shadow: none;
+  border-color: var(--black-color);
+  border-width: 0 3px 3px 0;
+      }
+  }
+
+  // Quando passar o mouse no LI, o TOOLTIP aparece
+  &:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: -45px;
+  }
+  
+  // CORES (Aplicando ao Filled e ao Tooltip ao mesmo tempo)
+  & a[data-social="favorite"] {
+    &::before { background-color: $tertiary; }
+    & ~ .tooltip { background-color: $tertiary; } // Seleciona o tooltip vizinho
+  }
+
+  & a[data-social="edit"] {
+    &::before { background-color: $secondary; }
+    & ~ .tooltip { background-color: $secondary; }
+    &:hover { color: $color-gray-slate-hex; }
+  }
+
+  & a[data-social="delete"] {
+    &::before { background-color: $danger; }
+    & ~ .tooltip { background-color: $danger; }
+  }
+}
+}

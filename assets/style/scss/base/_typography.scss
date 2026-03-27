@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+body {
+  font-family: 'Inter';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Impact', Inter;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+// Estilo para links dentro de textos
+a {
+  transition: color 0.2s ease-in-out;
+  &:hover {
+    color: var(--secondary-color);
+  }
+}
+
+.messageErro {
+    color: $danger;
+    display: block;
+    font-size: 0.8em;
+}
+
+.text-center { text-align: center; }
+.text-italic { font-style: italic; }
+
+.filter-block h3 {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.style_error {
+    border: 2px solid $danger;
+    box-shadow: 0 0 5px rgba($color-danger-hex, 0.5);
+}
+
+#erro_inicial {
+    display: none;
+    color: $danger;
+}
+
+#sucesso_feedback {
+    display: none;
+    color: $success;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid $success;
+}
+
+.cont_error {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    margin-top: -20px;
+}
+
+.id_ContErr {
+    position: relative;
+    padding: 15px;
+}

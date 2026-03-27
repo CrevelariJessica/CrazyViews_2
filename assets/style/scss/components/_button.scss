@@ -1,0 +1,332 @@
+.theme-switch-container {
+    /* light/dark */
+    /* Container principal do switch */
+    .theme-switch-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .input-switch {
+      display: none; /* Esconde o checkbox real */
+    }
+
+    /* O Círculo (Sol) */
+    .theme-circle {
+      position: relative;
+      border-radius: 100%;
+      width: 6rem;
+      height: 6rem;
+      background: linear-gradient(40deg, $color-danger-hex, $color-warning-hex 70%);
+      margin: 0 auto 1.5rem auto;
+      border: 4px solid $color-black-hex;
+      transition: all 0.5s ease;
+    }
+
+    /* A Sombra que cria a Lua */
+    .theme-crescent {
+      position: absolute;
+      border-radius: 100%;
+      right: 0;
+      width: 5rem;
+      height: 5rem;
+      background: $color-white-hex; /* Cor do fundo do seu site no light mode */
+      transform: scale(0);
+      transform-origin: top right;
+      transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+
+    /* O corpo do botão (a trilha) */
+    .theme-label {
+      width: 12rem;
+      height: 3.5rem;
+      background-color: $gray-medium;
+      background-image: radial-gradient($color-black-hex 15%, transparent 16%), radial-gradient($color-black-hex 15%, transparent 16%);
+      background-size: 8px 8px;
+      background-position: 0 0, 4px 4px;
+      border-radius: 100px;
+      position: relative;
+      display: block;
+      cursor: pointer;
+      border: 4px solid $color-black-hex;
+    }
+
+    /* A pecinha que desliza */
+    .theme-toggle {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      top: -4px;
+      left: -4px;
+      background-color: $color-info-hex;
+      box-shadow: 4px 4px 0px $color-black-hex;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      border: 4px solid $color-black-hex;
+      border-radius: 100px;
+    }
+
+    /* Texto Day/Night */
+    .theme-names {
+      font-size: 130%;
+      color: $color-black-hex;
+      text-shadow: 1px 1px 0 $color-white-hex, -1px -1px 0 $color-white-hex;
+      font-family: Impact, sans-serif;
+      font-style: italic;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15px;
+      line-height: 3.2rem;
+      pointer-events: none;
+    }
+
+    .theme-dark { opacity: 0; transition: 0.3s; }
+    .theme-light { opacity: 1; transition: 0.3s; }
+
+    /* --- ESTADOS QUANDO ESTIVER CHECKED (DARK MODE) --- */
+
+    /* Desliza o botão */
+    .input-switch:checked + .theme-app .theme-toggle {
+      transform: translateX(103%);
+      background-color: $color-warning-hex;
+    }
+
+    /* Transforma Sol em Lua */
+    .input-switch:checked + .theme-app .theme-crescent {
+      transform: scale(1);
+      background: $color-bg-dark-hex; /* Deve ser a mesma cor do seu Dark Mode */
+    }
+
+    .input-switch:checked + .theme-app .theme-circle {
+      background: linear-gradient(40deg, $color-primary-lighter-hex, $color-white-hex 70%);
+    }
+
+    /* Altera opacidade dos textos */
+    .input-switch:checked + .theme-app .theme-dark { opacity: 1; }
+    .input-switch:checked + .theme-app .theme-light { opacity: 0; }
+}
+
+.close-button {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    color: $danger;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    transform: translatey(3px);
+    color: var(--tertiary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"] {
+    color: var(--primary-color);
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $gray-medium;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.btn-save-modal {
+    background-color: var(--secondary-color);
+    color: var(--quaternary-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    width: 100%;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.btn-save-modal:hover {
+    transform: translatey(5px);
+    background-color: var(--tertiary-color);
+    color: var(--secondary-color);
+}
+
+#cancelButton {
+    padding: 10px;
+    margin-right: 10px;
+    color: $bg;
+    background-color: var(--quaternary-color);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#cancelButton:hover {
+    color: $bg;
+    background-color: var(--tertiary-color);
+}
+
+#saveButton {
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+#saveButton:hover {
+    color: $bg;
+    background-color: var(--tertiary-color);
+}
+
+.btn-delete {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 10px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-delete:hover {
+    color: $bg;
+    background-color: $danger;
+}
+
+.btn-cancel {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-cancel:hover {
+    color: var(--quaternary-color);
+    background-color: var(--secondary-color);
+}
+
+/* From Uiverse.io by augustin_4687 */ 
+.button {
+  font-size: 1rem;
+  cursor: pointer;
+  position: relative;
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+  line-height: 1;
+  padding: 1px;
+  transform: translate(-4px, -4px);
+  outline: 2px solid transparent;
+  outline-offset: 5px;
+  border-radius: 9999px;
+  background-color: $gray-dark;
+  color: $gray-dark;
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
+  text-align: center;
+  box-shadow:
+    0.5px 0.5px 0 0 $gray-dark,
+    1px 1px 0 0 $gray-dark,
+    1.5px 1.5px 0 0 $gray-dark,
+    2px 2px 0 0 $gray-dark,
+    2.5px 2.5px 0 0 $white,
+    3px 3px 0 0 $white,
+    0 0 0 2px $white,
+    0.5px 0.5px 0 2px $white,
+    1px 1px 0 2px $white,
+    1.5px 1.5px 0 2px $white,
+    2px 2px 0 2px $white,
+    2.5px 2.5px 0 2px $white,
+    3px 3px 0 2px $white,
+    3.5px 3.5px 0 2px $white,
+    4px 4px 0 2px $white;
+
+  &:hover {
+    transform: translate(0, 0);
+    box-shadow: 0 0 0 2px $white;
+  }
+
+  &:active,
+  &:focus-visible {
+    outline-color: $secondary;
+  }
+
+  &:focus-visible {
+    outline-style: dashed;
+  }
+
+  & > div {
+    position: relative;
+    pointer-events: none;
+    background-color: $secondary;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 9999px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      opacity: 0.5;
+      background-image: radial-gradient(
+          rgba(255, 255, 255, 0.8) 20%,
+          transparent 20%
+        ),
+        radial-gradient(rgba(255, 255, 255, 1) 20%, transparent 20%);
+      background-position: 0 0, 4px 4px;
+      background-size: 8px 8px;
+      mix-blend-mode: hard-light;
+      animation: dots 0.5s infinite linear;
+    }
+
+    & > span {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.25rem;
+      gap: 0.25rem;
+      filter: drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.25));
+
+      &:active {
+        transform: translateY(2px);
+      }
+    }
+  }
+}
+
+@keyframes dots {
+  0% {
+    background-position:
+      0 0,
+      4px 4px;
+  }
+  100% {
+    background-position:
+      8px 0,
+      12px 4px;
+  }
+}

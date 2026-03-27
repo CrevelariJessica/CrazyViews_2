@@ -1,0 +1,448 @@
+/* Banner e Conteúdo */
+.banner {
+    display: flex;
+    height: 400px;
+    background-color: var(--background-color);
+    position: relative;
+    z-index: 100;
+}
+
+.banner_stand {
+    display: flex;
+    height: 200px;
+    padding: 0px;
+    background-color: $bg;
+    position: relative;
+    z-index: 100;
+}
+
+.t_title {
+    padding: 10px;
+}
+
+.info_valor {
+    flex-grow: 1;
+}
+
+.b_title {
+    font-weight: bold;
+}
+
+.b_content_info {
+    margin-top: 5px;
+    margin-left: 5px;
+    display: flex;
+    gap: 7px;
+    padding: 5px;
+}
+
+.banner_content {
+    height: 200px;
+    width: 600px;
+    margin-left: 40px;
+    color: $bg;
+    background-color: rgba($color-gray-light-hex, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.banner_inner {
+    padding-left: 15px;
+    padding-top: 10px;
+    margin-top: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    position: relative;
+    z-index: 300;
+    overflow: hidden;
+}
+
+.imageHqStyle {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 8px 8px 15px rgba($color-black-hex, 0.4);
+    border-top: 5px solid var(--text-color);
+    border-right: 10px solid var(--text-color);
+    border-bottom: 5px solid var(--text-color);
+    border-left: 4px solid var(--text-color);
+}
+
+.imageHq {
+    width: 100%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+#imageHq {
+    display: flex;
+    transform: rotateY(-45deg);
+}
+
+.bannerbanner {
+    width: 280px;
+    height: 100%;
+    position: absolute;
+    right: 15%;
+    z-index: 400;
+    top: 50%;
+    transform: translateY(-50%);
+    perspective: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+#HQImage {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+.bannerImage {
+    display: flex;
+    width: 100%;
+    height: 400px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.backgroundStyle {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(2px) brightness(0.7);
+}
+
+.page_edition {
+    display: flex;
+    min-height: 650px;
+    flex-grow: 1;
+    background-color: var(--background-color);
+}
+
+.p_edition {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 90%;
+    height: 90%;
+    margin-left: 5%;
+    margin-top: 10px;
+    position: relative;
+    z-index: 100;
+}
+
+.add_edition {
+    width: 100%;
+    padding-top: 5px;
+    position: relative;
+    z-index: 101;
+    min-height: 25px;
+}
+
+#button_addEdt {
+    font-size: 1em;
+    padding: 6px;
+    background-color: var(--primary-color);
+    color: $gray-light;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba($color-black-hex, 0.1);
+}
+
+#button_addEdt:hover {
+    transform: translateY(2px);
+}
+
+#b_etitle {
+    position: relative;
+    z-index: 103;
+}
+
+#form_NewEdt {
+    display: block;
+    margin-top: 0px;
+    width: 100%;
+    position: absolute;
+    z-index: 900;
+    top: 35px;
+    left: 0px;
+    color: $color-aliceblue-hex;
+    background-color: rgba($color-primary-hex, 0.75);
+    box-shadow: 0 4px 8px rgba($color-black-hex, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 5px;
+    overflow: hidden;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+}
+
+#form_NewEdt.is-open {
+    max-height: 400px;
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+
+#id_numEdt input[type="text"],
+#id_numDate input[type="text"] {
+    background-color: $bg;
+    width: 150px;
+}
+
+#uploadForm {
+    display: flex;
+    gap: 0px;
+    flex-direction: column;
+    width: 100%;
+}
+
+.partOne {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.partTwo {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    z-index: auto;
+    align-items: center;
+}
+
+#id_infOne {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    gap: 15px;
+    align-content: flex-start;
+}
+
+#id_upIm {
+    align-items: flex-start;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+}
+
+#id_numEdt {
+    display: flex;
+    flex-direction: column;
+}
+
+#id_numDate {
+    display: flex;
+    flex-direction: column;
+}
+
+#id_btUpEdt {
+    display: flex;
+    align-items: center;
+    width: 15%;
+}
+
+#id_btUpEdt button {
+    font-size: 1em;
+    padding: 10px;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba($color-black-hex, 0.2);
+    transition: color 0.2s;
+}
+
+#id_btUpEdt button:hover {
+    background-color: var(--tertiary-color);
+    transform: translateY(3px);
+    color: $bg;
+}
+
+.view_edition {
+    width: 100%;
+    height: 95%;
+    padding-top: 5px;
+    position: relative;
+    z-index: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cardsContainer {}
+
+#EditionList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+    width: 100%;
+}
+
+.menu-option:hover {
+    background-color: var(--tertiary-color);
+}
+
+.delete-action:hover {
+    background-color: $danger;
+}
+
+.menu-option {
+    padding: 10px;
+    text-decoration: none;
+    color: $bg;
+    display: block;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.edition-menu-options {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 200px;
+    background-color: var(--quaternary-color);
+    box-shadow: 0 4px 8px rgba($color-black-hex, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.btn-edition-menu {
+    background: $quaternary;
+    color: $bg;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: color 0.2s;
+}
+
+.btn-edition-menu:hover {
+    background: $tertiary;
+    color: $bg;
+}
+
+.edition-actions-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+/* Cards de Edição */
+.cardEdition {
+    height: 350px;
+    width: 200px;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba($color-black-hex, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.cardEdition:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 8px 16px rgba($color-black-hex, 0.2);
+}
+
+.cardImage {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: $quinary;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba($color-primary-hex, 0.3);
+}
+
+.cardText {
+    padding: 15px;
+    flex-grow: 1;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.cardTitle {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: var(--text-color);
+    padding: 2px;
+}
+
+.cardDateP {
+    color: $senary;
+    font-size: 0.8em;
+    margin: 5px;
+}
+
+.cardLink {
+    display: inline-block;
+    padding: 8px 15px;
+    color: var(--secondary-color);
+    background-color: var(--quaternary-color);
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: auto;
+    width: 100%;
+    transition: color 0.2s;
+}
+
+.cardLink:hover {
+    box-shadow: 0 3px 16px rgba($color-black-hex, 0.1);
+    color: $bg;
+    background-color: var(--tertiary-color);
+}
+
+.btnMoreEdt {
+    position: relative;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+#btnLoadMore {
+    background-color: var(--quaternary-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+#btnLoadMore:hover {
+    transform: translatey(5px);
+    color: $bg;
+    background-color: var(--tertiary-color);
+}

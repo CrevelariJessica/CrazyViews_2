@@ -1,0 +1,31 @@
+// 1. CONFIGURAÇÕES & FERRAMENTAS
+// Variáveis (Cores, Fontes, Margens, Estilo HQ) e Mixins
+@import "config/variables"; 
+@import "config/mixins"; 
+
+// 2. ESTILOS BASE 
+// Reset ou Normalize para compatibilidade de navegadores
+@import "base/reset";
+
+// Estilos globais para tags sem classes
+@import "base/typography";
+@import "base/global";
+
+// 3. COMPONENTES (Header e Footer)
+// Use o BEM para nomear as classes nestes arquivos
+@import "components/header";
+@import "components/footer";
+@import "components/button";
+@import "components/card";
+@import "components/modal";
+@import "components/input";
+@import "components/tooltip";
+
+// 4. PÁGINAS ESPECÍFICAS
+// Estilos que sobrescrevem o global para páginas específicas
+@import 'pages/dashboard';
+@import 'pages/favorite';
+@import 'pages/upload-update';
+@import 'pages/titlesUp';
+@import 'pages/read';
+@import 'pages/templateUpdate';

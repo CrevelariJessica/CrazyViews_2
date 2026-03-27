@@ -1,0 +1,303 @@
+.index_container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: 700px;
+    margin: 0px;
+    gap: 10px;
+    justify-content: center;
+    
+    .ux_container {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .index_info {
+        display: flex;
+        gap: 15px;
+        max-width: 1200px;
+        width: 100%;
+        height: 150px;
+        margin: 0 auto;
+    }
+
+    .background_picture{
+        display: flex;
+        position: relative;
+    }
+    #resultados-pesquisa {
+        color: $senary;
+    }
+    .index_infoInfo {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.9em;
+        gap: 10px;
+        color: var(--text-color);
+        padding: 5px;
+        margin: 0 auto;
+        width: 100%;
+    }
+    .index_infoInfo span {
+        color: var(--quaternary-color);
+        font-weight: bold;
+        font-size: 2.2em;
+    }
+    .inde_conteiner {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        gap: 10px;
+        top: 0px;
+        height: 100%;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        z-index: 300;
+    }
+    .block_one, .block_two {
+        display: flex;
+        width: 20%;
+        padding: 0px;
+        position: relative;
+        z-index: 100;
+        overflow: hidden;
+    }
+    .back_image_home{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: scale(1.1);
+            object-fit: cover;   /* Faz a imagem preencher tudo sem esticar/deformar */
+            z-index: 500;
+            pointer-events: none; /* Garante que a imagem não atrapalhe cliques em botões */
+    }
+    .background_city{
+        position: absolute;
+        height: 105%;
+        object-fit: cover;
+        z-index: -1;
+    }
+    .left{
+        top: 0;
+        left: 0;
+        object-position: 25% center;
+    }
+    .left:hover{
+
+    }
+    .right{
+        top: 0;
+        right: 0;
+        object-position: 80% center;
+    }
+    /* Estilos dos Filtros de busca */
+    .block_three{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        gap: 20px;
+    }
+    .filter-block {
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        text-align: center;
+        width: 100%;
+        margin: 0 auto;
+        border: 4px solid var(--text-color);
+    }
+    .filter-block h3 {
+        padding: 10px;
+        color: var(--primary-color);
+        font-size: 1.4em;
+    }
+    .checkbox-container {
+        font-size: 0.9em;
+        color: var(--text-color);
+    }
+    .filter-grid {
+        padding-left: 10px;
+        color: var(--text-color);
+        font-size: 0.8em;
+        align-items: center;
+        display: flex;
+        gap: 10px;
+    }
+    #filter_titulo,
+    #filter_titulo_original {
+        font-size: 0.9em;
+        color: var(--quinary-color);
+        width: 300px;
+    }
+    #filter_editora,
+    #filter_data_lancamento,
+    #filter_genero {
+        font-size: 0.9em;
+        color: var(--quinary-color);
+        width: 100px;
+    }
+    .filter-grid select {
+        color: var(--quinary-color);
+        width: 90px;
+        font-size: 0.9em;
+        padding: 0 5px;
+    }
+    .index_select {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
+    .inde_search {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        margin-top: 15px;
+        font-size: 1.1em;
+    }
+    #id_search {
+        width: 400px;
+    }
+    .t_index {
+        position: relative;
+    }
+    .index_index {
+        width: 400px;
+        height: 60px;
+        padding: 10px;
+        z-index: 500;
+    }
+    .index_list {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding-bottom: 10px;
+    }
+
+    #loader-pesquisa {
+        text-align: center;
+        font-weight: bold;
+    }
+    #resultados-pesquisa {
+        min-height: 200px;
+        text-align: center;
+    }
+    .container_cards_index {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        padding: 20px 0;
+        width: 100%;
+    }
+    .card_search {
+        display: flex;
+        flex-direction: column;
+        max-width: 200px;
+        height: 350px;
+        background-color: $bg;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba($color-black-hex, 0.6);
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+    }
+    .cardImageIndex {
+        display: flex;
+        height: 350px;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: $quinary;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+    .card-capa-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .cardTextIndex {
+        display: block;
+        width: 100%;
+        text-align: center;
+        transition: height 0.4s ease-out, background-color 0.4s ease-out;
+        z-index: 350;
+        background-color: rgba($color-primary-hex, 0.4);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        position: absolute;
+        bottom: 0;
+        height: 50px;
+        padding-top: 10px;
+        padding-bottom: 5px;
+        color: $bg;
+        flex-grow: 1;
+        transform: translateY(0);
+    }
+    .card_search:hover .cardTextIndex {
+        height: 100%;
+        background-color: rgba($color-primary-hex, 0.9);
+    }
+    .cardTextIndex p {
+        margin: 15px 0;
+        font-size: 0.8em;
+    }
+    .cardTitleIndex {
+        text-decoration: none;
+        padding: 5px;
+    }
+    .cardTextIndex .cardTitleIndex {
+        font-size: 1em;
+        margin-bottom: 5px;
+        color: var(--secondary-color);
+    }
+    .cardInfoIndex {
+        text-decoration: none;
+    }
+    .cardOriginalIndex {
+        text-decoration: none;
+    }
+}
+
+.b_image3 {
+    background-image: url('../img/ph_banner02.png');
+    background-repeat: no-repeat;
+    background-position: 20% 80%;
+    position: relative;
+    display: flex;
+    padding: 0;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    z-index: 50;
+}
+
+.b_image3::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color-quaternary-hex, 0.4);
+    z-index: 100;
+}
+
+.banner_standIndex {
+    display: flex;
+    padding: 0px;
+    position: relative;
+    z-index: 100;
+}

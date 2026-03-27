@@ -1,0 +1,54 @@
+.lib_catalog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    // Centraliza o conteúdo horizontalmente
+    width: 100%;
+    margin-top: 40px;
+    padding: 15px 0;
+    z-index: 500;
+}
+.lib_catList {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;        // Permite que as letras dobrem a linha se a tela for pequena
+        justify-content: center; // Centraliza as letras horizontalmente
+        width: 100%;
+        max-width: 1000px;      // Limita a largura para as letras não ficarem muito espalhadas
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        li {
+            display: flex; // Transforma o LI em flex também ajuda no alinhamento
+            
+            a {
+                text-decoration: none; 
+                color: inherit; 
+                cursor: pointer;
+                display: block; // Faz o link ocupar o espaço do LI
+                padding: 5px 10px;
+                font-family: 'Inter', sans-serif; // Força a fonte da tipografia
+                font-weight: 600;
+                text-decoration: none;
+                
+                // Sobrescreve o comportamento do _typography se necessário
+                &:hover {
+                    color: var(--tertiary-color);
+                }
+            }
+        }
+    }
+}
+
+.form-section {
+    background-color: rgba($color-primary-hex, 0.1);
+    padding: 12px;
+    border-radius: 6px;
+    margin: 12px 0;
+}
