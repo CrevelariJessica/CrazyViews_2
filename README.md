@@ -398,3 +398,18 @@ Fase 3
 
 Fase 4
 - Documentação final e comparação antes/depois
+
+## Prioridade de Implementação
+Prioridade Alta:
+- Redesign visual inspirado em quadrinhos.
+- Modularização do sistema de estilos com SCSS.
+- Arquitetura de Navegação Híbrida (SPA-like) e Transições Dinâmicas.
+- Desacoplamento e Modularização do JavaScript (ES6+ Events)
+
+Prioridade Media
+- Sistema de edição de páginas de edições.
+- Sistema de processamento assíncrono de uploads.
+
+Prioridade Baixa:
+- Implementação de sistema multiusuário com autenticação via Google.
+- Fortalecimento da segurança no envio de arquivos.
