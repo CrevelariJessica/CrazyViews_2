@@ -1,168 +1,45 @@
-<html>
-    <head>
-        <title>Títulos Enviados</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../assets/css/style2.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    </head>
-    <body>
-        <div class="page_all">
-            <div class="up_pageAll">
-                <header>
-                    <div class="h_logo"><a href="#"><img src="../Crazy_Views_logo.png" alt="Logo do site" class="logo"></a></div>
+<div class=" modal-style-hq">
+<div class="lib_catalog">
+    <nav class="lib_catList">
+        <ul>
+            <li><a onclick="carregarListaTitulos('filter_char=A')">A</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=B')">B</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=C')">C</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=D')">D</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=E')">E</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=F')">F</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=G')">G</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=H')">H</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=I')">I</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=J')">J</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=K')">K</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=L')">L</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=M')">M</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=N')">N</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=O')">O</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=P')">P</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=Q')">Q</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=R')">R</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=S')">S</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=T')">T</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=U')">U</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=V')">V</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=W')">W</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=X')">X</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=Y')">Y</a></li>
+            <li><a onclick="carregarListaTitulos('filter_char=Z')">Z</a></li>
+        </ul>
+        <ul>
+            <li><a onclick="carregarListaTitulos('filter_char=NUM')">0-9</a></li>
+        </ul>
+    </nav>
+</div>
 
-                    <div class="h_menus">
-                        <nav class="h_mainMenuMidle">
-                            <ul>
-                                <li><a href="../index.html">Início</a></li>
-                                <li><a href="favorite.html">Favoritos</a></li>
-                                <li><a id="nav" href="#" class="active">Títulos Enviados</a></li>
-                            </ul>
-                        </nav>
-                    </div>
+<div class="lib_container">
+    <div id="lib_List" class="lib_List">
+        <div id="feedback_message"></div>
+    </div>
+</div>
 
-                    <div class="h_menusUp">
-                        <nav class="h_mainMenu">
-                            <ul>
-                                <li><a id="headerUp" href="upload.html">Enviar Título</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </header>
-
-                <div class="banner_stand">
-                    <div class="b_image1">
-                    </div>
-
-                </div>
-                
-                <div class="lib_catalog">
-                    <nav class="lib_catList">
-                        <ul>
-                            <li><a onclick="carregarListaTitulos('filter_char=A')">A</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=B')">B</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=C')">C</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=D')">D</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=E')">E</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=F')">F</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=G')">G</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=H')">H</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=I')">I</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=J')">J</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=K')">K</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=L')">L</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=M')">M</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=N')">N</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=O')">O</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=P')">P</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=Q')">Q</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=R')">R</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=S')">S</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=T')">T</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=U')">U</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=V')">V</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=W')">W</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=X')">X</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=Y')">Y</a></li>
-                            <li><a onclick="carregarListaTitulos('filter_char=Z')">Z</a></li>
-                        </ul>
-                        <ul>
-                            <li><a onclick="carregarListaTitulos('filter_char=NUM')">0-9</a></li>
-                        </ul>
-                    </nav>
-                </div>
-
-                <div class="lib_container">
-                    <div id="lib_List" class="lib_List">
-                        <div id="feedback_message"></div>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div id="pagination-controls" class="flex justify-center my-8"></div>
-            
-            <div id="modalEdicaoTitulo" class="modal" style="display: none;">
-                    <div class="modal-content modal-edit-style">
-
-                        <div>
-                            <h3>EDITAR DETALHES</h3>
-                            <span class="close-button" onclick="fecharModalEdicao()">&times;</span>
-                        </div>
-
-                        <form id="formEdicaoTitulo">
-
-                            <input type="hidden" id="edit_id_titulo" name="id_titulo">
-                            
-                            <div class="id_ContainerGroupFav">
-                                <label>Título Local:</label>
-                                <input type="text" id="edit_titulo" name="titulo" maxlength="100" required>
-                            </div>
-
-                            <div class="id_ContainerGroupFav">
-                                <label>Título Original:</label>
-                                <input type="text" id="edit_original" name="original" maxlength="100">
-                            </div>
-                            
-                            <div class="container123">
-                                <div class="id_ContainerGroupFav">
-                                    <label>Gênero:</label>
-                                    <input type="text" id="edit_genero" name="genero" maxlength="50" required>
-                                </div>
-
-                                <div class="id_ContainerGroupFav">
-                                    <label>Editora:</label>
-                                    <input type="text" id="edit_Publisher" name="editora" maxlength="50" required>
-                                </div>
-                            </div>
-                            
-
-                            <div class="id_ContainerGroupFav">
-                                <label>Ano:</label>
-                                <input type="text" id="edit_lancamento" name="lancamento" maxlength="4" required pattern="\d{4}">
-                                <div class="cont_error">
-                                    <div class="id_ContErr">
-                                        <span id="edit_feedback_message" class="messageErro"></span> 
-                                        <span id="edit_loading_message" class="messageErro" style="display:none;"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="container456">
-                                <button type="button" id="cancelButton" onclick="fecharModalEdicao()">Cancelar</button>
-                                <button type="submit" id="saveButton" class="btn-edit">Salvar alterações<span id="editSpinner" class="spinner"></span></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            
-            <div id="modalConfirmacaoExclusao" class="modal" style="display: none;">
-                <div class="modal-content modal-delete-style">
-                    <h3>CONFIRMAÇÃO DE EXCLUSÃO</h3>
-                    <p>Tem certeza que deseja DELETAR este título PERMANENTEMENTE?</p>
-                    <p><strong>ATENÇÃO: Essa ação NÃO pode ser desfeita e IRÁ REMOVER todas as EDIÇÕES, PÁGINAS e FAVORITOS relacionados.</strong></p>
-                    <div class="modal-actions">
-                        <button class="btn-cancel" onclick="fecharModalConfirmacao()">Não, Cancelar</button>
-                        <button class="btn-delete" onclick="deletarTitulo()">Sim, Deletar Título</button>
-                    </div>
-                </div>
-            </div>
-            
-            <footer>
-                    <div class="footer-info">
-                        <p>&copy; 2025</p>
-                        <p>Crazy Views</p>
-                        <p>Desenvolvido por: Jessica Crevelari</p>
-                    </div>
-            </footer>
-        </div>
-        
-        <script src="../assets/js/global_scripts.js"></script>
-        <script src="../assets/js/favorite_action.js"></script>
-        <script type="module" src="../assets/js/title_list.js"></script>
-        <script src="../assets/js/modal_title.js"></script>
-        
-    </body>
-</html>
+</div>
+<div id="pagination-controls" class="flex justify-center my-8"></div>

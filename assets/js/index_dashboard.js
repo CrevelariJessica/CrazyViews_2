@@ -1,5 +1,5 @@
-const searchState = {
-    caminhoApi: './php/api_title_list.php',
+{const searchState = {
+    caminhoApi: 'php/api_title_list.php',
     paginaAtual: 1,
     limitePorPagina: 10,
     totalResultados: 0,
@@ -208,11 +208,11 @@ function renderizarTitulos(titulos, container) {
                     <h3 class="cardTitleIndex">
                         ${tituloDisplay} ${favoritoIcon}
                     </h3>
-                    <p class="cardOrginalIndex">${title.original || 'N/A'}</p>
-                    <p class="cardIIndex">Ano: ${title.lancamento || 'N/A'}</p>
-                    <p class="cardIIndex">Editora: ${title.editora || 'N/A'}</p> <!-- CAMPO EDITORA -->
-                    <p class="cardIIndex">Gênero: ${title.genero || 'N/A'}</p>
-                    <p class="cardIIndex">Edições: ${title.edicoes_por_titulo || '0'}</p>
+                    <p class="cardOriginalIndex">${title.original || 'N/A'}</p>
+                    <p class="cardInfoIndex">Ano: ${title.lancamento || 'N/A'}</p>
+                    <p class="cardInfoIndex">Editora: ${title.editora || 'N/A'}</p>
+                    <p class="cardInfoIndex">Gênero: ${title.genero || 'N/A'}</p>
+                    <p class="cardInfoIndex">Edições: ${title.edicoes_por_titulo || '0'}</p>
                 </div>
             </a>
         `;
@@ -266,19 +266,41 @@ function renderizarPaginacao(container) {
 
     container.innerHTML = html;
 }
+// Dentro do seu arquivo assets/js/index_dashboard.js
+
 function iniciarFiltros() {
+    console.log("Anexando eventos de filtro ao Dashboard...");
     
+    // 1. Carrega os números do topo
     carregarContadoresGerais();
     
+    // 2. Busca o formulário no HTML recém-injetado
     const form = document.getElementById('form-filtros');
     
     if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            aplicarFiltros(1); 
-        });
+        // Remove ouvintes antigos para não duplicar, caso o script rode duas vezes
+        form.removeEventListener('submit', lidarSubmit);
+        form.addEventListener('submit', lidarSubmit);
+        console.log("Sucesso: Evento de submit vinculado.");
+    } else {
+        console.warn("Aviso: Elemento 'form-filtros' não encontrado no DOM.");
     }
 }
-document.addEventListener('DOMContentLoaded', iniciarFiltros);
+
+// Função auxiliar para o listener
+function lidarSubmit(e) {
+    e.preventDefault();
+    aplicarFiltros(1);
+}
+
+// EXPORTAÇÃO PARA O MESTRE
+// Removemos o DOMContentLoaded daqui porque quem manda agora é o dashboard.js (view)
+window.iniciarFiltros = iniciarFiltros; 
 window.carregarContadoresGerais = carregarContadoresGerais;
 window.aplicarFiltros = aplicarFiltros;
+
+// Executa imediatamente se o script for carregado com o formulário já presente
+if (document.getElementById('form-filtros')) {
+    iniciarFiltros();
+}
+}

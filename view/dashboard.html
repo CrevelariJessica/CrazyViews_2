@@ -1,0 +1,125 @@
+<div class="index_container">
+    
+    <div class="ux_container">
+        
+        <div class="block_one modal-style-hq">
+            
+                <img src="assets/img/placeholder_spiderman.webp?v=1" alt="Descrição da imagem" class="back_image_home">
+                <img src="assets/img/New-York.webp?v=1" alt="Descrição da imagem" class="background_city left">
+            
+            
+        </div>
+        
+        <div class="block_three">
+            
+            <section class="index_info">
+                <div class="index_infoInfo modal-style-hq">
+                    <p>Títulos totais cadastrados:</p>
+                    <span id="totalTitulosGeral">0</span>
+                </div>
+                <div class="index_infoInfo modal-style-hq">
+                    <p>Títulos totais favoritados:</p>
+                    <span id="totalFavoritosGeral">0</span>
+                </div>
+                <div class="index_infoInfo modal-style-hq">
+                    <p>Edições totais cadastrados:</p>
+                    <span id="totalEdicoesGeral">0</span>
+                </div>
+            </section>
+            
+            <div class="filter-block modal-style-hq">
+            <h3>Pesquisar Título</h3>
+            
+            <div class="search_filter">
+                <form id="form-filtros" class="form-section">
+
+                    <div class="filter-grid">
+                        <label for="filter_titulo">Título Local</label>
+                        <input type="text" id="filter_titulo" name="titulo" maxlength="100">
+
+                        <div class="submit-area">
+                            <div class="checkbox-container">
+                                <input id="filter_favorito" name="favorito" type="checkbox">
+                                <label for="filter_favorito">Apenas Favoritos</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-grid">
+                        <div>
+                            <label for="filter_titulo_original">Título Original</label>
+                            <input type="text" id="filter_titulo_original" name="titulo_original" maxlength="100">
+                        </div>
+                        <div>
+                            <label for="filter_editora">Editora</label>
+                            <input type="text" id="filter_editora" name="editora" maxlength="100">
+                        </div>
+                    </div>
+
+                    <div class="filter-grid">
+                        <div>
+                            <label for="filter_genero">Gênero</label>
+                            <input type="text" id="filter_genero" name="genero">
+                        </div>
+
+                        <div>
+                            <label for="filter_data_lancamento">Ano</label>
+                            <input type="number" id="filter_data_lancamento" name="data_lancamento" min="1920" max="2100">
+                        </div>
+
+                        <div class="index_select">
+                            <div>
+                                <label for="filter_paginas">Qtd. de Páginas</label>
+                            </div>
+                            <select id="filter_paginas" name="paginas_range">
+                                <option value="">Qualquer</option>
+                                <option value="0-30">0 - 30</option>
+                                <option value="31-60">31 - 60</option>
+                                <option value="61-99">61 - 99</option>
+                                <option value="100+">100+</option>
+                            </select>
+                        </div>
+
+                        <div class="index_select">
+                            <div>
+                                <label for="filter_possui_edicoes">Possui Edições?</label>
+                            </div>
+                            <select id="filter_possui_edicoes" name="possui_edicoes">
+                                <option value="todos">Todos</option>
+                                <option value="sim">Sim</option>
+                                <option value="nao">Não</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="button" type="submit">
+                        Buscar Títulos
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="index_list">
+                <div id="loader-pesquisa">
+                    <div class="container_cards_index" style="display: none;">
+                        <div id="search_index">
+
+                        </div>
+                    </div>
+
+                </div>
+                <div id="resultados-pesquisa">
+                    <p>Use os filtros acima e clique em "Buscar Títulos" para começar.</p>
+                </div>
+                <div id="paginacao-controles"></div>
+            </div>
+            </div>
+        </div>
+        
+        <div class="block_two modal-style-hq">
+            <img src="assets/img/New-York.webp?v=1" alt="Descrição da imagem" class="background_city right">
+        </div>
+            
+    </div>
+</div>

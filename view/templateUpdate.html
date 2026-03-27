@@ -1,211 +1,122 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <title>Nome da HQ Enviada</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../assets/css/style2.css">
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    </head>
-    <body>
-            <div class="page_all">
-            <header>
-                <div id="nav" class="h_logo"><a href=" "><img src="../Crazy_Views_logo.png" alt="Logo do site" class="logo"></a></div>
-                
-                <div class="h_menus">
-                    <nav class="h_mainMenuMidle">
-                        <ul>
-                            <li><a href="../index.html">Início</a></li>
-                            <li><a href="favorite.html">Favoritos</a></li>
-                            <li><a href="titlesUp.html">Títulos Enviados</a></li>
-                        </ul>
-                    </nav>                    
-                </div>
-                
-                <div class="h_menusUp">
-                    <nav class="h_mainMenu">
-                        <ul>
-                            <li><a id="headerUp" href="upload.html">Enviar Título</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </header>
-                
-            <div id="sucesso_feedback"></div>
-            <div id="erro_inicial"></div>
-                
-                
-            <div class="banner">
-                <div id="banner_principal_container" class="bannerImage">
-                    <div id="bannerBackground" class="backgroundStyle"></div>
-                    <div class="bannerbanner">
-                        <div id="imageHq">
-                            <img id="HQImage" src="" alt="Capa" class="imageHqStyle" style="display:none;">
-                        </div>
-                    </div>
-                    
-                </div>
-                
-                
-                <div class="banner_inner">
-                    
-                    <div class="banner_content">
-                        <div id="info_basicas_titulo">
-                            <h2 id="tituloPrincipal" class="t_title">Carregando...</h2>
-                            
-                            <div class="b_content_info">
-                                <p class="b_title">Título Original:</p>
-                                <span id="tituloOriginal" class="info_valor"></span>
-                            </div>
+<div id="sucesso_feedback"></div>
+<div id="erro_inicial"></div>
 
-                            <div class="b_content_info">
-                                <p class="b_title">Editora: </p>
-                                <span id="editoraNome" class="info_valor"></span>
-                            </div>
-
-                            <div class="b_content_info">
-                                <p class="b_title">Ano de Lançamento:</p>
-                                <span id="anoLancamento" class="info_valor"></span>
-                            </div>
-
-                            <div class="b_content_info">
-                                <p class="b_title">Gênero:</p>
-                                <span id="generoNome" class="info_valor"></span>
-                            </div>
-                        </div>
-                    </div>
+<div class="banner">
+    <div id="banner_principal_container" class="bannerImage">
+        <div id="bannerBackground" class="backgroundStyle"></div>
+        <div class="bannerbanner">
+            <div id="imageHq">
+                <img id="HQImage" src="" alt="Capa" class="imageHqStyle" style="display:none;">
             </div>
+        </div>
+
+    </div>
+
+
+    <div class="banner_inner">
+
+        <div class="banner_content">
+            <div id="info_basicas_titulo">
+                <h2 id="tituloPrincipal" class="t_title">Carregando...</h2>
+
+                <div class="b_content_info">
+                    <p class="b_title">Título Original:</p>
+                    <span id="tituloOriginal" class="info_valor"></span>
+                </div>
+
+                <div class="b_content_info">
+                    <p class="b_title">Editora: </p>
+                    <span id="editoraNome" class="info_valor"></span>
+                </div>
+
+                <div class="b_content_info">
+                    <p class="b_title">Ano de Lançamento:</p>
+                    <span id="anoLancamento" class="info_valor"></span>
+                </div>
+
+                <div class="b_content_info">
+                    <p class="b_title">Gênero:</p>
+                    <span id="generoNome" class="info_valor"></span>
+                </div>
             </div>
-                
-            <div class="page_edition">
-                <div class="p_edition">
-                    <div class="add_edition">
-                        <button id="button_addEdt" type="button">Adicionar Nova Edição</button>                        
-                        <div id="form_NewEdt">
-                                <form id="uploadForm" action="../php/processa_edicao.php" method="POST" enctype="multipart/form-data">                               
-                                    <input type="hidden" name="id_titulo" value="<?php echo htmlspecialchars($id_titulo); ?>">
-                                    <input type="hidden" id="id_titulo_geral" name="id_titulo_fk" value="">
-                                    <div class="partOne">
-                                        <div id="id_infOne">
-                                            <div id="id_numEdt">
-                                                <label>Numero da Edição:</label>
-                                                <input type="text" id="txt_Edition" name="edition"  required oninput="maskNunberOnly(this, 5)">
-                                            </div>
+        </div>
+</div>
+</div>
 
-                                            <div id="id_numDate">
-                                                <label>Data da Edição:</label>
-                                                <input type="text" id="txt_ReleaseDate" name="lancamentoDate" placeholder="MM/AAAA" maxlength="7" required oninput="maskDate(this)"><br>
-                                            </div>
-                                        </div>
+<div class="page_edition">
+    <div class="p_edition">
+        <div class="add_edition">
+            <button id="button_addEdt" type="button">Adicionar Nova Edição</button>                        
+            <div id="form_NewEdt">
+                    <form id="uploadForm" action="php/processa_edicao.php" method="POST" enctype="multipart/form-data">                               
+                        <input type="hidden" name="id_titulo" value="<?php echo htmlspecialchars($id_titulo); ?>">
+                        <input type="hidden" id="id_titulo_geral" name="id_titulo_fk" value="">
+                        <div class="partOne">
+                            <div id="id_infOne">
+                                <div id="id_numEdt">
+                                    <label>Numero da Edição:</label>
+                                    <input type="text" id="txt_Edition" name="edition"  required oninput="maskNunberOnly(this, 5)">
+                                </div>
 
-                                        <div id="id_upIm">
-                                            <label for="fileHQ">Selecionar Arquivo de imagem:</label>
-                                            <input type="file" name="fileHQ[]" id="fileHQ" accept=".zip, .cbz, .cbr, .rar, .pdf, .jpg, .jpeg, .png" multiple><br>
-                                        </div>
-
-                                        <div id="id_btUpEdt">
-                                            <input type="hidden" name="id_titulo" id="id_titulo_hidden" value=""> <button type="submit">Cadastrar Edição</button>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="partTwo">
-                                        <span id="errorEdition" class="messageErro" style="display:none;"></span>
-                                        <span id="ErrorDate" class="messageErro" style="display:none;"></span>
-                                    </div>
-                                    
-                                </form>
-                            <div id="feedback_ajax" style="margin-top: 10px; font-weight: bold;"></div>
-                        </div>
-                        
-                    </div>
-                    
-                    <div class="view_edition">
-                        <div class="cardsContainer">
-                            <div id="EditionList">
-                                <div class="cardEdition">
-                                    <div class="edition-actions-container">
-                                            <button class="btn-edition-menu">...</button>
-
-                                            <div class="edition-menu-options" style="display: none;">
-                                                <a href="#" class="menu-option">Editar Número da Edição</a>
-                                                <a href="#" class="menu-option">Editar Data da Edição</a>
-                                                <a href="#" class="menu-option delete-action">Deletar Edição</a>
-                                            </div>
-                                        </div>
-                                    
-                                    <div class="cardImage"></div>
-                                    <div class="cardText">
-                                        <h3 class="cardTitle">Edição #</h3>
-                                        <p class="cardDateP">Data da Edição:</p>
-                                        <p class="cardDateP">páginas:</p>
-                                        <a href="" class="cardLink">Ler</a>
-                                    </div>
+                                <div id="id_numDate">
+                                    <label>Data da Edição:</label>
+                                    <input type="text" id="txt_ReleaseDate" name="lancamentoDate" placeholder="MM/AAAA" maxlength="7" required oninput="maskDate(this)"><br>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="btnMoreEdt">
-                            <div id="loadMoreContainer" class="text-center mt-3"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                
-            </div>
-            
-            <div id="editModal" class="modal" style="display: none;">
-                <div class="modal-content">
-                    <span class="close-button" id="closeModal">&times;</span>
 
-                    <h2>EDITAR EDIÇÃO</h2>
+                            <div id="id_upIm">
+                                <label for="fileHQ">Selecionar Arquivo de imagem:</label>
+                                <input type="file" name="fileHQ[]" id="fileHQ" accept=".zip, .cbz, .cbr, .rar, .pdf, .jpg, .jpeg, .png" multiple><br>
+                            </div>
 
-                    <form id="editEditionForm">
-                        <input type="hidden" id="modalEditionId" name="id">
-
-                        <div class="form-group">
-                            <label for="modalEditionNumber">Número da Edição:</label>
-                            <input type="text" id="modalEditionNumber" name="numero" maxlength="5" oninput="maskNunberOnly(this, 5)" required>
+                            <div id="id_btUpEdt">
+                                <input type="hidden" name="id_titulo" id="id_titulo_hidden" value=""> 
+                                <button type="submit">Cadastrar Edição</button>
+                            </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="modalEditionDate">Data de Lançamento (MM/AAAA):</label>
-                            <input type="text" id="modalEditionDate" name="data_display" maxlength="7" oninput="maskDate(this)" required>
+                        <div class="partTwo">
+                            <span id="errorEdition" class="messageErro" style="display:none;"></span>
+                            <span id="ErrorDate" class="messageErro" style="display:none;"></span>
                         </div>
 
-                        <button type="submit" class="btn-save-modal">Salvar Alterações</button>
                     </form>
-                </div>
+                <div id="feedback_ajax" style="margin-top: 10px; font-weight: bold;"></div>
             </div>
-            
-            <div id="deleteConfirmModal" class="modal" style="display: none;">
-                <div class="modal-content modal-delete-style">
-                    <span class="close-button" id="closeDeleteModal">&times;</span>
-                    <h3>CONFIRMAÇÃO DE EXCLUSÃO</h3>
-                    <p>Tem certeza que deseja DELETAR a <strong id="editionToDeleteInfo"></strong>?</p>
-                    <p><strong>ATENÇÃO: Essa ação NÃO pode ser desfeita e IRÁ REMOVER todas as PÁGINAS desta edição.</strong></p>
 
-                    <div class="modal-actions">
-                        <button id="cancelDeleteButton" class="btn-cancel">Não, Cancelar</button>
-                        <button id="confirmDeleteButton" class="btn-delete">Sim, Deletar Edição</button>
+        </div>
+
+        <div class="view_edition">
+            <div class="cardsContainer">
+                <div id="EditionList">
+                    <div class="cardEdition">
+                        <div class="edition-actions-container">
+                                <button class="btn-edition-menu">...</button>
+
+                                <div class="edition-menu-options" style="display: none;">
+                                    <a href="#" class="menu-option">Editar Número da Edição</a>
+                                    <a href="#" class="menu-option">Editar Data da Edição</a>
+                                    <a href="#" class="menu-option delete-action">Deletar Edição</a>
+                                </div>
+                            </div>
+
+                        <div class="cardImage"></div>
+                        <div class="cardText">
+                            <h3 class="cardTitle">Edição #</h3>
+                            <p class="cardDateP">Data da Edição:</p>
+                            <p class="cardDateP">páginas:</p>
+                            <a href="" class="cardLink">Ler</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <footer>
-                    <div class="footer-info">
-                        <p>&copy; 2025</p>
-                        <p>Crazy Views</p>
-                        <p>Desenvolvido por: Jessica Crevelari</p>
-                    </div>
-            </footer>
+
+            <div class="btnMoreEdt">
+                <div id="loadMoreContainer" class="text-center mt-3"></div>
+            </div>
+
         </div>
-        
-        
-            
-        <script src="../assets/js/global_scripts.js"></script>
-        <script src="../assets/js/api_t.js"></script>
-        <script src="../assets/js/page_edition.js"> </script>
-        <script src="../assets/js/logic_detail.js"></script>
-    </body>
-</html>
+
+    </div>
+
+</div>

@@ -1,68 +1,159 @@
-let buttonDarkMode = null;
-const PROJECT_BASE_PATH = '/Crazy_Views';
+// --- CONFIGURAÇÕES GLOBAIS ---
+const PROJECT_BASE_PATH = '/hq_app';
+const contentDiv = document.getElementById('content');
+const radioInputs = document.querySelectorAll('input[name="plan"]');
+let isNavigating = false;
 
-function setDarkMode(dark) {
-    if (dark) {
+// --- SISTEMA DE DARK MODE---
+function initDarkMode() {
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const currentMode = localStorage.getItem('darkMode');
+
+    // Aplica o modo salvo ao carregar a página
+    if (currentMode === 'enabled') {
         document.body.classList.add('dark-mode');
-        localStorage.setItem('darkMode', 'on');
-        if (buttonDarkMode) {
-            buttonDarkMode.innerHTML = '<img class="btn-dark-mode-img" src="' + PROJECT_BASE_PATH + '/assets/img/sun.svg" alt="Sun" width="20" height="20">';
-            buttonDarkMode.style.backgroundColor = 'var(--secondary-color)';
-            buttonDarkMode.style.color = 'var(--primary-color)';
-        }
-    } else {
-        document.body.classList.remove('dark-mode');
-        localStorage.setItem('darkMode', 'off');
-        if (buttonDarkMode) {
-            buttonDarkMode.innerHTML = '<img class="btn-dark-mode-img" src="' + PROJECT_BASE_PATH + '/assets/img/moon.svg" alt="Moon" width="20" height="20">';
-            buttonDarkMode.style.backgroundColor = 'var(--primary-color)';
-            buttonDarkMode.style.color = 'var(--quinary-color)';
-        }
+        if (darkModeToggle) darkModeToggle.checked = true;
+    }
+
+    // Ouvinte para o novo botão Toggle
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('change', () => {
+            if (darkModeToggle.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
     }
 }
 
-function toggleDarkMode() {
-    const isDark = !document.body.classList.contains('dark-mode');
-    setDarkMode(isDark);
+// --- FUNÇÃO PRINCIPAL DE NAVEGAÇÃO (SPA) ---
+async function switchPage(url, addHistory = true) {
+    if (isNavigating) return;
+    
+    // Cleanup de eventos da página anterior
+    if (window.pageCleanup && typeof window.pageCleanup === 'function') {
+        try { window.pageCleanup(); } catch (e) { console.error("Erro no cleanup:", e); }
+        window.pageCleanup = null;
+    }
+    
+    isNavigating = true;
+    contentDiv.classList.add('fade-out');
+
+    setTimeout(async () => {
+        try {
+            const urlObj = new URL(url, window.location.origin);
+            const params = urlObj.search;
+            let cleanPath = urlObj.pathname.replace(/^\/+/, '');
+
+            let fetchPath = cleanPath;
+            if (!fetchPath.startsWith('view/')) fetchPath = 'view/' + fetchPath;
+            if (!fetchPath.endsWith('.html')) fetchPath += '.html';
+                
+            const fetchUrl = '/' + 'hq_app/' + fetchPath + params + (params ? '&' : '?') + 'v=' + Date.now();
+            
+            const response = await fetch(fetchUrl);
+            if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+            
+            const html = await response.text();
+            window.scrollTo(0, 0);
+            contentDiv.innerHTML = html;
+
+            if (addHistory) {
+                const visualURL = cleanPath.replace('view/', '').replace('.html', '') + params;
+                history.pushState({ pageUrl: url }, "", visualURL);
+            }
+            
+            // Limpa scripts de páginas anteriores
+            document.querySelectorAll('.page-script').forEach(s => s.remove());
+            
+            // --- GESTÃO DE DEPENDÊNCIAS ---
+            if (cleanPath.includes('templateUpdate')) {
+                const dependencias = [
+                    'assets/js/page_edition.js',
+                    'assets/js/edt_render.js',
+                    'assets/js/api_t.js'
+                ];
+                for (const src of dependencias) {
+                    await new Promise((resolve) => {
+                        const s = document.createElement('script');
+                        s.src = src + '?v=' + Date.now();
+                        s.className = 'page-script';
+                        s.onload = resolve;
+                        s.onerror = resolve;
+                        document.body.appendChild(s);
+                    });
+                }
+            }
+
+            // --- CARREGAMENTO DO SCRIPT DA PÁGINA ---
+            let scriptPath = fetchPath.replace('.html', '.js');
+            if (!scriptPath.startsWith('/')) scriptPath = '/hq_app/' + scriptPath;
+
+            const masterScript = document.createElement("script");
+            masterScript.src = scriptPath + '?v=' + Date.now();
+            masterScript.className = 'page-script';
+            masterScript.onload = () => {
+                syncMenuWithURL();
+                setTimeout(() => {
+                    isNavigating = false;
+                    // Inicialização específica de cada página
+                    if (cleanPath.includes('templateUpdate') && typeof window.carregarDadosTitulo === 'function') {
+                        window.carregarDadosTitulo();
+                    }
+                }, 100);
+            };
+            masterScript.onerror = () => { isNavigating = false; };
+            document.body.appendChild(masterScript);
+            contentDiv.classList.remove('fade-out');
+
+        } catch (error) {
+            isNavigating = false;
+            console.error("Falha na navegação:", error);
+            contentDiv.classList.remove('fade-out');
+            contentDiv.innerHTML = `<p style="padding:20px; color:red;">Erro ao carregar conteúdo.</p>`;
+        }
+    }, 400);
 }
 
-$(document).ready(function () {
-    $('#nav').on('click', function (e) {
-        e.preventDefault();
-        $('html, body').animate({
-            scrollTop: 0
-        }, 600);
+window.carregarConteudo = (url) => switchPage(url, true);
+
+// --- SINCRONIZAÇÃO E EVENTOS ---
+function syncMenuWithURL() {
+    const path = window.location.pathname.split('/').filter(Boolean).pop() || 'dashboard';
+    const targetRadio = Array.from(radioInputs).find(radio => {
+        const val = radio.value.toLowerCase();
+        return val.includes(path.toLowerCase().replace('.html', ''));
     });
+    
+    radioInputs.forEach(r => r.checked = false); // Reseta todos
+    if (targetRadio) targetRadio.checked = true;
+}
 
-    // Setup dark mode button
-    const h_menusUp = document.querySelector('.h_menusUp');
-    buttonDarkMode = h_menusUp.querySelector('.btn-dark-mode');
+window.onpopstate = function() {
+    isNavigating = false;
+    const path = window.location.pathname.split('/').pop() || 'dashboard';
+    const params = window.location.search;
+    switchPage(`view/${path.replace('.html', '')}.html${params}`, false);
+};
 
-    if (buttonDarkMode) {
-        // Remove old button if exists (for safety, reset)
-        buttonDarkMode.remove();
-        buttonDarkMode = null;
-    }
+radioInputs.forEach(radio => {
+    radio.addEventListener('change', (e) => {
+        if (e.target.checked) switchPage(e.target.value);
+    });
+});
 
-    // Create and append the dark mode button
-    buttonDarkMode = document.createElement('button');
-    buttonDarkMode.classList.add('btn-dark-mode');
-    buttonDarkMode.style.backgroundColor = 'var(--primary-color)';
-    buttonDarkMode.style.color = 'var(--quinary-color)';
-    buttonDarkMode.style.border = 'none';
-    buttonDarkMode.style.borderRadius = '5px';
-    buttonDarkMode.style.padding = '5px';
-    buttonDarkMode.style.cursor = 'pointer';
-    buttonDarkMode.style.fontSize = '1.2em';
-    buttonDarkMode.style.fontWeight = 'bold';
-    buttonDarkMode.addEventListener('click', toggleDarkMode);
-    h_menusUp.appendChild(buttonDarkMode);
+// --- INICIALIZAÇÃO AO CARREGAR O SITE ---
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicia o Dark Mode
+    initDarkMode();
 
-    // On load, set dark mode state from localStorage if present
-    const darkModeSetting = localStorage.getItem('darkMode');
-    if (darkModeSetting === 'on') {
-        setDarkMode(true);
-    } else {
-        setDarkMode(false);
-    }
+    // Determina a página inicial
+    let path = window.location.pathname.split('/').filter(Boolean).pop() || 'dashboard';
+    let params = window.location.search;
+    if (['principal.html', 'index.html', 'hq_app'].includes(path)) path = 'dashboard';
+
+    switchPage(`view/${path.replace('.html', '')}.html${params}`, false);
 });
