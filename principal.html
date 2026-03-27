@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CRAZY VIEWS</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="assets/style/main.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    </head>
+    <body>
+        <svg style="display: none;">
+  <filter id="advanced-texture">
+    <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />
+    <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="2">
+      <feDistantLight azimuth="45" elevation="60" />
+    </feDiffuseLighting>
+  </filter>
+</svg>
+        <div class="page_all">
+            <div class="up_pageAll">
+                
+            <header>
+                <div class="container">
+                    <div class="h_logo"><a href="#"><img src="Crazy_Views_logo.png" alt="Logo do site" class="logo"></a></div>
+
+                    <div class="h_menu">
+                        <div class="comic-radio-group">
+                            <input type="radio" name="plan" id="home" value="view/dashboard.html" />
+                            <label for="home">Início</label>
+
+                            <input type="radio" name="plan" id="fav_t" value="view/favorite.html" />
+                            <label for="fav_t">Favoritos</label>
+
+                            <input type="radio" name="plan" id="titles_up" value="view/titlesUp.html" />
+                            <label for="titles_up">Títulos Enviados</label>
+
+                            <div class="comic-glider"></div>
+                        </div>
+                        </div>
+
+                        <div class="h_envia">
+                            <div class="comic-group">
+                                <div class="cube-up" onclick="carregarConteudo('view/upload.html')">
+                                    <label>Enviar</label>
+                                </div>
+                            </div>
+                            
+                            <div class="theme-switch-container">
+                                <input id="dark-mode-toggle" type="checkbox" class="input-switch" />
+                                <div class="theme-app">
+                                  <div class="theme-content">
+                                    <div class="theme-circle">
+                                      <div class="theme-crescent"></div>
+                                    </div>
+
+                                    <label for="dark-mode-toggle" class="theme-label">
+                                      <div class="theme-toggle"></div>
+                                      <div class="theme-names">
+                                        <p class="theme-light">DAY</p>
+                                        <p class="theme-dark">NIGHT</p>
+                                      </div>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                </div>
+            </header>
+                
+            <div class="banner_standIndex ">
+                        <div class="b_image3 modal-style-hq"></div>
+                </div>
+                <main id="main-container">
+                    <div id="content">
+                        <div class="page_all">
+                            <div class="up_pageAll">
+
+
+                            </div>
+                        </div>
+                    </div>
+                </main>
+        
+        <footer class='modal-style-hq'>
+                    <div class="footer-info">
+                        <p>&copy; 2025</p>
+                        <p>Crazy Views</p>
+                        <p>Desenvolvido por: Jessica Crevelari</p>
+                    </div>
+            </footer>
+        </div>
+            </div>
+                
+                <div id="modalEdicaoTitulo" class="modal" style="display: none;">
+    <div class="modal-content modal-edit-style">
+
+        <div>
+            <h3>EDITAR DETALHES</h3>
+            <span class="close-button" onclick="fecharModalEdicao()">&times;</span>
+        </div>
+
+        <form id="formEdicaoTitulo">
+
+            <input type="hidden" id="edit_id_titulo" name="id_titulo">
+
+            <div class="id_ContainerGroupFav">
+                <label>Título Local:</label>
+                <input type="text" id="edit_titulo" name="titulo" maxlength="100" required>
+            </div>
+
+            <div class="id_ContainerGroupFav">
+                <label>Título Original:</label>
+                <input type="text" id="edit_original" name="original" maxlength="100">
+            </div>
+
+            <div class="modal-row-group">
+                <div class="id_ContainerGroupFav">
+                    <label>Gênero:</label>
+                    <input type="text" id="edit_genero" name="genero" maxlength="50" required>
+                </div>
+
+                <div class="id_ContainerGroupFav">
+                    <label>Editora:</label>
+                    <input type="text" id="edit_Publisher" name="editora" maxlength="50" required>
+                </div>
+            </div>
+
+
+            <div class="id_ContainerGroupFav">
+                <label>Ano:</label>
+                <input type="text" id="edit_lancamento" name="lancamento" maxlength="4" required pattern="\d{4}">
+                <div class="cont_error">
+                    <div class="id_ContErr">
+                        <span id="edit_feedback_message" class="messageErro"></span> 
+                        <span id="edit_loading_message" class="messageErro" style="display:none;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-actions-wrapper">
+                <button type="button" id="cancelButton" onclick="fecharModalEdicao()">Cancelar</button>
+                <button type="submit" id="saveButton" class="btn-save-modal">Salvar alterações<span id="editSpinner" class="spinner"></span></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="modalConfirmacaoExclusao" class="modal" style="display: none;">
+    <div class="modal-content modal-delete-style">
+        <h3>CONFIRMAÇÃO DE EXCLUSÃO</h3>
+        <p>Tem certeza que deseja DELETAR este título PERMANENTEMENTE?</p>
+        <p><strong>ATENÇÃO: Essa ação NÃO pode ser desfeita e IRÁ REMOVER todas as EDIÇÕES, PÁGINAS e FAVORITOS relacionados.</strong></p>
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="fecharModalConfirmacao()">Não, Cancelar</button>
+            <button class="btn-delete" onclick="deletarTitulo()">Sim, Deletar Título</button>
+        </div>
+    </div>
+</div>
+                
+<div id="editModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-button" id="closeModal">&times;</span>
+
+        <h2>EDITAR EDIÇÃO</h2>
+
+        <form id="editEditionForm">
+            <input type="hidden" id="modalEditionId" name="id">
+
+            <div class="form-group">
+                <label for="modalEditionNumber">Número da Edição:</label>
+                <input type="text" id="modalEditionNumber" name="numero" maxlength="5" oninput="maskNunberOnly(this, 5)" required>
+            </div>
+
+            <div class="form-group">
+                <label for="modalEditionDate">Data de Lançamento (MM/AAAA):</label>
+                <input type="text" id="modalEditionDate" name="data_display" maxlength="7" oninput="maskDate(this)" required>
+            </div>
+
+            <button type="submit" class="btn-save-modal">Salvar Alterações</button>
+        </form>
+    </div>
+</div>|
+
+<div id="deleteConfirmModal" class="modal" style="display: none;">
+    <div class="modal-content modal-delete-style">
+        <span class="close-button" id="closeDeleteModal">&times;</span>
+        <h3>CONFIRMAÇÃO DE EXCLUSÃO</h3>
+        <p>Tem certeza que deseja DELETAR a <strong id="editionToDeleteInfo"></strong>?</p>
+        <p><strong>ATENÇÃO: Essa ação NÃO pode ser desfeita e IRÁ REMOVER todas as PÁGINAS desta edição.</strong></p>
+
+        <div class="modal-actions">
+            <button id="cancelDeleteButton" class="btn-cancel">Não, Cancelar</button>
+            <button id="confirmDeleteButton" class="btn-delete">Sim, Deletar Edição</button>
+        </div>
+    </div>
+</div>
+                
+            <script src="assets/js/global_scripts.js"></script>
+            
+    </body>
+</html>
