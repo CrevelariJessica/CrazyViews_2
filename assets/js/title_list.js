@@ -1,5 +1,5 @@
-const PATH_API = '../php/api_title_list.php';
-const PATH_ACTIONS_API = '../php/api_actions.php';
+const PATH_API = window.buildAppUrl ? window.buildAppUrl('php/api_title_list.php') : '../php/api_title_list.php';
+const PATH_ACTIONS_API = window.buildAppUrl ? window.buildAppUrl('php/api_actions.php') : '../php/api_actions.php';
 window.PATH_ACTIONS_API = PATH_ACTIONS_API; // Mantido para uso em modals.js
 window.PATH_API = PATH_API; // Adicionado para uso em modals.js
 
@@ -22,7 +22,9 @@ function abrirMenuEdicao(iconElement, tituloId) {
         window.abrirModalEdicao(tituloId);
     } else {
         // Fallback: Redireciona para a página de edição (como estava antes)
-        window.location.href = `templateUpdate.html?id=${tituloId}`;
+        window.location.href = window.buildRouteUrl
+            ? window.buildRouteUrl('templateUpdate', { id: tituloId })
+            : `principal.html?page=templateUpdate&id=${tituloId}`;
     }
 }
 
@@ -40,11 +42,10 @@ function renderizarCards(titulos, containerId, appendResults = false) {
     }
 
     // Caminho para o placeholder (Relativo a /view/pages/)
-    const placeholderUrl = '../assets/img/placeholder.jpg'; 
+    const placeholderUrl = window.buildAppUrl ? window.buildAppUrl('assets/img/placeholder.jpg') : '../assets/img/placeholder.jpg'; 
 
-    // PREFIXO CORRIGIDO: Conforme sua instrução, o acesso à pasta 'files/'
-    // a partir de /view/pages/ é de apenas um nível (../).
-    const DB_PATH_PREFIX = '../'; 
+    // PREFIXO PADRONIZADO para funcionar tanto no Docker quanto fora dele.
+    const DB_PATH_PREFIX = window.buildAppUrl ? '' : '../'; 
     
     titulos.forEach(titulo => {
         const isFavorito = titulo.is_favorito == 1;
@@ -56,7 +57,9 @@ function renderizarCards(titulos, containerId, appendResults = false) {
 
         // Aplica o prefixo apenas se houver uma URL de capa válida
         const rawCapaUrl = titulo.url_capa;
-        const finalCapaUrl = rawCapaUrl ? DB_PATH_PREFIX + rawCapaUrl : placeholderUrl;
+        const finalCapaUrl = rawCapaUrl
+            ? (window.buildAppUrl ? window.buildAppUrl(rawCapaUrl) : DB_PATH_PREFIX + rawCapaUrl)
+            : placeholderUrl;
         
         // Estrutura do Card
         // NOTA: As chamadas 'mostrarModalConfirmacao' e 'abrirMenuEdicao' agora dependem
@@ -80,7 +83,7 @@ function renderizarCards(titulos, containerId, appendResults = false) {
                          onerror="this.onerror=null; this.src='${placeholderUrl}';">
                 </div>
                 <div class="lib_cardInfo">
-                    <a href="templateUpdate.html?id=${titulo.id_titulo}" class="lib_cardT">
+                    <a href="${window.buildRouteUrl ? window.buildRouteUrl('templateUpdate', { id: titulo.id_titulo }) : `principal.html?page=templateUpdate&id=${titulo.id_titulo}`}" class="lib_cardT">
                         <h3>${titulo.titulo}</h3>
                     </a>
                     <p class="lib_cardO">${titulo.original}</p>

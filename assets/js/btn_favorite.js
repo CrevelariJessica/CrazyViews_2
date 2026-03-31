@@ -1,5 +1,5 @@
 {
-    const API_PATH = '/hq_app/php/api_actions.php';
+    const API_PATH = window.buildAppUrl ? window.buildAppUrl('php/api_actions.php') : 'php/api_actions.php';
 
     window.toggleFavorito = async (tituloId, iconElement) => {
         if (!iconElement) return;

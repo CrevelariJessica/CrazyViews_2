@@ -187,12 +187,14 @@ function renderizarTitulos(titulos, container) {
     titulos.forEach(title => {
         const tituloDisplay = title.titulo || 'Título Desconhecido';
         const idTitulo = title.id_titulo; 
-        const detalhesLink = `view/templateUpdate.html?id=${idTitulo}`;
+        const detalhesLink = window.buildRouteUrl
+            ? window.buildRouteUrl('templateUpdate', { id: idTitulo })
+            : `principal.html?page=templateUpdate&id=${idTitulo}`;
         const favoritoIcon = title.is_favorito == 1 ? 
             '<span style="color: gold; margin-left: 5px;" title="Favorito">★</span>' : 
             '';
-        const capaUrl = title.url_capa || '';
-        const placeholderUrl = 'assets/img/placeholder.jpg';
+        const capaUrl = title.url_capa ? (window.buildAppUrl ? window.buildAppUrl(title.url_capa) : title.url_capa) : '';
+        const placeholderUrl = window.buildAppUrl ? window.buildAppUrl('assets/img/placeholder.jpg') : 'assets/img/placeholder.jpg';
         const imageTag = `<img 
             src="${capaUrl || placeholderUrl}" 
             alt="Capa do Título: ${tituloDisplay}" 

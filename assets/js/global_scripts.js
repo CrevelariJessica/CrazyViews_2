@@ -1,8 +1,53 @@
 // --- CONFIGURAÇÕES GLOBAIS ---
-const PROJECT_BASE_PATH = '/hq_app';
+const PROJECT_BASE_PATH = window.location.pathname.includes('/view/') ? '../' : '';
 const contentDiv = document.getElementById('content');
 const radioInputs = document.querySelectorAll('input[name="plan"]');
 let isNavigating = false;
+
+function normalizeAppPath(path = '') {
+    return String(path || '').replace(/^(\.\.\/|\.\/|\/)+/, '');
+}
+
+function buildAppUrl(path = '') {
+    return PROJECT_BASE_PATH + normalizeAppPath(path);
+}
+
+function buildRouteUrl(page = 'dashboard', extraParams = {}) {
+    const cleanPage = normalizeAppPath(page).replace(/^view\//, '').replace(/\.html$/, '') || 'dashboard';
+    const params = new URLSearchParams(extraParams);
+    params.set('page', cleanPage);
+    const query = params.toString();
+    return buildAppUrl(`principal.html${query ? `?${query}` : ''}`);
+}
+
+function getRouteState() {
+    const searchParams = new URLSearchParams(window.location.search);
+    const pageFromQuery = searchParams.get('page');
+
+    if (pageFromQuery) {
+        searchParams.delete('page');
+        const queryString = searchParams.toString();
+        return {
+            page: pageFromQuery.replace('.html', '') || 'dashboard',
+            params: queryString ? `?${queryString}` : ''
+        };
+    }
+
+    let path = window.location.pathname.split('/').filter(Boolean).pop() || 'dashboard';
+    if (['principal.html', 'index.html', 'hq_app'].includes(path)) path = 'dashboard';
+
+    return {
+        page: path.replace('.html', '') || 'dashboard',
+        params: window.location.search
+    };
+}
+
+window.normalizeAppPath = normalizeAppPath;
+window.buildAppUrl = buildAppUrl;
+window.buildRouteUrl = buildRouteUrl;
+window.openAppPage = (page, params = {}) => {
+    window.location.href = buildRouteUrl(page, params);
+};
 
 // --- SISTEMA DE DARK MODE---
 function initDarkMode() {
@@ -31,44 +76,45 @@ function initDarkMode() {
 
 // --- FUNÇÃO PRINCIPAL DE NAVEGAÇÃO (SPA) ---
 async function switchPage(url, addHistory = true) {
-    if (isNavigating) return;
-    
+    if (isNavigating || !contentDiv) return;
+
     // Cleanup de eventos da página anterior
     if (window.pageCleanup && typeof window.pageCleanup === 'function') {
         try { window.pageCleanup(); } catch (e) { console.error("Erro no cleanup:", e); }
         window.pageCleanup = null;
     }
-    
+
     isNavigating = true;
     contentDiv.classList.add('fade-out');
 
     setTimeout(async () => {
         try {
-            const urlObj = new URL(url, window.location.origin);
+            const urlObj = new URL(buildAppUrl(url), window.location.href);
             const params = urlObj.search;
-            let cleanPath = urlObj.pathname.replace(/^\/+/, '');
+            let cleanPath = normalizeAppPath(urlObj.pathname);
 
             let fetchPath = cleanPath;
             if (!fetchPath.startsWith('view/')) fetchPath = 'view/' + fetchPath;
             if (!fetchPath.endsWith('.html')) fetchPath += '.html';
-                
-            const fetchUrl = '/' + 'hq_app/' + fetchPath + params + (params ? '&' : '?') + 'v=' + Date.now();
-            
+
+            const fetchUrl = `${buildAppUrl(fetchPath)}${params}${params ? '&' : '?'}v=${Date.now()}`;
+
             const response = await fetch(fetchUrl);
             if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
-            
+
             const html = await response.text();
             window.scrollTo(0, 0);
             contentDiv.innerHTML = html;
 
             if (addHistory) {
-                const visualURL = cleanPath.replace('view/', '').replace('.html', '') + params;
-                history.pushState({ pageUrl: url }, "", visualURL);
+                const pageName = fetchPath.replace(/^view\//, '').replace('.html', '');
+                const historyParams = Object.fromEntries(new URLSearchParams(params).entries());
+                history.pushState({ pageUrl: url }, "", buildRouteUrl(pageName, historyParams));
             }
-            
+
             // Limpa scripts de páginas anteriores
             document.querySelectorAll('.page-script').forEach(s => s.remove());
-            
+
             // --- GESTÃO DE DEPENDÊNCIAS ---
             if (cleanPath.includes('templateUpdate')) {
                 const dependencias = [
@@ -79,7 +125,7 @@ async function switchPage(url, addHistory = true) {
                 for (const src of dependencias) {
                     await new Promise((resolve) => {
                         const s = document.createElement('script');
-                        s.src = src + '?v=' + Date.now();
+                        s.src = buildAppUrl(src) + '?v=' + Date.now();
                         s.className = 'page-script';
                         s.onload = resolve;
                         s.onerror = resolve;
@@ -90,7 +136,7 @@ async function switchPage(url, addHistory = true) {
 
             // --- CARREGAMENTO DO SCRIPT DA PÁGINA ---
             let scriptPath = fetchPath.replace('.html', '.js');
-            if (!scriptPath.startsWith('/')) scriptPath = '/hq_app/' + scriptPath;
+            scriptPath = buildAppUrl(scriptPath);
 
             const masterScript = document.createElement("script");
             masterScript.src = scriptPath + '?v=' + Date.now();
@@ -122,21 +168,20 @@ window.carregarConteudo = (url) => switchPage(url, true);
 
 // --- SINCRONIZAÇÃO E EVENTOS ---
 function syncMenuWithURL() {
-    const path = window.location.pathname.split('/').filter(Boolean).pop() || 'dashboard';
+    const { page } = getRouteState();
     const targetRadio = Array.from(radioInputs).find(radio => {
-        const val = radio.value.toLowerCase();
-        return val.includes(path.toLowerCase().replace('.html', ''));
+        const val = normalizeAppPath(radio.value).toLowerCase();
+        return val.includes(page.toLowerCase().replace('.html', ''));
     });
-    
-    radioInputs.forEach(r => r.checked = false); // Reseta todos
+
+    radioInputs.forEach(r => r.checked = false);
     if (targetRadio) targetRadio.checked = true;
 }
 
 window.onpopstate = function() {
     isNavigating = false;
-    const path = window.location.pathname.split('/').pop() || 'dashboard';
-    const params = window.location.search;
-    switchPage(`view/${path.replace('.html', '')}.html${params}`, false);
+    const { page, params } = getRouteState();
+    switchPage(`view/${page.replace('.html', '')}.html${params}`, false);
 };
 
 radioInputs.forEach(radio => {
@@ -147,13 +192,8 @@ radioInputs.forEach(radio => {
 
 // --- INICIALIZAÇÃO AO CARREGAR O SITE ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicia o Dark Mode
     initDarkMode();
 
-    // Determina a página inicial
-    let path = window.location.pathname.split('/').filter(Boolean).pop() || 'dashboard';
-    let params = window.location.search;
-    if (['principal.html', 'index.html', 'hq_app'].includes(path)) path = 'dashboard';
-
-    switchPage(`view/${path.replace('.html', '')}.html${params}`, false);
+    const { page, params } = getRouteState();
+    switchPage(`view/${page.replace('.html', '')}.html${params}`, false);
 });

@@ -30,13 +30,14 @@ var EdtRender = {
     
         // 2. Monta a URL absoluta a partir da raiz do servidor
         const capaUrl = caminhoLimpo 
-            ? `/hq_app/${caminhoLimpo}` 
-            : '/hq_app/assets/img/placeholder.jpg';
+            ? (window.buildAppUrl ? window.buildAppUrl(caminhoLimpo) : caminhoLimpo)
+            : (window.buildAppUrl ? window.buildAppUrl('assets/img/placeholder.jpg') : 'assets/img/placeholder.jpg');
 
     // DEBUG para confirmar a limpeza
     console.log("Caminho Processado:", capaUrl);
 
-    const leituraUrl = `view/read.html?id=${edicao.id}`;
+    const leituraBaseUrl = window.buildAppUrl ? window.buildAppUrl('view/read.html') : 'view/read.html';
+    const leituraUrl = `${leituraBaseUrl}?id=${edicao.id}`;
     
     console.log("URL Final da Capa:", capaUrl);
             

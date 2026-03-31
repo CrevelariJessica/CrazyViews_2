@@ -47,7 +47,7 @@ if ($conn->query($sql_titulo) === TRUE) {
     // Limpa os resultados do multi_query antes de continuar (necessário)
     while($conn->more_results() && $conn->next_result()) {}
     // Redireciona para a página desejada ou exibe uma mensagem de sucesso
-    header("Location: ../view/templateUpdate.html?id=" . $id_novo_titulo . "&novo=1");
+    header("Location: ../principal.html?page=templateUpdate&id=" . $id_novo_titulo . "&novo=1");
     exit();
 } else {
     echo "Erro ao inserir Título: " . $conn->error;

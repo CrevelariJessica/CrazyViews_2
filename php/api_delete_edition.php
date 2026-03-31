@@ -124,8 +124,8 @@ try {
     $conn->commit();
 
     // DELETAR PASTA E CONTEÚDO NO SERVIDOR
-    // Define o caminho base dos arquivos
-    $DIR_BASE = $_SERVER['DOCUMENT_ROOT'] . '/hq_app/files/';
+    // Define o caminho base dos arquivos sem depender de pasta absoluta fixa
+    $DIR_BASE = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR;
 
     // Monta o caminho completo da pasta da edição
     $pasta_edicao_completa = $DIR_BASE . $pasta_titulo . DIRECTORY_SEPARATOR . 'edicao_' . $numero_edicao;

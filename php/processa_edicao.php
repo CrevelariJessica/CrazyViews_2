@@ -40,7 +40,7 @@ function retornar_sucesso($titulo_id) {
         ob_clean(); 
     }
     // Retorna a URL que o JavaScript deve seguir
-    $final_response['redirect_url'] = 'templateUpdate.html?id=' . $titulo_id . "&success=1"; 
+    $final_response['redirect_url'] = 'principal.html?page=templateUpdate&id=' . $titulo_id . "&success=1"; 
     echo json_encode($final_response);
     exit();
 }

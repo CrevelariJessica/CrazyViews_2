@@ -2,7 +2,7 @@
     console.log("Iniciando Hierarquia: Dashboard na pasta View");
 
     // 1. Define variável global absoluta para a API
-    window.PATH_API = 'php/api_title_list.php';
+    window.PATH_API = ' ';
 
     // 2. Função de carregamento usando caminho absoluto do projeto
     const loadScript = (src) => {

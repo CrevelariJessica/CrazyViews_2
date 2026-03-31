@@ -37,7 +37,7 @@ if ($result->num_rows > 0){
         $nome_titulo = htmlspecialchars($titulo['titulo']);
         $edicoes = (int)$titulo['edicoes_count'];
         
-        $link_template = "php/templateUpdate.php?id=" . $id_titulo;
+        $link_template = "../principal.html?page=templateUpdate&id=" . $id_titulo;
         
         echo "<div class='resumo-titulo'>";
         echo "  <h2>Título: {$nome_titulo}</h2>";
