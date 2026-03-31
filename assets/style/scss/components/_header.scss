@@ -7,7 +7,7 @@ header {
     z-index: 999;
     font-size: 1.2em;
     align-items: center;
-    color: $gray-light;
+    color: var(--text-color);
 }
 .container {
   display: flex;
@@ -31,19 +31,18 @@ header {
 }
 .h_envia{
   display: flex;
+  gap: 12px;
   width: 20%;
   justify-content: flex-start;
 }
 
 .comic-radio-group {
-    --bg: #{$color-warning-hex};
-    --text-light: #{$color-white-hex};
-    --text-dark: #{$color-black-hex};
-    --primary-color: #{$color-danger-hex};
-    --secundary-color: #{$color-info-hex};
-    --tertiary-color: #{$color-success-hex};
-  
-    display: flex;
+    --bg: var(--comic-nav-bg);
+    --text-light: var(--comic-text-light);
+    --text-dark: var(--comic-text-dark);
+    --primary-color: var(--comic-accent-a);
+    --secundary-color: var(--comic-accent-b);
+    --tertiary-color: var(--comic-accent-c);
     position: relative;
     background: var(--bg);
     border-radius: 12px;
@@ -137,10 +136,10 @@ header {
 }
 
 .comic-group{
-    --bg: #{$color-warning-hex};
-    --text-light: #{$color-white-hex};
-    --text-dark: #{$color-black-hex};
-    --primary-color: #{$color-danger-hex};
+    --bg: var(--comic-nav-bg);
+    --text-light: var(--comic-text-light);
+    --text-dark: var(--comic-text-dark);
+    --primary-color: var(--comic-accent-a);
   
   display: flex;
   position: relative;

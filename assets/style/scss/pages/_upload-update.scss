@@ -89,3 +89,72 @@
         font-size: 16px;
     }
 }
+
+// Correção do layout e tema do formulário de upload
+.background-page-png {
+    position: relative;
+    min-height: 100vh;
+    background-image: url('../img/ph_banner01.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    isolation: isolate;
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--hero-overlay);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 0;
+    }
+
+    .page_all,
+    .page_allUp,
+    .id_all,
+    .id_ContainerbotForm {
+        position: relative;
+        z-index: 1;
+    }
+
+    .page_allUp {
+        min-height: 100vh;
+        height: auto;
+    }
+
+    .id_all {
+        top: 0;
+        gap: 24px;
+        padding: 40px 0 80px;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .id_ContainerbotForm {
+        width: min(92vw, 780px);
+        min-width: 0;
+        min-height: auto;
+        border-radius: 14px;
+        border: 4px solid var(--panel-border);
+        background: linear-gradient(135deg, var(--panel-bg), var(--panel-soft));
+        color: var(--text-color);
+        box-shadow: 0 14px 28px var(--panel-shadow), 8px 8px 0 var(--panel-border);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .id_ContainerGroup {
+        color: var(--text-color);
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        color: var(--text-color);
+        background: var(--gray-light);
+        border: 2px solid var(--panel-border);
+        box-shadow: none;
+    }
+}

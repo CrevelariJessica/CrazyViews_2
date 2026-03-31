@@ -50,26 +50,32 @@ window.openAppPage = (page, params = {}) => {
 };
 
 // --- SISTEMA DE DARK MODE---
+function applyTheme(isDark) {
+    const theme = isDark ? 'dark' : 'light';
+
+    document.body.classList.toggle('dark-mode', isDark);
+    document.body.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+}
+
 function initDarkMode() {
     const darkModeToggle = document.getElementById('dark-mode-toggle');
-    const currentMode = localStorage.getItem('darkMode');
+    const storedMode = localStorage.getItem('darkMode');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = storedMode ? storedMode === 'enabled' : prefersDark;
 
-    // Aplica o modo salvo ao carregar a página
-    if (currentMode === 'enabled') {
-        document.body.classList.add('dark-mode');
-        if (darkModeToggle) darkModeToggle.checked = true;
-    }
+    applyTheme(isDark);
 
-    // Ouvinte para o novo botão Toggle
     if (darkModeToggle) {
+        darkModeToggle.checked = isDark;
+        darkModeToggle.setAttribute('aria-checked', String(isDark));
+
         darkModeToggle.addEventListener('change', () => {
-            if (darkModeToggle.checked) {
-                document.body.classList.add('dark-mode');
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                document.body.classList.remove('dark-mode');
-                localStorage.setItem('darkMode', 'disabled');
-            }
+            const enabled = darkModeToggle.checked;
+            applyTheme(enabled);
+            darkModeToggle.setAttribute('aria-checked', String(enabled));
+            localStorage.setItem('darkMode', enabled ? 'enabled' : 'disabled');
         });
     }
 }

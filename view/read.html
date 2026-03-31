@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (() => {
+            try {
+                const theme = localStorage.getItem('darkMode') === 'enabled' ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', theme);
+                document.documentElement.style.colorScheme = theme;
+            } catch (error) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="../assets/style/scss/main.css">
     <title>Leitor de HQ</title>
 </head>
-<body class="back_uniq">
+<body class="back_uniq" data-theme="light">
     <div class="back_image">
         <div class="page_read">
             <header id="controls">

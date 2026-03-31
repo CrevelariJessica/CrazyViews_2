@@ -1,76 +1,67 @@
 .theme-switch-container {
-    /* light/dark */
-    /* Container principal do switch */
-    .theme-switch-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 
     .input-switch {
-      display: none; /* Esconde o checkbox real */
+      display: none;
     }
 
-    /* O Círculo (Sol) */
     .theme-circle {
       position: relative;
       border-radius: 100%;
       width: 6rem;
       height: 6rem;
-      background: linear-gradient(40deg, $color-danger-hex, $color-warning-hex 70%);
+      background: linear-gradient(40deg, var(--theme-sun-from), var(--theme-sun-to) 70%);
       margin: 0 auto 1.5rem auto;
-      border: 4px solid $color-black-hex;
+      border: 4px solid var(--theme-ink);
       transition: all 0.5s ease;
     }
 
-    /* A Sombra que cria a Lua */
     .theme-crescent {
       position: absolute;
       border-radius: 100%;
       right: 0;
       width: 5rem;
       height: 5rem;
-      background: $color-white-hex; /* Cor do fundo do seu site no light mode */
+      background: var(--theme-paper);
       transform: scale(0);
       transform-origin: top right;
       transition: transform 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
 
-    /* O corpo do botão (a trilha) */
     .theme-label {
       width: 12rem;
       height: 3.5rem;
-      background-color: $gray-medium;
-      background-image: radial-gradient($color-black-hex 15%, transparent 16%), radial-gradient($color-black-hex 15%, transparent 16%);
+      background-color: var(--theme-track-bg);
+      background-image: radial-gradient(var(--theme-ink) 15%, transparent 16%), radial-gradient(var(--theme-ink) 15%, transparent 16%);
       background-size: 8px 8px;
       background-position: 0 0, 4px 4px;
       border-radius: 100px;
       position: relative;
       display: block;
       cursor: pointer;
-      border: 4px solid $color-black-hex;
+      border: 4px solid var(--theme-ink);
     }
 
-    /* A pecinha que desliza */
     .theme-toggle {
       position: absolute;
       width: 50%;
       height: 100%;
       top: -4px;
       left: -4px;
-      background-color: $color-info-hex;
-      box-shadow: 4px 4px 0px $color-black-hex;
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      border: 4px solid $color-black-hex;
+      background-color: var(--theme-toggle-bg);
+      box-shadow: 4px 4px 0px var(--theme-ink);
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.3s ease;
+      border: 4px solid var(--theme-ink);
       border-radius: 100px;
     }
 
-    /* Texto Day/Night */
     .theme-names {
       font-size: 130%;
-      color: $color-black-hex;
-      text-shadow: 1px 1px 0 $color-white-hex, -1px -1px 0 $color-white-hex;
+      color: var(--theme-ink);
+      text-shadow: 1px 1px 0 var(--theme-paper), -1px -1px 0 var(--theme-paper);
       font-family: Impact, sans-serif;
       font-style: italic;
       display: flex;
@@ -83,25 +74,20 @@
     .theme-dark { opacity: 0; transition: 0.3s; }
     .theme-light { opacity: 1; transition: 0.3s; }
 
-    /* --- ESTADOS QUANDO ESTIVER CHECKED (DARK MODE) --- */
-
-    /* Desliza o botão */
     .input-switch:checked + .theme-app .theme-toggle {
       transform: translateX(103%);
-      background-color: $color-warning-hex;
+      background-color: var(--secondary-color);
     }
 
-    /* Transforma Sol em Lua */
     .input-switch:checked + .theme-app .theme-crescent {
       transform: scale(1);
-      background: $color-bg-dark-hex; /* Deve ser a mesma cor do seu Dark Mode */
+      background: var(--theme-paper);
     }
 
     .input-switch:checked + .theme-app .theme-circle {
-      background: linear-gradient(40deg, $color-primary-lighter-hex, $color-white-hex 70%);
+      background: linear-gradient(40deg, var(--theme-moon-from), var(--theme-moon-to) 70%);
     }
 
-    /* Altera opacidade dos textos */
     .input-switch:checked + .theme-app .theme-dark { opacity: 1; }
     .input-switch:checked + .theme-app .theme-light { opacity: 0; }
 }
