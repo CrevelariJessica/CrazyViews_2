@@ -5,6 +5,7 @@
     position: relative;
     width: 100%;
     padding: 10px;
+    flex-wrap: wrap;
 }
 
 .brutalist-input {
@@ -21,6 +22,9 @@
   outline: none;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-shadow: 5px 5px 0 var(--gray-dark), 10px 10px 0 var(--quaternary-color);
+  min-height: 50px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 @keyframes glitch {
@@ -181,4 +185,70 @@
   50% {
     border-color: var(--quaternary-color);
   }
+}
+
+/* Responsiveness para Inputs */
+@media (max-width: 768px) {
+    .brutalist-container {
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .brutalist-input {
+        font-size: 16px;
+        padding: 20px 15px;
+        box-shadow: 3px 3px 0 var(--gray-dark), 6px 6px 0 var(--quaternary-color);
+    }
+
+    .brutalist-label {
+        font-size: 12px;
+        top: -20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .brutalist-container {
+        padding: 5px;
+        gap: 8px;
+    }
+
+    .brutalist-input {
+        font-size: 14px;
+        padding: 15px 12px;
+        border: 3px solid var(--gray-dark);
+        box-shadow: 2px 2px 0 var(--gray-dark), 4px 4px 0 var(--quaternary-color);
+    }
+
+    .brutalist-label {
+        font-size: 11px;
+        padding: 3px 8px;
+        top: -18px;
+    }
+}
+
+@media (max-width: 320px) {
+    .brutalist-container {
+        padding: 3px;
+        gap: 5px;
+        flex-direction: column;
+    }
+
+    .brutalist-input {
+        font-size: 12px;
+        padding: 12px 10px;
+        border: 2px solid var(--gray-dark);
+        box-shadow: 1px 1px 0 var(--gray-dark), 2px 2px 0 var(--quaternary-color);
+        min-height: 40px;
+    }
+
+    .brutalist-label {
+        font-size: 10px;
+        padding: 2px 6px;
+        top: -16px;
+        left: -2px;
+    }
+
+    .brutalist-input:focus::before {
+        box-shadow: 1px 1px 0 var(--gray-dark);
+    }
 }

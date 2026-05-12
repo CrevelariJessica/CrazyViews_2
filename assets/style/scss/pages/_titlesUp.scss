@@ -71,3 +71,101 @@
     border: 2px dashed var(--panel-border);
     box-shadow: 0 8px 18px var(--panel-shadow);
 }
+
+/* Responsiveness para Titles Upload */
+@media (max-width: 768px) {
+    .lib_catalog {
+        padding: 12px 0;
+        margin-top: 30px;
+    }
+
+    .lib_catList ul {
+        max-width: 95%;
+        gap: 6px;
+    }
+
+    .lib_catList ul li a {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.95em;
+        border-radius: 8px;
+    }
+
+    .form-section {
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lib_catalog {
+        padding: 10px 0;
+        margin-top: 20px;
+        width: calc(100% - 10px);
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .lib_catList {
+        width: calc(100% - 10px);
+        margin: 0 5px;
+    }
+
+    .lib_catList ul {
+        width: 100%;
+        max-width: 100%;
+        gap: 5px;
+        padding: 5px;
+    }
+
+    .lib_catList ul li {
+        flex: 0 1 auto;
+    }
+
+    .lib_catList ul li a {
+        padding: 0.35rem 0.6rem;
+        font-size: 0.85em;
+        border-radius: 6px;
+        min-width: 45px;
+        word-break: break-word;
+    }
+
+    .form-section {
+        padding: 8px;
+        margin: 8px 0;
+        border-radius: 4px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 320px) {
+    .lib_catalog {
+        padding: 8px 0;
+        margin-top: 15px;
+        width: 100%;
+    }
+
+    .lib_catList {
+        width: 100%;
+    }
+
+    .lib_catList ul {
+        width: calc(100vw - 20px);
+        max-width: 100%;
+        gap: 4px;
+        padding: 4px;
+    }
+
+    .lib_catList ul li a {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.75em;
+        border-radius: 4px;
+        min-width: 40px;
+    }
+
+    .form-section {
+        padding: 6px;
+        margin: 6px 0;
+        font-size: 0.8em;
+    }
+}

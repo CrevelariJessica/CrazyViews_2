@@ -158,3 +158,175 @@
         box-shadow: none;
     }
 }
+
+/* Responsiveness para Upload/Update */
+@media (max-width: 768px) {
+    .background-page-png {
+        .id_all {
+            padding: 30px 0 60px;
+            gap: 20px;
+        }
+
+        .id_ContainerbotForm {
+            width: min(95vw, 95%);
+            padding: 20px;
+            border: 3px solid var(--panel-border);
+            box-shadow: 0 10px 20px var(--panel-shadow), 6px 6px 0 var(--panel-border);
+        }
+
+        .id_ContainerGroup {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .id_FormLeft {
+            width: 100%;
+            flex-direction: column;
+        }
+
+        .id_Form {
+            gap: 12px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100% !important;
+            font-size: 0.9em;
+            padding: 8px;
+            max-width: none !important;
+        }
+
+        #txt_ReleaseYe,
+        #txt_TitleOriginal,
+        #txt_TitleLocal,
+        #txt_Publisher,
+        #txt_Gender {
+            width: 100% !important;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .background-page-png {
+        background-attachment: scroll;
+        
+        .page_allUp {
+            min-height: auto;
+        }
+
+        .id_all {
+            padding: 20px 0 40px;
+            gap: 15px;
+            top: 0;
+        }
+
+        .id_ContainerbotForm {
+            width: 100%;
+            min-width: auto;
+            padding: 15px;
+            border: 3px solid var(--panel-border);
+            margin: 0 10px;
+            box-shadow: 0 8px 16px var(--panel-shadow), 4px 4px 0 var(--panel-border);
+            border-radius: 10px;
+        }
+
+        .id_ContainerGroup {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .id_FormLeft {
+            width: 100%;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .id_Form {
+            gap: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100% !important;
+            font-size: 0.85em;
+            padding: 8px;
+            max-width: none !important;
+            border: 2px solid var(--panel-border);
+        }
+
+        #txt_ReleaseYe,
+        #txt_TitleOriginal,
+        #txt_TitleLocal,
+        #txt_Publisher,
+        #txt_Gender {
+            width: 100% !important;
+            word-break: break-word;
+        }
+
+        label {
+            font-size: 0.9em;
+        }
+
+        .form-group {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            margin-top: 10px;
+            margin-bottom: 4px;
+        }
+    }
+}
+
+@media (max-width: 320px) {
+    .background-page-png {
+        background-attachment: scroll;
+        
+        .id_all {
+            padding: 15px 0 30px;
+            gap: 10px;
+        }
+
+        .id_ContainerbotForm {
+            width: calc(100vw - 20px);
+            margin: 0 10px;
+            padding: 10px;
+            border: 2px solid var(--panel-border);
+            box-shadow: 0 4px 8px var(--panel-shadow), 2px 2px 0 var(--panel-border);
+        }
+
+        .id_ContainerGroup {
+            gap: 8px;
+        }
+
+        .id_Form {
+            gap: 8px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100% !important;
+            font-size: 0.8em !important;
+            padding: 6px !important;
+            max-width: none !important;
+        }
+
+        label {
+            font-size: 0.85em;
+        }
+
+        .form-group label {
+            margin-top: 8px;
+            margin-bottom: 3px;
+        }
+
+        button[type="submit"] {
+            font-size: 0.85em;
+            padding: 8px;
+        }
+    }
+}

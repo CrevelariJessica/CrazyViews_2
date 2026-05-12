@@ -1,6 +1,6 @@
 header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     min-height: 14vh;
     height: auto;
@@ -8,32 +8,225 @@ header {
     font-size: 1.2em;
     align-items: center;
     color: var(--text-color);
+    padding: 0 10px;
+    box-sizing: border-box;
 }
 .container {
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+.dark_mode{
+    display: flex;
+    position: relative;
+    align-items: end;
 }
 .h_menu{
     display: flex;
     width: 60%;
     justify-content: center;
+    box-sizing: border-box;
 }
 .h_logo {
     display: flex;
     width: 20%;
     justify-content: flex-end;
+    box-sizing: border-box;
 }
 .logo {
     height: 80px;
     margin: 7.5px 0;
+    max-width: 100%;
+    width: auto;
 }
 .h_envia{
   display: flex;
-  gap: 12px;
-  width: 20%;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    header {
+        font-size: 1.1em;
+    }
+
+    .h_menu {
+        width: 65%;
+    }
+
+    .h_logo {
+        width: 20%;
+    }
+
+    .h_envia {
+        width: 15%;
+        gap: 8px;
+    }
+
+    .comic-radio-group label {
+        font-size: 18px;
+        padding: 0.7rem 1.2rem;
+        min-width: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        min-height: auto;
+        gap: 10px;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .h_menu {
+        width: 100%;
+        justify-content: center;
+        order: 2;
+    }
+
+    .h_logo {
+        width: 100%;
+        justify-content: center;
+        order: 1;
+    }
+
+    .h_envia {
+        width: 100%;
+        justify-content: center;
+        order: 3;
+        gap: 10px;
+    }
+
+    .logo {
+        height: 60px;
+    }
+
+    .comic-radio-group {
+        border: 3px solid var(--text-dark);
+        box-shadow: 6px 6px 0px var(--text-dark);
+        width: 100%;
+        max-width: 100%;
+        flex-wrap: nowrap;
+    }
+
+    .comic-radio-group label {
+        font-size: 16px;
+        padding: 0.6rem 1rem;
+        min-width: 70px;
+        letter-spacing: 0.5px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 8px;
+        gap: 8px;
+        min-height: auto;
+    }
+
+    .logo {
+        height: 50px;
+    }
+
+    .h_menu {
+        width: 100%;
+        gap: 5px;
+    }
+
+    .h_logo {
+        width: 100%;
+    }
+
+    .h_envia {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .comic-radio-group {
+        width: calc(100vw - 16px);
+        max-width: 100%;
+        border: 2px solid var(--text-dark);
+        box-shadow: 4px 4px 0px var(--text-dark);
+        flex-wrap: nowrap;
+    }
+
+    .comic-radio-group label {
+        font-size: 14px;
+        padding: 0.5rem 0.8rem;
+        min-width: 70px;
+        flex: 1 1 auto;
+    }
+
+    .theme-names {
+        font-size: 100%;
+        line-height: 2.8rem;
+        padding: 0 10px;
+    }
+
+    .theme-label {
+        width: 10rem;
+        height: 3rem;
+    }
+
+    .theme-toggle {
+        width: 48%;
+    }
+}
+
+@media (max-width: 320px) {
+    header {
+        padding: 6px;
+        gap: 6px;
+        font-size: 0.9em;
+    }
+
+    .logo {
+        height: 45px;
+    }
+
+    .h_menu,
+    .h_logo,
+    .h_envia {
+        width: 100%;
+        gap: 4px;
+    }
+
+    .comic-radio-group {
+        width: calc(100vw - 12px);
+        border: 2px solid var(--text-dark);
+        box-shadow: 3px 3px 0px var(--text-dark);
+    }
+
+    .comic-radio-group label {
+        font-size: 12px;
+        padding: 0.4rem 0.6rem;
+        min-width: 50px;
+    }
+
+    .theme-label {
+        width: 9rem;
+        height: 2.8rem;
+    }
+
+    .theme-names {
+        font-size: 90%;
+        line-height: 2.6rem;
+        padding: 0 8px;
+    }
 }
 
 .comic-radio-group {
@@ -43,13 +236,14 @@ header {
     --primary-color: var(--comic-accent-a);
     --secundary-color: var(--comic-accent-b);
     --tertiary-color: var(--comic-accent-c);
+    display: flex;
     position: relative;
     background: var(--bg);
     border-radius: 12px;
     border: 4px solid var(--text-dark);
     box-shadow: 8px 8px 0px var(--text-dark);
     overflow: hidden;
-    width: fit-content;
+    width: 100%;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
     font-style: italic;
     font-weight: 500;
@@ -58,11 +252,11 @@ header {
   display: none;
 }
 .comic-radio-group label {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 100px;
   font-size: 24px;
   padding: 0.8rem 1.6rem;
   cursor: pointer;
@@ -72,6 +266,7 @@ header {
   z-index: 2;
   transition: color 0.3s ease-in-out;
   text-align: center;
+  white-space: nowrap;
   text-shadow:
     -1px -1px 0 var(--text-light),
     1px -1px 0 var(--text-light),

@@ -7,7 +7,7 @@
     // 2. Função de carregamento usando caminho absoluto do projeto
     const loadScript = (src) => {
         const s = document.createElement('script');
-        s.src = `assets/js/${src}?v=${Date.now()}`;
+        s.src = `/assets/js/${src}?v=${Date.now()}`;
         document.body.appendChild(s);
     };
 
@@ -15,7 +15,7 @@
     loadScript("modal_title.js");
 
     // 3. Import dinâmico com caminho ABSOLUTO
-    import(`assets/js/index_dashboard.js?v=${Date.now()}`)
+    import(`/assets/js/index_dashboard.js?v=${Date.now()}`)
         .then(() => {
             console.log("Módulo Dashboard carregado via caminho absoluto.");
             

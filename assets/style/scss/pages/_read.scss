@@ -41,12 +41,15 @@
     position: relative;
     margin: auto;
     top: 60px;
+    box-sizing: border-box;
 }
 #page-image {
     display: block;
     width: 100%;
     height: auto;
+    max-width: 100%;
     cursor: pointer;
+    box-sizing: border-box;
 }
 #controls {
     width: 100%;
@@ -58,6 +61,8 @@
     color: $bg;
     align-items: center;
     justify-content: space-around;
+    box-sizing: border-box;
+    gap: 10px;
 }
 .nav-button {
     padding: 10px 20px;
@@ -235,4 +240,221 @@
     border: 4px solid var(--panel-border);
     border-radius: 10px;
     box-shadow: 0 18px 35px var(--panel-shadow);
+}
+
+/* Responsiveness para Read/Reader */
+@media (max-width: 768px) {
+    #reader-container {
+        max-width: 100%;
+        padding: 15px 0;
+        top: 120px;
+    }
+
+    #page-image {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #controls {
+        min-height: auto;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 8px 12px;
+    }
+
+    .nav-button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+        border: 2px solid var(--panel-border);
+        box-shadow: 2px 2px 0 var(--panel-border);
+    }
+
+    #zoom-controls {
+        gap: 4px;
+        margin-left: 10px;
+    }
+
+    #page-navigation-controls {
+        gap: 10px;
+    }
+
+    #page-counter {
+        font-size: 0.9em;
+        padding: 6px 12px;
+    }
+
+    .btn-exit {
+        font-size: 1em;
+        padding: 4px 12px;
+    }
+
+    .header-top {
+        padding: 8px 12px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .image-wrapper {
+        margin: 15px 0;
+        padding: 0 5px;
+    }
+
+    .image-wrapper img {
+        border: 3px solid var(--panel-border);
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    #reader-container {
+        max-width: 100%;
+        padding: 10px 0;
+        top: 100px;
+    }
+
+    #page-image {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #controls {
+        min-height: auto;
+        padding: 6px 8px;
+        gap: 6px;
+        flex-direction: column;
+        position: absolute;
+        width: 100%;
+    }
+
+    .nav-button {
+        padding: 6px 12px;
+        font-size: 0.8em;
+        border: 2px solid var(--panel-border);
+        box-shadow: 1px 1px 0 var(--panel-border);
+        transition: transform 0.15s ease, background-color 0.15s ease;
+        word-break: break-word;
+    }
+
+    .nav-button:hover:not(:disabled) {
+        transform: translate(-0.5px, -0.5px);
+    }
+
+    #zoom-controls {
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-left: 0;
+    }
+
+    #page-navigation-controls {
+        flex-wrap: wrap;
+        gap: 6px;
+        justify-content: center;
+    }
+
+    #page-counter {
+        font-size: 0.8em;
+        padding: 4px 10px;
+        min-height: auto;
+    }
+
+    .btn-exit {
+        font-size: 0.9em;
+        padding: 4px 10px;
+        min-height: auto;
+    }
+
+    .header-top {
+        padding: 6px 10px;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .cont_mode {
+        gap: 6px;
+        padding: 6px;
+        flex-wrap: wrap;
+    }
+
+    .image-wrapper {
+        margin: 10px 5px;
+        padding: 0;
+    }
+
+    .image-wrapper img {
+        border: 2px solid var(--panel-border);
+        border-radius: 6px;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .nav-row {
+        gap: 10px;
+        margin: 10px 0;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 320px) {
+    #reader-container {
+        padding: 8px 0;
+        top: 90px;
+    }
+
+    #controls {
+        padding: 4px 6px;
+        gap: 4px;
+        min-height: auto;
+        font-size: 0.75em;
+    }
+
+    .nav-button {
+        padding: 4px 8px;
+        font-size: 0.7em;
+        border: 1px solid var(--panel-border);
+        box-shadow: 0.5px 0.5px 0 var(--panel-border);
+        min-width: 45px;
+    }
+
+    #zoom-controls {
+        gap: 2px;
+    }
+
+    #page-navigation-controls {
+        gap: 4px;
+    }
+
+    #page-counter {
+        font-size: 0.7em;
+        padding: 3px 8px;
+    }
+
+    .btn-exit {
+        font-size: 0.8em;
+        padding: 3px 8px;
+    }
+
+    .header-top {
+        padding: 4px 8px;
+        gap: 4px;
+    }
+
+    .cont_mode {
+        gap: 4px;
+        padding: 4px;
+    }
+
+    .image-wrapper {
+        margin: 8px 3px;
+        padding: 0;
+    }
+
+    .image-wrapper img {
+        border: 1px solid var(--panel-border);
+        border-radius: 4px;
+    }
+
+    .nav-row {
+        gap: 6px;
+        margin: 6px 0;
+    }
 }

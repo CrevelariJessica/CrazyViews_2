@@ -6,7 +6,7 @@
     const loadScriptPromise = (src) => {
         return new Promise((resolve, reject) => {
             const s = document.createElement('script');
-            s.src = `assets/js/${src}?v=${Date.now()}`;
+            s.src = `/assets/js/${src}?v=${Date.now()}`;
             s.className = 'page-script';
             s.onload = resolve;
             s.onerror = () => reject(new Error(`Falha ao carregar: ${src}`));

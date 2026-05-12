@@ -23,7 +23,7 @@
 
     const load = (path) => new Promise((resolve, reject) => {
         const s = document.createElement('script');
-        s.src = `assets/js/${path}?v=${Date.now()}`;
+        s.src = `/assets/js/${path}?v=${Date.now()}`;
         s.className = 'page-script'; 
         s.onload = resolve;
         s.onerror = reject;
@@ -40,7 +40,7 @@
             ]);
 
             // 2. Importa o motor da lista de títulos
-            await import(`assets/js/title_list.js?v=${Date.now()}`);
+            await import(`/assets/js/title_list.js?v=${Date.now()}`);
 
             // 3. Ativa o ouvinte do formulário de edição que reside no modal global
             if (typeof window.setupEditFormListener === 'function') {

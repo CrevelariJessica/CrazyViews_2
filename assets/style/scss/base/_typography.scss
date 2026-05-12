@@ -71,3 +71,176 @@ a {
     position: relative;
     padding: 15px;
 }
+
+/* Responsiveness para Typography */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0.8rem;
+        line-height: 1.2;
+    }
+
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.2rem; }
+    h4 { font-size: 1.1rem; }
+
+    p {
+        margin-bottom: 0.8rem;
+        line-height: 1.6;
+    }
+
+    .filter-block h3 {
+        font-size: 1.2rem;
+        letter-spacing: 0.5px;
+    }
+
+    .messageErro {
+        font-size: 0.75em;
+    }
+
+    .id_ContErr {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0.6rem;
+        line-height: 1.1;
+        word-break: break-word;
+    }
+
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
+    h3 { font-size: 1rem; }
+    h4 { font-size: 0.95rem; }
+
+    p {
+        margin-bottom: 0.6rem;
+        line-height: 1.5;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .filter-block h3 {
+        font-size: 1rem;
+        letter-spacing: 0.3px;
+    }
+
+    .messageErro {
+        font-size: 0.7em;
+    }
+
+    .text-center { text-align: center; }
+    .text-italic { font-style: italic; }
+
+    a {
+        word-break: break-word;
+    }
+
+    .id_ContErr {
+        padding: 10px;
+        margin-bottom: 8px;
+        margin-top: -15px;
+    }
+
+    #sucesso_feedback {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 320px) {
+    body {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 0.4rem;
+        line-height: 1;
+    }
+
+    h1 { font-size: 1.3rem; }
+    h2 { font-size: 1.1rem; }
+    h3 { font-size: 0.9rem; }
+    h4 { font-size: 0.85rem; }
+
+    p {
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+
+    .filter-block h3 {
+        font-size: 0.85rem;
+        letter-spacing: 0.2px;
+    }
+
+    .messageErro {
+        font-size: 0.65em;
+    }
+
+    .id_ContErr {
+        padding: 8px;
+        margin-bottom: 6px;
+    }
+}
+
+.lib_cardInfo {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 20px 50px;
+    color: $senary;
+    transition: transform 0.3s;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.lib_cardT {
+    text-decoration: none;
+}
+
+.lib_cardInfo h3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;    /* Número de linhas que você quer mostrar */
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1em;
+    color: var(--primary-color);
+}
+
+.lib_cardIn {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.lib_cardE {
+    font-size: 0.8em;
+    border-bottom: 2px solid var(--body-dot-color);
+}
+
+.lib_cardO{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;    /* Número de linhas que você quer mostrar */
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9em;
+    border-bottom: 2px solid var(--body-dot-color);
+}

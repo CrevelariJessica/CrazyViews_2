@@ -137,6 +137,8 @@
         font-size: 0.9em;
         color: var(--quinary-color);
         width: 300px;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     #filter_editora,
     #filter_data_lancamento,
@@ -144,12 +146,16 @@
         font-size: 0.9em;
         color: var(--quinary-color);
         width: 100px;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     .filter-grid select {
         color: var(--quinary-color);
         width: 90px;
         font-size: 0.9em;
         padding: 0 5px;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     .index_select {
         display: flex;
@@ -393,6 +399,488 @@
     }
 }
 
+/* Responsiveness para Dashboard */
+@media (max-width: 1024px) {
+    .index_container {
+        .ux_container {
+            flex-direction: column;
+        }
+
+        .block_one,
+        .block_two {
+            width: 100%;
+            display: none;
+        }
+
+        .block_three {
+            width: 100%;
+            gap: 15px;
+        }
+
+        .index_info {
+            height: auto;
+            gap: 10px;
+        }
+    }
+
+    .container_cards_index {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+    }
+
+    .card_search {
+        max-width: 100%;
+        height: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+    .index_container {
+        min-height: 100%;
+        gap: 15px;
+    }
+
+    .inde_search {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 10px;
+    }
+
+    #id_search,
+    .index_index {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+        font-size: 0.95em;
+    }
+
+    .filter-block {
+        padding: 10px;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .filter-grid {
+        flex-direction: column;
+        gap: 8px;
+        padding-left: 5px;
+    }
+
+    #filter_titulo,
+    #filter_titulo_original,
+    #filter_editora,
+    #filter_data_lancamento,
+    #filter_genero,
+    .filter-grid select {
+        width: 100% !important;
+        max-width: 100% !important;
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    .container_cards_index {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+        padding: 15px 0;
+    }
+
+    .card_search {
+        max-width: 100%;
+        height: 280px;
+    }
+
+    .cardTextIndex {
+        height: 50px;
+        padding-top: 8px;
+    }
+
+    .cardTextIndex p {
+        font-size: 0.75em;
+        margin: 5px 0;
+    }
+
+    .index_infoInfo {
+        font-size: 0.85em;
+    }
+
+    .filter-block h3 {
+        font-size: 1.1em;
+        padding: 8px;
+    }
+
+    .b_image3 {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .index_container {
+        min-height: 100%;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .index_info {
+        height: auto;
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .index_infoInfo {
+        font-size: 0.75em;
+        padding: 8px;
+        gap: 5px;
+    }
+
+    .index_infoInfo span {
+        font-size: 1.8em;
+    }
+
+    .filter-block {
+        padding: 8px;
+        border: 3px solid var(--panel-border);
+    }
+
+    .filter-block h3 {
+        font-size: 0.95em;
+        padding: 5px;
+    }
+
+    .checkbox-container {
+        font-size: 0.85em;
+    }
+
+    .filter-grid {
+        flex-direction: column;
+        gap: 6px;
+        padding-left: 0;
+        align-items: stretch;
+    }
+
+    .index_select {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    #filter_titulo,
+    #filter_titulo_original,
+    #filter_editora,
+    #filter_data_lancamento,
+    #filter_genero,
+    .filter-grid select {
+        width: 100% !important;
+        max-width: 100% !important;
+        font-size: 0.85em;
+        padding: 8px;
+        min-height: 36px;
+    }
+
+    .inde_search {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 8px;
+        font-size: 0.9em;
+    }
+
+    #id_search,
+    .index_index {
+        width: calc(100vw - 36px) !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+        height: 40px;
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    .container_cards_index {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 10px 0;
+    }
+
+    .card_search {
+        max-width: 100%;
+        height: 250px;
+    }
+
+    .cardImageIndex {
+        height: 250px;
+    }
+
+    .cardTextIndex {
+        height: auto;
+        padding: 8px;
+        position: relative;
+        bottom: auto;
+        max-height: none;
+    }
+
+    .cardTextIndex p {
+        font-size: 0.7em;
+        margin: 4px 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+    }
+
+    .cardTitleIndex {
+        font-size: 0.85em;
+    }
+
+    #resultados-pesquisa {
+        min-height: auto;
+        padding: 12px;
+        font-size: 0.9em;
+    }
+
+    .b_image3 {
+        height: 120px;
+    }
+
+    .index_list {
+        width: 100%;
+    }
+}
+
+@media (max-width: 320px) {
+    .index_container {
+        padding: 5px;
+        gap: 5px;
+    }
+
+    #id_search,
+    .index_index,
+    #filter_titulo,
+    #filter_titulo_original,
+    #filter_editora,
+    #filter_data_lancamento,
+    #filter_genero,
+    .filter-grid select {
+        width: 100% !important;
+        font-size: 0.8em !important;
+        padding: 6px !important;
+        min-height: 32px;
+    }
+
+    .card_search {
+        height: 220px;
+    }
+
+    .index_infoInfo span {
+        font-size: 1.5em;
+    }
+
+    .filter-block h3 {
+        font-size: 0.9em;
+    }
+
+    .cardTextIndex p {
+        font-size: 0.65em;
+    }
+}
+
 .b_image3::after {
     background: var(--hero-overlay);
+}
+
+/* Responsiveness para Dashboard */
+@media (max-width: 768px) {
+    .index_container {
+        .ux_container {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .block_one, .block_two {
+            width: 100%;
+            height: 100px;
+        }
+
+        .block_three {
+            width: 100%;
+        }
+
+        .index_info {
+            height: auto;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .filter-block {
+            padding: 10px;
+        }
+
+        .filter-block h3 {
+            font-size: 1.2em;
+        }
+
+        .filter-grid {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+        }
+
+        #filter_titulo,
+        #filter_titulo_original,
+        #filter_editora,
+        #filter_data_lancamento,
+        #filter_genero,
+        .filter-grid select,
+        #id_search {
+            width: 100%;
+            font-size: 0.85em;
+        }
+
+        .index_index {
+            width: 100%;
+            height: auto;
+        }
+
+        .container_cards_index {
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 15px 0;
+        }
+
+        .card_search {
+            max-width: 100%;
+            height: 300px;
+        }
+
+        .cardTextIndex p {
+            font-size: 0.7em;
+        }
+
+        .inde_search {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .index_infoInfo span {
+            font-size: 1.8em;
+        }
+    }
+
+    .b_image3 {
+        height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .index_container {
+        min-height: 100%;
+        gap: 8px;
+
+        .ux_container {
+            gap: 10px;
+        }
+
+        .block_one, .block_two {
+            height: 80px;
+        }
+
+        .index_info {
+            height: auto;
+            padding: 0 5px;
+        }
+
+        .index_infoInfo {
+            padding: 8px;
+            gap: 8px;
+            font-size: 0.8em;
+        }
+
+        .index_infoInfo span {
+            font-size: 1.5em;
+        }
+
+        .filter-block {
+            padding: 8px;
+            border: 3px solid var(--panel-border);
+        }
+
+        .filter-block h3 {
+            font-size: 1.1em;
+            padding: 8px;
+            word-break: break-word;
+        }
+
+        .checkbox-container {
+            font-size: 0.8em;
+        }
+
+        .filter-grid {
+            flex-direction: column;
+            gap: 10px;
+            padding-left: 5px;
+            font-size: 0.75em;
+        }
+
+        #filter_titulo,
+        #filter_titulo_original,
+        #filter_editora,
+        #filter_data_lancamento,
+        #filter_genero,
+        .filter-grid select,
+        #id_search {
+            width: 100%;
+            font-size: 0.8em;
+            padding: 6px;
+            max-width: none;
+        }
+
+        .inde_search {
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .index_index {
+            width: 100%;
+            height: auto;
+            padding: 8px;
+            font-size: 0.9em;
+        }
+
+        .container_cards_index {
+            grid-template-columns: 1fr;
+            gap: 10px;
+            padding: 10px 5px;
+        }
+
+        .card_search {
+            max-width: 100%;
+            height: 250px;
+        }
+
+        .cardTextIndex {
+            height: 60px;
+            padding-top: 8px;
+            padding-bottom: 4px;
+        }
+
+        .cardTextIndex p {
+            margin: 8px 0;
+            font-size: 0.65em;
+            word-wrap: break-word;
+        }
+
+        .cardTitleIndex {
+            font-size: 0.9em;
+            word-break: break-word;
+        }
+
+        .b_image3 {
+            height: 100px;
+        }
+
+        #resultados-pesquisa {
+            padding: 12px;
+            font-size: 0.9em;
+            word-break: break-word;
+        }
+    }
 }

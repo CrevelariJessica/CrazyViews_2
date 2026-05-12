@@ -44,6 +44,8 @@
     background-color: rgba($color-gray-light-hex, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 .banner_inner {
@@ -289,7 +291,6 @@
     justify-content: center;
 }
 
-.cardsContainer {}
 
 #EditionList {
     display: grid;
@@ -445,4 +446,310 @@
     transform: translatey(5px);
     color: $bg;
     background-color: var(--tertiary-color);
+}
+
+/* Responsiveness para Template Update */
+@media (max-width: 768px) {
+    .banner {
+        height: 250px;
+    }
+
+    .banner_content {
+        height: 150px;
+        width: 70%;
+        margin-left: 20px;
+    }
+
+    .bannerbanner {
+        width: 200px;
+        right: 10%;
+    }
+
+    .p_edition {
+        width: 95%;
+        margin-left: 2.5%;
+    }
+
+    #uploadForm {
+        flex-direction: column;
+    }
+
+    .partOne {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #id_infOne,
+    #id_upIm,
+    #id_btUpEdt {
+        width: 100%;
+    }
+
+    #id_numEdt input[type="text"],
+    #id_numDate input[type="text"] {
+        width: 100%;
+    }
+
+    #EditionList {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+        padding: 15px 0;
+    }
+
+    .cardEdition {
+        height: 280px;
+        width: 150px;
+    }
+
+    .cardImage {
+        height: 220px;
+    }
+
+    .cardTitle {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        height: 200px;
+    }
+
+    .banner_stand {
+        height: 150px;
+    }
+
+    .banner_content {
+        height: 120px;
+        width: 90%;
+        margin-left: 10px;
+        font-size: 0.85em;
+    }
+
+    .bannerbanner {
+        width: 120px;
+        right: 5%;
+    }
+
+    .page_edition {
+        min-height: auto;
+    }
+
+    .p_edition {
+        width: 98%;
+        margin-left: 1%;
+        gap: 3px;
+    }
+
+    #button_addEdt {
+        font-size: 0.9em;
+        padding: 5px 10px;
+    }
+
+    #form_NewEdt {
+        max-height: 0;
+    }
+
+    #form_NewEdt.is-open {
+        max-height: 300px;
+        padding-top: 15px;
+        padding-bottom: 3px;
+    }
+
+    #uploadForm {
+        gap: 0;
+        flex-direction: column;
+    }
+
+    .partOne {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .partTwo {
+        width: 100%;
+        padding: 3px;
+    }
+
+    #id_infOne,
+    #id_upIm {
+        width: 100%;
+        padding: 8px;
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    #id_btUpEdt {
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #id_numEdt input[type="text"],
+    #id_numDate input[type="text"] {
+        width: 100%;
+        font-size: 0.85em;
+        padding: 6px;
+    }
+
+    #EditionList {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px 5px;
+    }
+
+    .cardEdition {
+        height: 250px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .cardImage {
+        height: 180px;
+    }
+
+    .cardTitle {
+        font-size: 0.95em;
+        word-break: break-word;
+    }
+
+    .cardText {
+        padding: 10px;
+    }
+
+    .cardDateP {
+        font-size: 0.75em;
+        margin: 3px;
+    }
+
+    .cardLink {
+        padding: 6px 12px;
+        font-size: 0.9em;
+        margin-top: auto;
+        width: 100%;
+    }
+
+    .btn-edition-menu {
+        font-size: 1em;
+        padding: 2px 6px;
+    }
+
+    .edition-menu-options {
+        width: 150px;
+        right: 0;
+    }
+
+    .btnMoreEdt {
+        padding: 3px;
+        margin-bottom: 10px;
+    }
+
+    #btnLoadMore {
+        font-size: 0.9em;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 320px) {
+    .banner {
+        height: 150px;
+    }
+
+    .banner_stand {
+        height: 100px;
+    }
+
+    .banner_content {
+        height: 100px;
+        width: calc(100vw - 20px);
+        margin-left: 5px;
+        font-size: 0.75em;
+    }
+
+    .bannerbanner {
+        width: 80px;
+        right: 3%;
+    }
+
+    .imageHqStyle {
+        border-width: 2px 5px 2px 2px;
+    }
+
+    .p_edition {
+        width: 100%;
+        margin-left: 0;
+        gap: 2px;
+    }
+
+    #button_addEdt {
+        font-size: 0.8em;
+        padding: 4px 8px;
+    }
+
+    #uploadForm {
+        gap: 5px;
+    }
+
+    .partOne {
+        gap: 5px;
+    }
+
+    #id_infOne,
+    #id_upIm {
+        padding: 4px;
+        gap: 4px;
+    }
+
+    #id_numEdt input[type="text"],
+    #id_numDate input[type="text"] {
+        font-size: 0.8em;
+        padding: 4px;
+    }
+
+    #EditionList {
+        gap: 8px;
+        padding: 8px 3px;
+    }
+
+    .cardEdition {
+        height: 220px;
+        width: 100%;
+    }
+
+    .cardImage {
+        height: 150px;
+    }
+
+    .cardTitle {
+        font-size: 0.85em;
+    }
+
+    .cardDateP {
+        font-size: 0.65em;
+    }
+
+    .cardLink {
+        padding: 4px 10px;
+        font-size: 0.8em;
+    }
+
+    .btnMoreEdt {
+        padding: 2px;
+        margin-bottom: 8px;
+    }
+
+    #btnLoadMore {
+        font-size: 0.8em;
+        padding: 6px 12px;
+    }
+
+    .edition-menu-options {
+        width: 120px;
+    }
+
+    .btn-edition-menu {
+        font-size: 0.8em;
+        padding: 1px 4px;
+    }
 }

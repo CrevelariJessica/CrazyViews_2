@@ -1,4 +1,9 @@
 <?php
+// Exibir erros durante desenvolvimento (temporário, não em produção)
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Configuração para desenvolvimento local com Docker
 // Quando rodando dentro do container PHP, use 'mysql' como host
 // Quando rodando localmente (fora do Docker), use 'localhost'

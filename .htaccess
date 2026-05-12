@@ -1,0 +1,30 @@
+RewriteEngine On
+
+# Força HTTPS (opcional, descomente se necessário)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Permite acesso a arquivos estáticos
+<IfModule mod_headers.c>
+    <FilesMatch "\.(css|js|png|jpg|jpeg|gif|ico|svg|webp|woff|woff2|ttf|eot)$">
+        Header set Cache-Control "max-age=31536000, public"
+    </FilesMatch>
+</IfModule>
+
+# Redireciona tudo para index.php se existir (SPA support)
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule . index.php [L]
+
+# Headers de segurança básicos
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Configuração para módulos ES6
+<IfModule mod_mime.c>
+    AddType application/javascript .js
+    AddType text/css .css
+</IfModule>
