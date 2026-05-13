@@ -60,3 +60,39 @@
 .book:hover .cover {
     transform: rotateY(-80deg);
 }
+.lib_cardInfo {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 20px 50px;
+    color: $senary;
+    transition: transform 0.3s;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    overflow: hidden;
+}
+.lib_cardInfo h3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;    /* Número de linhas que você quer mostrar */
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1em;
+    color: var(--primary-color);
+}
+.lib_cardIn {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.lib_cardO{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;    /* Número de linhas que você quer mostrar */
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9em;
+    border-bottom: 2px solid var(--body-dot-color);
+}

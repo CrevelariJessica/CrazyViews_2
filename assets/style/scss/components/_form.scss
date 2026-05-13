@@ -1,0 +1,42 @@
+/* Container que agrupa o campo e a mensagem de erro */
+.cont_error {
+    display: flex;
+    flex-direction: column;
+    /* Usando clamp para que o espaçamento diminua em telas menores sem media queries */
+    margin-bottom: clamp(6px, 1.5vh, 10px); 
+    margin-top: clamp(-15px, -2vh, -20px); /* Ajuste de proximidade com o campo anterior */
+    width: 100%;
+}
+/* Área interna de feedback do erro */
+.id_ContErr {
+    position: relative;
+    padding: clamp(8px, 2vw, 15px);
+    width: 100%;
+    
+    /* Se houver uma borda ou fundo de erro, use suas variáveis */
+    border-radius: 4px;
+    background-color: rgba(var(--danger-color-rgb), 0.05); 
+}
+/* Formularios */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+
+    label {
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
+
+    input[type="text"] {
+        color: var(--primary-color);
+        width: 100%;
+        padding: 12px;
+        border: 2px solid var(--gray-medium);
+        border-radius: 6px;
+        background: transparent;
+        
+        &:focus { outline: none; border-color: var(--secondary-color); }
+    }
+}

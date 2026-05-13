@@ -1,0 +1,66 @@
+.comic-radio-group, .comic-group {
+    --nav-bg: var(--comic-nav-bg);
+    --nav-border: var(--comic-text-dark);
+    
+    display: inline-flex;
+    position: relative;
+    background: var(--nav-bg);
+    border-radius: 12px;
+    border: 4px solid var(--nav-border);
+    box-shadow: 6px 6px 0px var(--nav-border);
+    overflow: hidden;
+    font-family: Impact, sans-serif;
+    font-style: italic;
+
+    input { display: none; }
+
+    label {
+        flex: 1 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(14px, 1.5vw, 24px);
+        padding: 0.8rem clamp(10px, 2vw, 20px);
+        cursor: pointer;
+        z-index: 2;
+        color: var(--nav-border);
+        text-shadow: 1px 1px 0 var(--white-color);
+        transition: color 0.3s;
+        white-space: nowrap;
+    }
+
+    input:checked + label {
+        color: var(--white-color);
+        text-shadow: 2px 2px 0 var(--nav-border);
+    }
+}
+
+.comic-glider {
+    position: absolute;
+    height: 100%;
+    width: 33.33%;
+    z-index: 1;
+    transition: transform 0.5s cubic-bezier(0.37, 1.95, 0.66, 0.56);
+    border-right: 4px solid var(--nav-border);
+    border-left: 4px solid var(--nav-border);
+}
+
+// Lógica do Glider usando ID (Mantenha os IDs conforme seu HTML)
+#home:checked ~ .comic-glider { 
+    transform: translateX(0); 
+    background-color: var(--comic-accent-a); 
+}
+#fav_t:checked ~ .comic-glider { 
+    transform: translateX(100%); 
+    background-color: var(--comic-accent-b); 
+}
+#titles_up:checked ~ .comic-glider { 
+    transform: translateX(200%); 
+    background-color: var(--comic-accent-c); 
+}
+
+/* Efeito de bolinhas (Dots) padrão Comic */
+.comic-glider, .cube-up:hover {
+    background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.15) 1px, transparent 0);
+    background-size: 6px 6px;
+}

@@ -1,35 +1,39 @@
+/* 1. RESET & BASE */
+* {
+    box-sizing: border-box; /* Aplicado globalmente para evitar repetição */
+}
+
 body {
+    /* Variáveis locais para controle de escala do fundo */
+    --dot-spacing: 14px;
+    --grain-size: 200px;
+
     position: relative;
     margin: 0;
     padding: 0;
     min-height: 100vh;
     color: var(--text-color);
     background-color: var(--background-color);
+    
+    /* Background complexo */
     background-image:
         radial-gradient(circle at 18% 24%, var(--body-glow-1) 0%, transparent 18%),
         radial-gradient(circle at 82% 18%, var(--body-glow-2) 0%, transparent 22%),
         radial-gradient(circle at 50% 82%, var(--body-glow-3) 0%, transparent 25%),
         radial-gradient(var(--body-dot-color) 1px, transparent 1px),
-        linear-gradient(135deg,
-          var(--body-gradient-start) 10%,
-          var(--body-gradient-mid) 55%,
-          var(--body-gradient-end) 100%
-        ),
+        linear-gradient(135deg, var(--body-gradient-start) 10%, var(--body-gradient-mid) 55%, var(--body-gradient-end) 100%),
         url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 100% 100%, 100% 100%, 100% 100%, 14px 14px, 100% 100%, 200px 200px;
+    
+    background-size: 100% 100%, 100% 100%, 100% 100%, var(--dot-spacing) var(--dot-spacing), 100% 100%, var(--grain-size) var(--grain-size);
     background-attachment: fixed;
     background-blend-mode: screen, screen, screen, multiply, normal, soft-light;
-    transition: background-color 0.35s ease, color 0.35s ease, background-image 0.35s ease;
+    transition: background 0.35s ease, color 0.35s ease;
     overflow-x: hidden;
-    box-sizing: border-box;
 
     &::after {
         content: "";
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        inset: 0; /* Atalho para top/left/width/height 100% */
         background: var(--overlay-gradient);
         filter: url(#advanced-texture);
         mix-blend-mode: soft-light;
@@ -39,211 +43,58 @@ body {
     }
 }
 
-.page_all {
+/* 2. LAYOUT ESTRUTURAL */
+/* Agrupados pois compartilham o comportamento base de ocupar 100% */
+.page_all, .up_pageAll, main {
     display: flex;
     flex-direction: column;
     width: 100%;
-    min-height: 100vh;
 }
 
-main {
-    width: 100%;
-}
-
-.up_pageAll {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+.page_all, .up_pageAll {
     min-height: 100vh;
 }
 
 .ph_banner {
     width: 100%;
     height: auto;
+    display: block;
 }
 
-/* Estado quando a página está saindo (vai para a esquerda) */
-.fade-out {
+/* 3. ANIMAÇÕES DE TRANSIÇÃO */
+.fade-out, .fade-in-preview {
     opacity: 0 !important;
-    transform: translateX(-100px) !important;
+    transition: 0.4s ease;
 }
 
-/* Estado quando a página está chegando (começa na direita) */
-.fade-in-preview {
-    opacity: 0 !important;
-    transform: translateX(100px) !important;
-}
+.fade-out { transform: translateX(-50px) !important; }
+.fade-in-preview { transform: translateX(50px) !important; }
 
-/* Fixes & Utilities */
+/* 4. UTILITÁRIOS (FIXES) */
 .flex { display: flex; }
 .justify-center { justify-content: center; }
-.my-8 { margin-top: 2rem; }
-.mt-3 { margin-top: 1rem; }
+/* Use clamp para margens fluidas sem precisar de media queries */
+.my-8 { margin-top: clamp(1rem, 5vh, 2rem); }
+.mt-3 { margin-top: clamp(0.5rem, 2vh, 1rem); }
 
-.spinner {
-    border: 3px solid rgba($color-white-hex, 0.3);
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border-left-color: $white;
-    animation: spin 1s linear infinite;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 10px;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.btn-save-modal {
-    background-color: var(--secondary-color);
-    color: var(--quaternary-color);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: color 0.2s, transform 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover {
-        transform: translateY(-2px);
-        background-color: var(--tertiary-color);
-        color: var(--secondary-color);
-    }
-}
-
-/* Global Responsiveness */
-@media (max-width: 1024px) {
-    body {
-        background-size: 100% 100%, 100% 100%, 100% 100%, 14px 14px, 100% 100%, 180px 180px;
-    }
-
-    .page_all,
-    main {
-        width: 100%;
-    }
-}
-
+/* 5. RESPONSIVIDADE GLOBAL (REDUZIDA) */
 @media (max-width: 768px) {
     body {
-        background-size: 100% 100%, 100% 100%, 100% 100%, 12px 12px, 100% 100%, 150px 150px;
-        background-attachment: scroll;
+        --dot-spacing: 10px;
+        --grain-size: 150px;
+        background-attachment: scroll; /* Melhor performance em mobile */
     }
-
-    .page_all,
-    .up_pageAll,
-    main {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-
-    .ph_banner {
-        width: 100%;
-        height: auto;
-    }
-
-    .spinner {
-        width: 16px;
-        height: 16px;
-        border: 2px solid rgba($color-white-hex, 0.3);
-        border-left-color: $white;
-    }
-
-    .btn-save-modal {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
+    
+    .fade-out { transform: translateX(-30px) !important; }
+    .fade-in-preview { transform: translateX(30px) !important; }
 }
 
 @media (max-width: 480px) {
     body {
-        background-size: 100% 100%, 100% 100%, 100% 100%, 10px 10px, 100% 100%, 120px 120px;
-        background-attachment: scroll;
-        font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (480 - 320)));
+        --dot-spacing: 8px;
+        --grain-size: 120px;
+        /* Fonte fluida para telas pequenas */
+        font-size: clamp(14px, 4vw, 16px);
     }
-
-    .page_all,
-    .up_pageAll {
-        flex-direction: column;
-    }
-
-    main {
-        width: 100%;
-        overflow-x: hidden;
-    }
-
-    .ph_banner {
-        max-width: 100%;
-        height: auto;
-    }
-
-    .fade-out {
-        transform: translateX(-50px) !important;
-    }
-
-    .fade-in-preview {
-        transform: translateX(50px) !important;
-    }
-
-    .flex {
-        flex-wrap: wrap;
-    }
-
-    .spinner {
-        width: 14px;
-        height: 14px;
-        border: 2px solid rgba($color-white-hex, 0.3);
-        margin-left: 8px;
-    }
-
-    .btn-save-modal {
-        font-size: 13px;
-        padding: 6px 12px;
-        min-height: 36px;
-    }
-
-    .my-8 { margin-top: 1.5rem; }
-    .mt-3 { margin-top: 0.75rem; }
-}
-
-@media (max-width: 320px) {
-    body {
-        background-size: 100% 100%, 100% 100%, 100% 100%, 8px 8px, 100% 100%, 100px 100px;
-        font-size: 14px;
-    }
-
-    .page_all,
-    .up_pageAll,
-    main {
-        width: 100vw;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-    }
-
-    .spinner {
-        width: 12px;
-        height: 12px;
-        border: 1px solid rgba($color-white-hex, 0.3);
-        margin-left: 6px;
-    }
-
-    .btn-save-modal {
-        font-size: 12px;
-        padding: 4px 10px;
-        min-height: 32px;
-    }
-
-    .my-8 { margin-top: 1rem; }
-    .mt-3 { margin-top: 0.5rem; }
-
-    .flex { flex-direction: column; }
+    .flex { flex-wrap: wrap; }
 }

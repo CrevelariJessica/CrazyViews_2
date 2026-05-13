@@ -13,10 +13,14 @@
 
 // 3. COMPONENTES (Header e Footer)
 // Use o BEM para nomear as classes nestes arquivos
+@import "components/animation";
 @import "components/header";
 @import "components/footer";
+@import "components/form";
 @import "components/button";
+@import "components/_button_switch";
 @import "components/card";
+@import "components/comic_nav";
 @import "components/modal";
 @import "components/input";
 @import "components/tooltip";
