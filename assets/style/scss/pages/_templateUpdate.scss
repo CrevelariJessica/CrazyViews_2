@@ -1,111 +1,28 @@
-/* Banner e Conteúdo */
+/* ==========================================================================
+   1. BANNER PRINCIPAL DA HQ & EFEITO 3D DO ELEMENTO
+   ========================================================================== */
 .banner {
     display: flex;
     height: 400px;
     background-color: var(--background-color);
     position: relative;
     z-index: 100;
+
+    @media (max-width: 768px) { height: 250px; }
+    @media (max-width: 480px) { height: 200px; }
+    @media (max-width: 320px) { height: 150px; }
 }
 
 .banner_stand {
     display: flex;
     height: 200px;
-    padding: 0px;
+    padding: 0;
     background-color: $bg;
     position: relative;
     z-index: 100;
-}
 
-.t_title {
-    padding: 10px;
-}
-
-.info_valor {
-    flex-grow: 1;
-}
-
-.b_title {
-    font-weight: bold;
-}
-
-.b_content_info {
-    margin-top: 5px;
-    margin-left: 5px;
-    display: flex;
-    gap: 7px;
-    padding: 5px;
-}
-
-.banner_content {
-    height: 200px;
-    width: 600px;
-    margin-left: 40px;
-    color: $bg;
-    background-color: rgba($color-gray-light-hex, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-sizing: border-box;
-    max-width: 100%;
-}
-
-.banner_inner {
-    padding-left: 15px;
-    padding-top: 10px;
-    margin-top: 120px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 100%;
-    position: relative;
-    z-index: 300;
-    overflow: hidden;
-}
-
-.imageHqStyle {
-    position: relative;
-    width: 100%;
-    height: auto;
-    display: block;
-    box-shadow: 8px 8px 15px rgba($color-black-hex, 0.4);
-    border-top: 5px solid var(--text-color);
-    border-right: 10px solid var(--text-color);
-    border-bottom: 5px solid var(--text-color);
-    border-left: 4px solid var(--text-color);
-}
-
-.imageHq {
-    width: 100%;
-    height: auto;
-    position: relative;
-    overflow: hidden;
-}
-
-#imageHq {
-    display: flex;
-    transform: rotateY(-45deg);
-}
-
-.bannerbanner {
-    width: 280px;
-    height: 100%;
-    position: absolute;
-    right: 15%;
-    z-index: 400;
-    top: 50%;
-    transform: translateY(-50%);
-    perspective: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-}
-
-#HQImage {
-    object-fit: contain;
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
+    @media (max-width: 480px) { height: 150px; }
+    @media (max-width: 320px) { height: 100px; }
 }
 
 .bannerImage {
@@ -127,11 +44,112 @@
     filter: blur(2px) brightness(0.7);
 }
 
+.banner_inner {
+    padding-left: 15px;
+    padding-top: 10px;
+    margin-top: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    position: relative;
+    z-index: 300;
+    overflow: hidden;
+}
+
+.banner_content {
+    height: 200px;
+    width: 600px;
+    margin-left: 40px;
+    color: $bg;
+    background-color: rgba($color-gray-light-hex, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    max-width: 100%;
+
+    @media (max-width: 768px) { height: 150px; width: 70%; margin-left: 20px; }
+    @media (max-width: 480px) { height: 120px; width: 90%; margin-left: 10px; font-size: 0.85em; }
+    @media (max-width: 320px) { height: 100px; width: calc(100vw - 20px); margin-left: 5px; font-size: 0.75em; }
+}
+
+// Perspectiva e efeito inclinado da capa da HQ no banner
+.bannerbanner {
+    width: 280px;
+    height: 100%;
+    position: absolute;
+    right: 15%;
+    z-index: 400;
+    top: 50%;
+    transform: translateY(-50%);
+    perspective: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+
+    @media (max-width: 768px) { width: 200px; right: 10%; }
+    @media (max-width: 480px) { width: 120px; right: 5%; }
+    @media (max-width: 320px) { width: 80px; right: 3%; }
+}
+
+#imageHq {
+    display: flex;
+    transform: rotateY(-45deg);
+}
+
+.imageHq {
+    width: 100%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.imageHqStyle {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 8px 8px 15px rgba($color-black-hex, 0.4);
+    border-top: 5px solid var(--text-color);
+    border-right: 10px solid var(--text-color);
+    border-bottom: 5px solid var(--text-color);
+    border-left: 4px solid var(--text-color);
+
+    @media (max-width: 320px) { border-width: 2px 5px 2px 2px; }
+}
+
+#HQImage {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+/* Detalhes de textos internos do painel */
+.t_title { padding: 10px; }
+.b_title { font-weight: bold; }
+.info_valor { flex-grow: 1; }
+.b_content_info {
+    margin-top: 5px;
+    margin-left: 5px;
+    display: flex;
+    gap: 7px;
+    padding: 5px;
+}
+
+
+/* ==========================================================================
+   2. SEÇÃO DE GERENCIAMENTO / ADICIONAR EDIÇÃO (FORMULÁRIOS)
+   ========================================================================== */
 .page_edition {
     display: flex;
     min-height: 650px;
     flex-grow: 1;
     background-color: var(--background-color);
+
+    @media (max-width: 480px) { min-height: auto; }
 }
 
 .p_edition {
@@ -144,6 +162,10 @@
     margin-top: 10px;
     position: relative;
     z-index: 100;
+
+    @media (max-width: 768px) { width: 95%; margin-left: 2.5%; }
+    @media (max-width: 480px) { width: 98%; margin-left: 1%; gap: 3px; }
+    @media (max-width: 320px) { width: 100%; margin-left: 0; gap: 2px; }
 }
 
 .add_edition {
@@ -154,6 +176,8 @@
     min-height: 25px;
 }
 
+#b_etitle { position: relative; z-index: 103; }
+
 #button_addEdt {
     font-size: 1em;
     padding: 6px;
@@ -162,25 +186,21 @@
     border: none;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba($color-black-hex, 0.1);
+
+    &:hover { transform: translateY(2px); }
+    @media (max-width: 480px) { font-size: 0.9em; padding: 5px 10px; }
+    @media (max-width: 320px) { font-size: 0.8em; padding: 4px 8px; }
 }
 
-#button_addEdt:hover {
-    transform: translateY(2px);
-}
-
-#b_etitle {
-    position: relative;
-    z-index: 103;
-}
-
+/* --- FORMULÁRIO RETRÁTIL (SLIDE DOWN EFFECT) --- */
 #form_NewEdt {
     display: block;
-    margin-top: 0px;
+    margin-top: 0;
     width: 100%;
     position: absolute;
     z-index: 900;
     top: 35px;
-    left: 0px;
+    left: 0;
     color: $color-aliceblue-hex;
     background-color: rgba($color-primary-hex, 0.75);
     box-shadow: 0 4px 8px rgba($color-black-hex, 0.1);
@@ -192,31 +212,35 @@
     padding-top: 0;
     padding-bottom: 0;
     transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
-}
 
-#form_NewEdt.is-open {
-    max-height: 400px;
-    padding-top: 25px;
-    padding-bottom: 5px;
-}
+    &.is-open {
+        max-height: 400px;
+        padding-top: 25px;
+        padding-bottom: 5px;
 
-#id_numEdt input[type="text"],
-#id_numDate input[type="text"] {
-    background-color: $bg;
-    width: 150px;
+        @media (max-width: 480px) { max-height: 300px; padding-top: 15px; padding-bottom: 3px; }
+    }
 }
 
 #uploadForm {
     display: flex;
-    gap: 0px;
+    gap: 0;
     flex-direction: column;
     width: 100%;
+
+    @media (max-width: 768px) { flex-direction: column; }
+    @media (max-width: 480px) { gap: 0; }
+    @media (max-width: 320px) { gap: 5px; }
 }
 
 .partOne {
     display: flex;
     flex-direction: row;
     width: 100%;
+
+    @media (max-width: 768px) { flex-direction: column; }
+    @media (max-width: 480px) { gap: 10px; }
+    @media (max-width: 320px) { gap: 5px; }
 }
 
 .partTwo {
@@ -227,6 +251,8 @@
     position: relative;
     z-index: auto;
     align-items: center;
+
+    @media (max-width: 480px) { padding: 3px; }
 }
 
 #id_infOne {
@@ -236,6 +262,10 @@
     padding: 10px;
     gap: 15px;
     align-content: flex-start;
+
+    @media (max-width: 768px) { width: 100%; }
+    @media (max-width: 480px) { padding: 8px; gap: 8px; flex-direction: column; }
+    @media (max-width: 320px) { padding: 4px; gap: 4px; }
 }
 
 #id_upIm {
@@ -245,41 +275,56 @@
     flex-direction: column;
     gap: 6px;
     padding: 10px;
+
+    @media (max-width: 768px) { width: 100%; }
+    @media (max-width: 480px) { padding: 8px; gap: 8px; flex-direction: column; }
+    @media (max-width: 320px) { padding: 4px; gap: 4px; }
 }
 
-#id_numEdt {
+#id_numEdt, #id_numDate {
     display: flex;
     flex-direction: column;
-}
 
-#id_numDate {
-    display: flex;
-    flex-direction: column;
+    input[type="text"] {
+        background-color: $bg;
+        width: 150px;
+
+        @media (max-width: 768px) { width: 100%; }
+        @media (max-width: 480px) { font-size: 0.85em; padding: 6px; }
+        @media (max-width: 320px) { font-size: 0.8em; padding: 4px; }
+    }
 }
 
 #id_btUpEdt {
     display: flex;
     align-items: center;
     width: 15%;
+
+    @media (max-width: 768px) { width: 100%; }
+    @media (max-width: 480px) { justify-content: center; }
+
+    button {
+        font-size: 1em;
+        padding: 10px;
+        color: var(--primary-color);
+        background-color: var(--secondary-color);
+        border: none;
+        border-radius: 4px;
+        box-shadow: 0 8px 16px rgba($color-black-hex, 0.2);
+        transition: color 0.2s;
+
+        &:hover {
+            background-color: var(--tertiary-color);
+            transform: translateY(3px);
+            color: $bg;
+        }
+    }
 }
 
-#id_btUpEdt button {
-    font-size: 1em;
-    padding: 10px;
-    color: var(--primary-color);
-    background-color: var(--secondary-color);
-    border: none;
-    border-radius: 4px;
-    box-shadow: 0 8px 16px rgba($color-black-hex, 0.2);
-    transition: color 0.2s;
-}
 
-#id_btUpEdt button:hover {
-    background-color: var(--tertiary-color);
-    transform: translateY(3px);
-    color: $bg;
-}
-
+/* ==========================================================================
+   3. GRID DE LISTAGEM & COMPONENTES MENU CONTEXTUAL
+   ========================================================================== */
 .view_edition {
     width: 100%;
     height: 95%;
@@ -291,30 +336,40 @@
     justify-content: center;
 }
 
-
 #EditionList {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
     padding: 20px 0;
     width: 100%;
+
+    @media (max-width: 768px) { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; padding: 15px 0; }
+    @media (max-width: 480px) { grid-template-columns: 1fr; gap: 10px; padding: 10px 5px; }
+    @media (max-width: 320px) { gap: 8px; padding: 8px 3px; }
 }
 
-.menu-option:hover {
-    background-color: var(--tertiary-color);
+/* --- MENUS SUSPENSOS DAS EDIDÕES --- */
+.edition-actions-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
 }
 
-.delete-action:hover {
-    background-color: $danger;
-}
-
-.menu-option {
-    padding: 10px;
-    text-decoration: none;
+.btn-edition-menu {
+    background: $quaternary;
     color: $bg;
-    display: block;
-    white-space: nowrap;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
     transition: color 0.2s;
+
+    &:hover { background: $tertiary; color: $bg; }
+    @media (max-width: 480px) { font-size: 1em; padding: 2px 6px; }
+    @media (max-width: 320px) { font-size: 0.8em; padding: 1px 4px; }
 }
 
 .edition-menu-options {
@@ -328,33 +383,28 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+
+    @media (max-width: 480px) { width: 150px; }
+    @media (max-width: 320px) { width: 120px; }
 }
 
-.btn-edition-menu {
-    background: $quaternary;
+.menu-option {
+    padding: 10px;
+    text-decoration: none;
     color: $bg;
-    border: none;
-    border-radius: 5px;
-    padding: 3px 8px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.2em;
+    display: block;
+    white-space: nowrap;
     transition: color 0.2s;
+
+    &:hover { background-color: var(--tertiary-color); }
 }
 
-.btn-edition-menu:hover {
-    background: $tertiary;
-    color: $bg;
-}
+.delete-action:hover { background-color: $danger; }
 
-.edition-actions-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 10;
-}
 
-/* Cards de Edição */
+/* ==========================================================================
+   4. CARDS DE EXIBIÇÃO DE EDIÇÃO (VOLUMES)
+   ========================================================================== */
 .cardEdition {
     height: 350px;
     width: 200px;
@@ -365,11 +415,15 @@
     flex-direction: column;
     transition: transform 0.2s;
     position: relative;
-}
 
-.cardEdition:hover {
-    transform: translateX(-5px);
-    box-shadow: 0 8px 16px rgba($color-black-hex, 0.2);
+    &:hover {
+        transform: translateX(-5px);
+        box-shadow: 0 8px 16px rgba($color-black-hex, 0.2);
+    }
+
+    @media (max-width: 768px) { height: 280px; width: 150px; }
+    @media (max-width: 480px) { height: 250px; width: 100%; max-width: 100%; }
+    @media (max-width: 320px) { height: 220px; }
 }
 
 .cardImage {
@@ -382,13 +436,18 @@
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba($color-primary-hex, 0.3);
+
+    @media (max-width: 768px) { height: 220px; }
+    @media (max-width: 480px) { height: 180px; }
+    @media (max-width: 320px) { height: 150px; }
 }
 
 .cardText {
     padding: 15px;
     flex-grow: 1;
     text-align: center;
-    flex-grow: 1;
+
+    @media (max-width: 480px) { padding: 10px; }
 }
 
 .cardTitle {
@@ -396,12 +455,19 @@
     font-size: 1.2em;
     color: var(--text-color);
     padding: 2px;
+
+    @media (max-width: 768px) { font-size: 1em; }
+    @media (max-width: 480px) { font-size: 0.95em; word-break: break-word; }
+    @media (max-width: 320px) { font-size: 0.85em; }
 }
 
 .cardDateP {
     color: $senary;
     font-size: 0.8em;
     margin: 5px;
+
+    @media (max-width: 480px) { font-size: 0.75em; margin: 3px; }
+    @media (max-width: 320px) { font-size: 0.65em; }
 }
 
 .cardLink {
@@ -415,14 +481,18 @@
     margin-top: auto;
     width: 100%;
     transition: color 0.2s;
+
+    &:hover {
+        box-shadow: 0 3px 16px rgba($color-black-hex, 0.1);
+        color: $bg;
+        background-color: var(--tertiary-color);
+    }
+
+    @media (max-width: 480px) { padding: 6px 12px; font-size: 0.9em; }
+    @media (max-width: 320px) { padding: 4px 10px; font-size: 0.8em; }
 }
 
-.cardLink:hover {
-    box-shadow: 0 3px 16px rgba($color-black-hex, 0.1);
-    color: $bg;
-    background-color: var(--tertiary-color);
-}
-
+/* --- BOTÃO CARREGAR MAIS EDIDÕES --- */
 .btnMoreEdt {
     position: relative;
     display: flex;
@@ -430,6 +500,9 @@
     justify-content: center;
     padding: 5px;
     margin-bottom: 20px;
+
+    @media (max-width: 480px) { padding: 3px; margin-bottom: 10px; }
+    @media (max-width: 320px) { padding: 2px; margin-bottom: 8px; }
 }
 
 #btnLoadMore {
@@ -440,316 +513,13 @@
     border-radius: 8px;
     font-weight: bold;
     transition: color 0.2s;
-}
 
-#btnLoadMore:hover {
-    transform: translatey(5px);
-    color: $bg;
-    background-color: var(--tertiary-color);
-}
-
-/* Responsiveness para Template Update */
-@media (max-width: 768px) {
-    .banner {
-        height: 250px;
+    &:hover {
+        transform: translateY(5px);
+        color: $bg;
+        background-color: var(--tertiary-color);
     }
 
-    .banner_content {
-        height: 150px;
-        width: 70%;
-        margin-left: 20px;
-    }
-
-    .bannerbanner {
-        width: 200px;
-        right: 10%;
-    }
-
-    .p_edition {
-        width: 95%;
-        margin-left: 2.5%;
-    }
-
-    #uploadForm {
-        flex-direction: column;
-    }
-
-    .partOne {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    #id_infOne,
-    #id_upIm,
-    #id_btUpEdt {
-        width: 100%;
-    }
-
-    #id_numEdt input[type="text"],
-    #id_numDate input[type="text"] {
-        width: 100%;
-    }
-
-    #EditionList {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 15px;
-        padding: 15px 0;
-    }
-
-    .cardEdition {
-        height: 280px;
-        width: 150px;
-    }
-
-    .cardImage {
-        height: 220px;
-    }
-
-    .cardTitle {
-        font-size: 1em;
-    }
-}
-
-@media (max-width: 480px) {
-    .banner {
-        height: 200px;
-    }
-
-    .banner_stand {
-        height: 150px;
-    }
-
-    .banner_content {
-        height: 120px;
-        width: 90%;
-        margin-left: 10px;
-        font-size: 0.85em;
-    }
-
-    .bannerbanner {
-        width: 120px;
-        right: 5%;
-    }
-
-    .page_edition {
-        min-height: auto;
-    }
-
-    .p_edition {
-        width: 98%;
-        margin-left: 1%;
-        gap: 3px;
-    }
-
-    #button_addEdt {
-        font-size: 0.9em;
-        padding: 5px 10px;
-    }
-
-    #form_NewEdt {
-        max-height: 0;
-    }
-
-    #form_NewEdt.is-open {
-        max-height: 300px;
-        padding-top: 15px;
-        padding-bottom: 3px;
-    }
-
-    #uploadForm {
-        gap: 0;
-        flex-direction: column;
-    }
-
-    .partOne {
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
-    }
-
-    .partTwo {
-        width: 100%;
-        padding: 3px;
-    }
-
-    #id_infOne,
-    #id_upIm {
-        width: 100%;
-        padding: 8px;
-        gap: 8px;
-        flex-direction: column;
-    }
-
-    #id_btUpEdt {
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-
-    #id_numEdt input[type="text"],
-    #id_numDate input[type="text"] {
-        width: 100%;
-        font-size: 0.85em;
-        padding: 6px;
-    }
-
-    #EditionList {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 10px 5px;
-    }
-
-    .cardEdition {
-        height: 250px;
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .cardImage {
-        height: 180px;
-    }
-
-    .cardTitle {
-        font-size: 0.95em;
-        word-break: break-word;
-    }
-
-    .cardText {
-        padding: 10px;
-    }
-
-    .cardDateP {
-        font-size: 0.75em;
-        margin: 3px;
-    }
-
-    .cardLink {
-        padding: 6px 12px;
-        font-size: 0.9em;
-        margin-top: auto;
-        width: 100%;
-    }
-
-    .btn-edition-menu {
-        font-size: 1em;
-        padding: 2px 6px;
-    }
-
-    .edition-menu-options {
-        width: 150px;
-        right: 0;
-    }
-
-    .btnMoreEdt {
-        padding: 3px;
-        margin-bottom: 10px;
-    }
-
-    #btnLoadMore {
-        font-size: 0.9em;
-        padding: 8px 16px;
-    }
-}
-
-@media (max-width: 320px) {
-    .banner {
-        height: 150px;
-    }
-
-    .banner_stand {
-        height: 100px;
-    }
-
-    .banner_content {
-        height: 100px;
-        width: calc(100vw - 20px);
-        margin-left: 5px;
-        font-size: 0.75em;
-    }
-
-    .bannerbanner {
-        width: 80px;
-        right: 3%;
-    }
-
-    .imageHqStyle {
-        border-width: 2px 5px 2px 2px;
-    }
-
-    .p_edition {
-        width: 100%;
-        margin-left: 0;
-        gap: 2px;
-    }
-
-    #button_addEdt {
-        font-size: 0.8em;
-        padding: 4px 8px;
-    }
-
-    #uploadForm {
-        gap: 5px;
-    }
-
-    .partOne {
-        gap: 5px;
-    }
-
-    #id_infOne,
-    #id_upIm {
-        padding: 4px;
-        gap: 4px;
-    }
-
-    #id_numEdt input[type="text"],
-    #id_numDate input[type="text"] {
-        font-size: 0.8em;
-        padding: 4px;
-    }
-
-    #EditionList {
-        gap: 8px;
-        padding: 8px 3px;
-    }
-
-    .cardEdition {
-        height: 220px;
-        width: 100%;
-    }
-
-    .cardImage {
-        height: 150px;
-    }
-
-    .cardTitle {
-        font-size: 0.85em;
-    }
-
-    .cardDateP {
-        font-size: 0.65em;
-    }
-
-    .cardLink {
-        padding: 4px 10px;
-        font-size: 0.8em;
-    }
-
-    .btnMoreEdt {
-        padding: 2px;
-        margin-bottom: 8px;
-    }
-
-    #btnLoadMore {
-        font-size: 0.8em;
-        padding: 6px 12px;
-    }
-
-    .edition-menu-options {
-        width: 120px;
-    }
-
-    .btn-edition-menu {
-        font-size: 0.8em;
-        padding: 1px 4px;
-    }
+    @media (max-width: 480px) { font-size: 0.9em; padding: 8px 16px; }
+    @media (max-width: 320px) { font-size: 0.8em; padding: 6px 12px; }
 }

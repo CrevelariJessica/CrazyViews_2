@@ -45,7 +45,7 @@
     border-left: 4px solid var(--nav-border);
 }
 
-// Lógica do Glider usando ID (Mantenha os IDs conforme seu HTML)
+// Lógica do Glider usando ID
 #home:checked ~ .comic-glider { 
     transform: translateX(0); 
     background-color: var(--comic-accent-a); 

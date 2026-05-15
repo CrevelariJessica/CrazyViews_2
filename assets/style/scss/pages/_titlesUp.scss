@@ -1,3 +1,6 @@
+/* ==========================================================================
+   1. CONTAINER DO CATÁLOGO PRINCIPAL
+   ========================================================================== */
 .lib_catalog {
     display: flex;
     flex-direction: column;
@@ -6,7 +9,15 @@
     margin-top: 40px;
     padding: 15px 0;
     z-index: 500;
+
+    @media (max-width: 768px) { margin-top: 30px; padding: 12px 0; }
+    @media (max-width: 480px) { margin-top: 20px; padding: 10px 0; width: calc(100% - 10px); margin-left: 5px; margin-right: 5px; }
+    @media (max-width: 320px) { margin-top: 15px; padding: 8px 0; width: 100%; }
 }
+
+/* ==========================================================================
+   2. LISTA ALFABÉTICA (NAVEGAÇÃO DO CATÁLOGO)
+   ========================================================================== */
 .lib_catList {
     width: 100%;
     display: flex;
@@ -14,158 +25,70 @@
     flex-direction: column;
     gap: 10px;
 
+    @media (max-width: 480px) { width: calc(100% - 10px); margin: 0 5px; }
+    @media (max-width: 320px) { width: 100%; }
+
     ul {
         display: flex;
-        flex-wrap: wrap;        // Permite que as letras dobrem a linha se a tela for pequena
+        flex-wrap: wrap;         // Permite que as letras dobrem a linha se a tela for pequena
         justify-content: center; // Centraliza as letras horizontalmente
         width: 100%;
-        max-width: 1000px;      // Limita a largura para as letras não ficarem muito espalhadas
+        max-width: 1000px;       // Limita a largura para as letras não ficarem muito espalhadas
         padding: 0;
         margin: 0;
         list-style: none;
 
+        @media (max-width: 768px) { max-width: 95%; gap: 6px; }
+        @media (max-width: 480px) { max-width: 100%; gap: 5px; padding: 5px; }
+        @media (max-width: 320px) { width: calc(100vw - 20px); max-width: 100%; gap: 4px; padding: 4px; }
+
         li {
-            display: flex; // Transforma o LI em flex também ajuda no alinhamento
+            display: flex;       // Transforma o LI em flex também ajuda no alinhamento
+
+            @media (max-width: 480px) { flex: 0 1 auto; }
             
             a {
                 text-decoration: none; 
                 color: inherit; 
                 cursor: pointer;
-                display: block; // Faz o link ocupar o espaço do LI
-                padding: 5px 10px;
-                font-family: 'Inter', sans-serif; // Força a fonte da tipografia
+                display: block;  // Faz o link ocupar o espaço do LI
+                font-family: 'Inter', sans-serif;
                 font-weight: 600;
-                text-decoration: none;
                 
-                // Sobrescreve o comportamento do _typography se necessário
+                // Estilização visual (Pílulas / Botões das Letras)
+                padding: 0.45rem 0.8rem;
+                border-radius: 999px;
+                background: var(--panel-soft);
+                border: 2px solid transparent;
+                transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+                
                 &:hover {
                     color: var(--tertiary-color);
+                    background: var(--panel-bg);
+                    border-color: var(--panel-border);
                 }
+
+                @media (max-width: 768px) { padding: 0.4rem 0.7rem; font-size: 0.95em; border-radius: 8px; }
+                @media (max-width: 480px) { padding: 0.35rem 0.6rem; font-size: 0.85em; border-radius: 6px; min-width: 45px; word-break: break-word; }
+                @media (max-width: 320px) { padding: 0.3rem 0.5rem; font-size: 0.75em; border-radius: 4px; min-width: 40px; }
             }
         }
     }
 }
 
+/* ==========================================================================
+   3. SEÇÃO DO FORMULÁRIO DE SELEÇÃO / UPLOAD
+   ========================================================================== */
 .form-section {
-    background-color: rgba($color-primary-hex, 0.1);
-    padding: 12px;
-    border-radius: 6px;
-    margin: 12px 0;
-}
-
-.lib_catList ul li a {
-    padding: 0.45rem 0.8rem;
-    border-radius: 999px;
-    background: var(--panel-soft);
-    border: 2px solid transparent;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-}
-
-.lib_catList ul li a:hover {
-    background: var(--panel-bg);
-    border-color: var(--panel-border);
-}
-
-.form-section {
+    // Unificação do background antigo com o gradiente moderno
     background: linear-gradient(135deg, var(--panel-soft), var(--panel-bg));
     border: 2px dashed var(--panel-border);
     box-shadow: 0 8px 18px var(--panel-shadow);
-}
+    padding: 12px;
+    border-radius: 6px;
+    margin: 12px 0;
 
-/* Responsiveness para Titles Upload */
-@media (max-width: 768px) {
-    .lib_catalog {
-        padding: 12px 0;
-        margin-top: 30px;
-    }
-
-    .lib_catList ul {
-        max-width: 95%;
-        gap: 6px;
-    }
-
-    .lib_catList ul li a {
-        padding: 0.4rem 0.7rem;
-        font-size: 0.95em;
-        border-radius: 8px;
-    }
-
-    .form-section {
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 4px;
-    }
-}
-
-@media (max-width: 480px) {
-    .lib_catalog {
-        padding: 10px 0;
-        margin-top: 20px;
-        width: calc(100% - 10px);
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-
-    .lib_catList {
-        width: calc(100% - 10px);
-        margin: 0 5px;
-    }
-
-    .lib_catList ul {
-        width: 100%;
-        max-width: 100%;
-        gap: 5px;
-        padding: 5px;
-    }
-
-    .lib_catList ul li {
-        flex: 0 1 auto;
-    }
-
-    .lib_catList ul li a {
-        padding: 0.35rem 0.6rem;
-        font-size: 0.85em;
-        border-radius: 6px;
-        min-width: 45px;
-        word-break: break-word;
-    }
-
-    .form-section {
-        padding: 8px;
-        margin: 8px 0;
-        border-radius: 4px;
-        font-size: 0.9em;
-    }
-}
-
-@media (max-width: 320px) {
-    .lib_catalog {
-        padding: 8px 0;
-        margin-top: 15px;
-        width: 100%;
-    }
-
-    .lib_catList {
-        width: 100%;
-    }
-
-    .lib_catList ul {
-        width: calc(100vw - 20px);
-        max-width: 100%;
-        gap: 4px;
-        padding: 4px;
-    }
-
-    .lib_catList ul li a {
-        padding: 0.3rem 0.5rem;
-        font-size: 0.75em;
-        border-radius: 4px;
-        min-width: 40px;
-    }
-
-    .form-section {
-        padding: 6px;
-        margin: 6px 0;
-        font-size: 0.8em;
-    }
+    @media (max-width: 768px) { padding: 10px; margin: 10px 0; border-radius: 4px; }
+    @media (max-width: 480px) { padding: 8px; margin: 8px 0; border-radius: 4px; font-size: 0.9em; }
+    @media (max-width: 320px) { padding: 6px; margin: 6px 0; font-size: 0.8em; }
 }

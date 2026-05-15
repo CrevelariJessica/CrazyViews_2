@@ -1,10 +1,7 @@
+/* CONTAINER ESCURO DE FUNDO (OVERLAY) */
 .modal {
     position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    min-height: 100%;
+    inset: 0; // Substitui top, left, width, height 100%
     background-color: rgba($color-black-hex, 0.6);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -12,319 +9,171 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    padding: 10px;
+    padding: clamp(5px, 2vw, 15px);
+    box-sizing: border-box;
+
+    @media (max-width: 320px) {
+        padding: 0;
+        align-items: flex-end; // Efeito "Bottom Sheet" (sobe de baixo) em telas muito pequenas
+    }
 }
 
+/* CAIXA DO CONTEÚDO DO MODAL */
 .modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background: linear-gradient(135deg, var(--surface-color), var(--surface-strong));
-    max-width: 500px;
     width: 100%;
-    max-height: 90vh;
+    max-width: 500px;
+    max-height: 85vh;
     color: var(--text-color);
-    padding: 20px;
-    border-radius: 8px;
-    border: 4px solid var(--gray-dark);
-    box-shadow: 0 12px 24px var(--shadow-color), 6px 6px 0 var(--gray-dark);
+    padding: clamp(12px, 3vw, 20px);
     overflow-y: auto;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    box-sizing: border-box;
+    
+    // Variáveis locais para herança responsiva simplificada
+    --modal-border: 4px;
+    --modal-shadow-main: 6px;
+    border: var(--modal-border) solid var(--gray-dark);
+    box-shadow: 0 12px 24px var(--shadow-color), 
+                var(--modal-shadow-main) var(--modal-shadow-main) 0 var(--gray-dark);
+    
+    // Otimização de transição de bordas e cantos
+    border-radius: 8px;
+
+    h2 {
+        padding: 5px;
+        text-align: center;
+        font-size: clamp(1.1em, 2vw, 1.5em);
+    }
+
+    h3 {
+        padding: 5px;
+        text-align: center;
+        font-size: clamp(0.9em, 1.8vw, 1.2em);
+    }
+
+    /* ADAPTAÇÃO RESPONSIVA DO CONTEÚDO VIA ANINHAMENTO */
+    @media (max-width: 768px) {
+        max-width: 85vw;
+        --modal-border: 3px;
+        --modal-shadow-main: 4px;
+    }
+
+    @media (max-width: 480px) {
+        max-width: 95vw;
+        max-height: 92vh;
+        --modal-border: 3px;
+        --modal-shadow-main: 2px;
+    }
+
+    @media (max-width: 320px) {
+        max-width: 100vw;
+        max-height: 95vh;
+        border-radius: 8px 8px 0 0;
+        --modal-border: 2px;
+        box-shadow: 0 -2px 10px var(--shadow-color); // Sombra apenas no topo
+    }
 }
 
-.modal-content h2 {
-    padding: 5px;
-    justify-self: center;
-}
-
-#modalEditionNumber {
-    width: 70px;
-}
-
-#modalEditionDate {
-    width: 90px;
-}
-
-.modal-edit-style {
+/* ESTRUTURAS DE FORMULÁRIOS INTERNOS */
+#formEdicaoTitulo, .modal-edit-style {
     display: flex;
     flex-direction: column;
-}
-
-.modal-edit-style h3 {
-    padding: 5px;
-    text-align: center;
-}
-
-#formEdicaoTitulo {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    gap: clamp(6px, 1.5vh, 10px);
     margin-top: 5px;
 }
 
 .modal-row-group {
     display: flex;
     gap: 10px;
+    width: 100%;
+
+    @media (max-width: 480px) {
+        flex-direction: column;
+        gap: 6px;
+    }
+}
+
+/* IDENTIFICADORES ESPECÍFICOS DE INPUTS (TAMANHOS CONFIGURÁVEIS) */
+#modalEditionNumber   { width: clamp(60px, 15vw, 70px); }
+#modalEditionDate     { width: clamp(80px, 20vw, 90px); }
+#edit_lancamento      { width: clamp(55px, 12vw, 60px); }
+#edit_Publisher       { width: clamp(90px, 22vw, 100px); }
+#edit_genero          { width: clamp(140px, 40vw, 190px); }
+
+// Garante que em telas pequenas nenhum ID force largura estática
+@media (max-width: 480px) {
+    #modalEditionNumber, #modalEditionDate, #edit_lancamento, 
+    #edit_Publisher, #edit_genero, #edit_original, #edit_titulo {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* INPUTS DENTRO DO MODAL */
+#formEdicaoTitulo input[type="text"],
+.modal-content input[type="text"] {
+    color: var(--primary-color);
+}
+
+/* GRUPOS DE AÇÕES / BOTÕES DO MODAL */
+.modal-actions-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-actions {
+    display: flex;
+    padding: 10px;
+    gap: clamp(8px, 2.5vw, 20px);
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+
+    button, .btn-save-modal, .btn-cancel, .btn-delete {
+        @media (max-width: 480px) {
+            width: 100%; // Botões empilham e ocupam largura total no mobile
+        }
+    }
+}
+
+/* VARIAÇÕES VISUAIS TEMÁTICAS */
+.modal-delete-style {
+    gap: 15px;
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+    color: var(--comic-text-light);
+
+    h3 {
+        color: var(--tertiary-color);
+        padding: 10px;
+        margin: 10px auto;
+        font-weight: bold;
+    }
+
+    p { padding: 6px; }
+
+    strong {
+        color: var(--bg-color, $bg);
+        background-color: var(--danger-color, $danger);
+    }
+}
+
+.modal-style-hq {
+    border-radius: 4px;
+    border: 4px solid var(--gray-dark, $gray-dark);
+    box-shadow: 4px 8px 0px var(--gray-dark, $gray-dark);
+
+    @media (max-width: 320px) {
+        border-width: 2px;
+        box-shadow: 2px 4px 0px var(--gray-dark, $gray-dark);
+    }
 }
 
 .id_ContainerGroupFav {
     display: flex;
     flex-direction: column;
     color: var(--text-color);
-}
-
-#edit_lancamento {
-    color: var(--primary-color);
-    width: 60px;
-}
-
-#edit_genero {
-    color: var(--primary-color);
-    width: 190px;
-}
-
-#edit_original,
-#edit_titulo {
-    color: var(--primary-color);
-}
-
-#edit_Publisher {
-    color: var(--primary-color);
-    width: 100px;
-}
-
-.modal-actions-wrapper {
-    display: flex;
-    justify-content: center;
-}
-
-.modal-delete-style {
-    gap: 15px;
-    text-align: center;
-    background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
-    color: var(--comic-text-light);
-}
-
-.modal-delete-style h3 {
-    color: var(--tertiary-color);
-    padding: 10px;
-    margin: 10px auto;
-    font-size: 1.3em;
-    font-weight: bold;
-}
-
-.modal-delete-style p {
-    padding: 6px;
-}
-
-.modal-delete-style strong {
-    color: $bg;
-    background-color: $danger;
-}
-
-.modal-style-hq{
-    border-radius: 4px;
-    border: 4px solid $gray-dark;
-    box-shadow: 4px 8px 0px $gray-dark;
-}
-
-.modal-actions {
-    display: flex;
-    padding: 10px;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* Responsiveness para Modals */
-@media (max-width: 768px) {
-    .modal-content {
-        max-width: 85vw;
-        padding: 15px;
-        border: 3px solid var(--gray-dark);
-        box-shadow: 0 8px 16px var(--shadow-color), 4px 4px 0 var(--gray-dark);
-    }
-
-    .modal-content h2 {
-        font-size: 1.2em;
-    }
-
-    #modalEditionNumber,
-    #modalEditionDate {
-        font-size: 14px;
-    }
-
-    #edit_genero,
-    #edit_original,
-    #edit_titulo,
-    #edit_Publisher {
-        max-width: 100%;
-        width: auto;
-        min-width: 100px;
-    }
-
-    .modal-actions {
-        gap: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .modal {
-        padding: 5px;
-    }
-
-    .modal-content {
-        max-width: 95vw;
-        width: 100%;
-        padding: 12px;
-        border: 3px solid var(--gray-dark);
-        box-shadow: 0 4px 8px var(--shadow-color), 2px 2px 0 var(--gray-dark);
-        max-height: 95vh;
-    }
-
-    .modal-content h2 {
-        font-size: 1.1em;
-        margin-bottom: 10px;
-        word-break: break-word;
-    }
-
-    .modal-content h3 {
-        font-size: 1em;
-        word-break: break-word;
-    }
-
-    #formEdicaoTitulo {
-        gap: 8px;
-        margin-top: 3px;
-    }
-
-    .modal-row-group {
-        gap: 8px;
-        flex-direction: column;
-    }
-
-    #modalEditionNumber,
-    #modalEditionDate,
-    #edit_lancamento,
-    #edit_genero,
-    #edit_original,
-    #edit_titulo,
-    #edit_Publisher {
-        width: 100%;
-        font-size: 13px;
-        padding: 8px;
-    }
-
-    .form-group input[type="text"] {
-        width: 100%;
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    .btn-save-modal {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-
-    .modal-actions {
-        gap: 8px;
-        flex-direction: column;
-    }
-
-    .modal-delete-style h3 {
-        font-size: 1.1em;
-        word-break: break-word;
-    }
-
-    .modal-delete-style p {
-        font-size: 0.9em;
-        word-break: break-word;
-    }
-}
-
-@media (max-width: 320px) {
-    .modal {
-        padding: 0;
-        align-items: flex-end;
-        justify-content: center;
-    }
-
-    .modal-content {
-        max-width: 100vw;
-        width: 100vw;
-        padding: 10px;
-        border: 2px solid var(--gray-dark);
-        box-shadow: 0 2px 4px var(--shadow-color);
-        max-height: 95vh;
-        border-radius: 8px 8px 0 0;
-        transform: none;
-        top: auto;
-        left: 0;
-        bottom: 0;
-        position: fixed;
-    }
-
-    .modal-content h2 {
-        font-size: 1em;
-        padding: 3px;
-        margin: 0 0 8px 0;
-    }
-
-    .modal-content h3 {
-        font-size: 0.9em;
-        padding: 3px;
-    }
-
-    #formEdicaoTitulo {
-        gap: 6px;
-    }
-
-    #modalEditionNumber,
-    #modalEditionDate,
-    #edit_lancamento,
-    #edit_genero,
-    #edit_original,
-    #edit_titulo,
-    #edit_Publisher {
-        width: 100% !important;
-        font-size: 12px;
-        padding: 6px !important;
-        max-width: 100% !important;
-        box-sizing: border-box;
-    }
-
-    .modal-row-group {
-        flex-direction: column;
-        gap: 6px;
-    }
-
-    .modal-actions {
-        gap: 6px;
-        flex-direction: column;
-        padding: 8px 0;
-    }
-
-    .modal-actions button {
-        width: 100%;
-        font-size: 12px;
-        padding: 8px;
-    }
-
-    .modal-delete-style h3 {
-        font-size: 1em;
-        padding: 5px;
-        margin: 5px auto;
-    }
-
-    .modal-delete-style p {
-        font-size: 0.8em;
-        padding: 4px;
-    }
-
-    .modal-style-hq {
-        border: 2px solid $gray-dark;
-        box-shadow: 2px 4px 0px $gray-dark;
-    }
 }

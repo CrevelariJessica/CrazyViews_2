@@ -1,96 +1,6 @@
-.background-page-png {
-    /* Estilos do formulário de cadastro */
-    .background-page-png {
-        background-image: url('../img/ph_banner01.png');
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        min-height: 100vh;
-        z-index: 10;
-    }
-    .background-page-png::after {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba($color-quaternary-hex, 0.4);
-        backdrop-filter: blur(7px);
-        -webkit-backdrop-filter: blur(7px);
-        z-index: 50;
-    }
-    .page_allUp {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 900px;
-    }
-    .id_all {
-        height: 700px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        gap: 20px;
-        top: 90px;
-        z-index: 100;
-    }
-    .id_ContainerbotForm {
-        display: flex;
-        position: relative;
-        min-width: 700px;
-        min-height: 600px;
-        margin: auto;
-        height: auto;
-        padding: 30px;
-        flex-direction: column;
-        background-color: $bg;
-    }
-    .id_ContainerGroup {
-    color: $color-gray-slate-hex;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    }
-    .id_FormLeft {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-    }
-    #txt_ReleaseYe {
-        width: 70px;
-    }
-    #txt_TitleOriginal,
-    #txt_TitleLocal {
-        width: 400px;
-    }
-    #txt_Publisher,
-    #txt_Gender {
-        width: 120px;
-    }
-    .id_Form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        position: relative;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    select {
-        width: 300px;
-        height: 25px;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid $color-gray-medium-hex;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-}
-
-// Correção do layout e tema do formulário de upload
+/* ==========================================================================
+   1. SEÇÃO PRINCIPAL - BACKGROUND & EMBALAGEM DA PÁGINA
+   ========================================================================== */
 .background-page-png {
     position: relative;
     min-height: 100vh;
@@ -111,6 +21,11 @@
         z-index: 0;
     }
 
+    @media (max-width: 480px) {
+        background-attachment: scroll; // Evita problemas de performance/renderização em mobile
+    }
+
+    // Passando o z-index correto para os filhos diretos flutuarem sobre o overlay
     .page_all,
     .page_allUp,
     .id_all,
@@ -118,215 +33,177 @@
         position: relative;
         z-index: 1;
     }
+}
 
-    .page_allUp {
-        min-height: 100vh;
-        height: auto;
+/* ==========================================================================
+   2. ESTRUTURA DO LAYOUT E GRIDS DO FORMULÁRIO
+   ========================================================================== */
+.page_allUp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+
+    @media (max-width: 480px) { min-height: auto; }
+}
+
+.id_all {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    top: 0;
+    gap: 24px;
+    padding: 40px 0 80px;
+
+    @media (max-width: 768px) { padding: 30px 0 60px; gap: 20px; }
+    @media (max-width: 480px) { padding: 20px 0 40px; gap: 15px; }
+    @media (max-width: 320px) { padding: 15px 0 30px; gap: 10px; }
+}
+
+.id_ContainerbotForm {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 30px;
+    width: min(92vw, 780px);
+    min-width: 0;
+    min-height: auto;
+    height: auto;
+    border-radius: 14px;
+    border: 4px solid var(--panel-border);
+    background: linear-gradient(135deg, var(--panel-bg), var(--panel-soft));
+    color: var(--text-color);
+    box-shadow: 0 14px 28px var(--panel-shadow), 8px 8px 0 var(--panel-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    @media (max-width: 768px) {
+        width: min(95vw, 95%);
+        padding: 20px;
+        border-width: 3px;
+        box-shadow: 0 10px 20px var(--panel-shadow), 6px 6px 0 var(--panel-border);
     }
-
-    .id_all {
-        top: 0;
-        gap: 24px;
-        padding: 40px 0 80px;
-        height: auto;
-        min-height: 100vh;
+    @media (max-width: 480px) {
+        width: 100%;
+        margin: 0 10px;
+        padding: 15px;
+        box-shadow: 0 8px 16px var(--panel-shadow), 4px 4px 0 var(--panel-border);
+        border-radius: 10px;
     }
-
-    .id_ContainerbotForm {
-        width: min(92vw, 780px);
-        min-width: 0;
-        min-height: auto;
-        border-radius: 14px;
-        border: 4px solid var(--panel-border);
-        background: linear-gradient(135deg, var(--panel-bg), var(--panel-soft));
-        color: var(--text-color);
-        box-shadow: 0 14px 28px var(--panel-shadow), 8px 8px 0 var(--panel-border);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-    }
-
-    .id_ContainerGroup {
-        color: var(--text-color);
-    }
-
-    input[type="text"],
-    input[type="number"],
-    select {
-        color: var(--text-color);
-        background: var(--gray-light);
-        border: 2px solid var(--panel-border);
-        box-shadow: none;
+    @media (max-width: 320px) {
+        width: calc(100vw - 20px);
+        padding: 10px;
+        border-width: 2px;
+        box-shadow: 0 4px 8px var(--panel-shadow), 2px 2px 0 var(--panel-border);
     }
 }
 
-/* Responsiveness para Upload/Update */
+/* Linhas e Divisões do Formulário */
+.id_ContainerGroup {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    color: var(--text-color);
+
+    @media (max-width: 768px) { flex-direction: column; gap: 15px; }
+    @media (max-width: 480px) { gap: 10px; }
+    @media (max-width: 320px) { gap: 8px; }
+}
+
+.id_FormLeft {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    @media (max-width: 768px) { flex-direction: column; }
+    @media (max-width: 480px) { gap: 10px; }
+}
+
+.id_Form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+
+    @media (max-width: 768px) { gap: 12px; }
+    @media (max-width: 480px) { gap: 10px; }
+    @media (max-width: 320px) { gap: 8px; }
+}
+
+.form-group {
+    @media (max-width: 480px) {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    label {
+        @media (max-width: 480px) { margin-top: 10px; margin-bottom: 4px; font-size: 0.9em; }
+        @media (max-width: 320px) { margin-top: 8px; margin-bottom: 3px; font-size: 0.85em; }
+    }
+}
+
+
+/* ==========================================================================
+   3. ELEMENTOS DE ENTRADA (INPUTS, SELECTS, BUTTONS)
+   ========================================================================== */
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;                // Por padrão preenche o container ou o limite máximo definido abaixo
+    max-width: 300px;           // Substitui a largura fixa antiga para manter a fluidez nativa
+    height: 25px;
+    padding: 10px;
+    margin-top: 5px;
+    border: 2px solid var(--panel-border);
+    border-radius: 5px;
+    font-size: 16px;
+    color: var(--text-color);
+    background: var(--gray-light);
+    box-shadow: none;
+
+    @media (max-width: 768px) { max-width: none; font-size: 0.9em; padding: 8px; }
+    @media (max-width: 480px) { font-size: 0.85em; }
+    @media (max-width: 320px) { font-size: 0.8em; padding: 6px; }
+}
+
+/* Limitadores de tamanho máximo customizados para Desktop */
+#txt_ReleaseYe { max-width: 70px; }
+
+#txt_TitleOriginal,
+#txt_TitleLocal { max-width: 400px; }
+
+#txt_Publisher,
+#txt_Gender { max-width: 120px; }
+
+/* Reset dos tamanhos máximos em telas menores (Mobile & Tablet) */
 @media (max-width: 768px) {
-    .background-page-png {
-        .id_all {
-            padding: 30px 0 60px;
-            gap: 20px;
-        }
-
-        .id_ContainerbotForm {
-            width: min(95vw, 95%);
-            padding: 20px;
-            border: 3px solid var(--panel-border);
-            box-shadow: 0 10px 20px var(--panel-shadow), 6px 6px 0 var(--panel-border);
-        }
-
-        .id_ContainerGroup {
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .id_FormLeft {
-            width: 100%;
-            flex-direction: column;
-        }
-
-        .id_Form {
-            gap: 12px;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        select {
-            width: 100% !important;
-            font-size: 0.9em;
-            padding: 8px;
-            max-width: none !important;
-        }
-
-        #txt_ReleaseYe,
-        #txt_TitleOriginal,
-        #txt_TitleLocal,
-        #txt_Publisher,
-        #txt_Gender {
-            width: 100% !important;
-        }
+    #txt_ReleaseYe,
+    #txt_TitleOriginal,
+    #txt_TitleLocal,
+    #txt_Publisher,
+    #txt_Gender {
+        max-width: none;
     }
 }
 
 @media (max-width: 480px) {
-    .background-page-png {
-        background-attachment: scroll;
-        
-        .page_allUp {
-            min-height: auto;
-        }
-
-        .id_all {
-            padding: 20px 0 40px;
-            gap: 15px;
-            top: 0;
-        }
-
-        .id_ContainerbotForm {
-            width: 100%;
-            min-width: auto;
-            padding: 15px;
-            border: 3px solid var(--panel-border);
-            margin: 0 10px;
-            box-shadow: 0 8px 16px var(--panel-shadow), 4px 4px 0 var(--panel-border);
-            border-radius: 10px;
-        }
-
-        .id_ContainerGroup {
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .id_FormLeft {
-            width: 100%;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .id_Form {
-            gap: 10px;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        select {
-            width: 100% !important;
-            font-size: 0.85em;
-            padding: 8px;
-            max-width: none !important;
-            border: 2px solid var(--panel-border);
-        }
-
-        #txt_ReleaseYe,
-        #txt_TitleOriginal,
-        #txt_TitleLocal,
-        #txt_Publisher,
-        #txt_Gender {
-            width: 100% !important;
-            word-break: break-word;
-        }
-
-        label {
-            font-size: 0.9em;
-        }
-
-        .form-group {
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .form-group label {
-            margin-top: 10px;
-            margin-bottom: 4px;
-        }
+    #txt_ReleaseYe,
+    #txt_TitleOriginal,
+    #txt_TitleLocal,
+    #txt_Publisher,
+    #txt_Gender {
+        word-break: break-word;
     }
 }
 
-@media (max-width: 320px) {
-    .background-page-png {
-        background-attachment: scroll;
-        
-        .id_all {
-            padding: 15px 0 30px;
-            gap: 10px;
-        }
-
-        .id_ContainerbotForm {
-            width: calc(100vw - 20px);
-            margin: 0 10px;
-            padding: 10px;
-            border: 2px solid var(--panel-border);
-            box-shadow: 0 4px 8px var(--panel-shadow), 2px 2px 0 var(--panel-border);
-        }
-
-        .id_ContainerGroup {
-            gap: 8px;
-        }
-
-        .id_Form {
-            gap: 8px;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        select {
-            width: 100% !important;
-            font-size: 0.8em !important;
-            padding: 6px !important;
-            max-width: none !important;
-        }
-
-        label {
-            font-size: 0.85em;
-        }
-
-        .form-group label {
-            margin-top: 8px;
-            margin-bottom: 3px;
-        }
-
-        button[type="submit"] {
-            font-size: 0.85em;
-            padding: 8px;
-        }
+/* Botão de Envio */
+button[type="submit"] {
+    @media (max-width: 320px) {
+        font-size: 0.85em;
+        padding: 8px;
     }
 }

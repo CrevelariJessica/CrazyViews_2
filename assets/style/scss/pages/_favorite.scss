@@ -1,49 +1,37 @@
+/* ==========================================================================
+   FAVORITES COMPONENT
+   ========================================================================== */
 .fav_container {
     display: flex;
     flex-direction: column;
     position: relative;
-    padding-top: 10px;
+    padding: 10px 10px 0 10px; // Shorthand para top, right, bottom, left
     min-height: 700px;
     width: 100%;
     max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto; // Centraliza horizontalmente de forma simplificada
     z-index: 300;
-    padding-left: 10px;
-    padding-right: 10px;
     box-sizing: border-box;
-}
 
-/* Responsiveness para Favorites */
-@media (max-width: 1024px) {
-    .fav_container {
+    // Responsividade nativa e aninhada
+    @media (max-width: 1024px) {
         max-width: 95%;
     }
-}
 
-@media (max-width: 768px) {
-    .fav_container {
+    @media (max-width: 768px) {
         padding-left: 5px;
         padding-right: 5px;
         min-height: 100%;
-        width: calc(100% - 10px);
+        // width se ajusta automaticamente por conta do box-sizing: border-box + padding
     }
-}
 
-@media (max-width: 480px) {
-    .fav_container {
-        padding-left: 0;
-        padding-right: 0;
+    @media (max-width: 480px) {
+        padding: 10px 0 0 0;
         min-height: 100%;
-        padding-top: 10px;
-        width: 100%;
         margin: 0;
     }
-}
 
-@media (max-width: 320px) {
-    .fav_container {
+    @media (max-width: 320px) {
         padding-top: 8px;
-        width: 100%;
     }
 }

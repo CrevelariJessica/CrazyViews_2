@@ -1,355 +1,279 @@
-/*--------------------------------------------------------------------------- */
-/* botoes de Info */
-
-/* Container relativo para posicionar o conteúdo */
-.tooltip-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-/* Estilo e Animação do Ícone */
-.icon {
-  transition: transform 0.5s;
-  cursor: pointer;
-}
-
-.tooltip-trigger:hover .icon {
-  transform: rotate(360deg) scale(1.1);
-}
-
-/* Balão do Tooltip */
-.tooltip-content {
-  position: absolute;
-  left: 50%;
-  bottom: 2rem; /* Posição inicial levemente abaixo */
-  transform: translateX(-50%);
-  width: 160px;
-  background-color: var(--text-color);
-  color: var(--white-color);
-  padding: 12px;
-  border-radius: 4px;
-  font-size: 0.875rem;
-  text-align: center;
-  opacity: 0;
-  pointer-events: none; /* Evita que o mouse interaja com ele invisível */
-  transition: all 0.5s;
-  z-index: 10;
-}
-
-/* A "Setinha" do balão (o before:rotate-45 do Tailwind) */
-.tooltip-content::before {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 16px;
-  height: 16px;
-  background-color: var(--text-color);
-}
-
-/* Efeito de Hover: Aparecer e subir */
-.tooltip-trigger:hover + .tooltip-content {
-  opacity: 1;
-  bottom: 3.3rem; /* Posição final */
-}
-/*--------------------------------------------------------------------------- */
-/* botoes de favorito/editar/deletar */
-.example-2 {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 0 auto;
-
-  .icon-content {
-  position: relative;
-  list-style: none;
-  display: flex;
-  justify-content: center;
-
-  // O BOTÃO (Círculo Perfeito)
-  a {
-    position: relative;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: $white;
-    border: 2px solid #e8e8e8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; // Corta o preenchimento quadrado!
-    transition: all 0.3s ease;
-    z-index: 2;
-
-    svg {
-        width: 20px;
-        height: 20px;
-        z-index: 3;
-        position: relative;
-        transition: transform 0.3s ease;
-        fill: var(--gray-medium);
-        color: var(--gray-medium);
-
-        // Garante que o preenchimento não "engula" o ícone
-        pointer-events: none; 
-      }
-
-      &:hover svg {
-        transform: scale(2); // Efeito de leve pulo no hover
-        fill: var(--gray-dark);
-      }
-
-    // O preenchimento colorido
-    &::before {
-      content: "";
-      position: absolute;
-      bottom: 0; left: 0; width: 100%; height: 0;
-      z-index: 1;
-      transition: all 0.3s ease-in-out;
-    }
-
-    &:hover {
-        color: white;
-        &::before { height: 100%; }
-        svg { transform: scale(1.1); }
-        border: 3px solid var(--black-color); // Borda preta e mais grossa estilo gibi
-        transform: scale(1.05);  // Dá um leve zoom no botão inteiro
-    }
-    
-  }
-
-  // TOOLTIP (Fora do círculo)
-  .tooltip {
+/* ==========================================================================
+   1. CORE / ESTRUTURA BASE DOS TOOLTIPS
+   ========================================================================== */
+%tooltip-base {
     position: absolute;
-    top: -10px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 5px 10px;
-    color: var(--gray-light);
-    font-size: 1.2em;
-    border-radius: 6px;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
     white-space: nowrap;
     z-index: 10;
-    border: 3px solid var(--black-color);
+    opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    
-        &::after {
+    box-sizing: border-box;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                opacity 0.3s ease, 
+                visibility 0.3s ease;
+
+    // Configurações padrão de tamanho e distância (modificáveis via variáveis)
+    --tt-w: 160px;
+    --tt-bg: var(--text-color);
+    --tt-color: var(--white-color);
+    --tt-pad: 12px;
+    --tt-font: 0.875rem;
+    --tt-offset-init: -10px; // Posição inicial escondida
+    --tt-offset-active: -45px; // Para onde ele vai no hover
+    --tt-arrow-size: 16px;
+
+    background-color: var(--tt-bg);
+    color: var(--tt-color);
+    padding: var(--tt-pad);
+    font-size: var(--tt-font);
+    text-align: center;
+    top: var(--tt-offset-init);
+
+    &::after, &::before {
         content: "";
         position: absolute;
-        bottom: -10px; // Conecta o balão ao botão
+        bottom: calc((var(--tt-arrow-size) / 2) * -1);
         left: 50%;
         transform: translateX(-50%) rotate(45deg);
-        width: 12px;
-        height: 12px;
-        background: inherit; // Pega a cor (orange, yellow, red) automaticamente
-        border-style: solid;
-        box-shadow: none;
-  border-color: var(--black-color);
-  border-width: 0 3px 3px 0;
-      }
-  }
+        width: var(--tt-arrow-size);
+        height: var(--tt-arrow-size);
+        background-color: inherit;
+    }
+}
 
-  // Quando passar o mouse no LI, o TOOLTIP aparece
-  &:hover .tooltip {
+// Comportamento genérico de ativação
+%tooltip-visible {
     opacity: 1;
     visibility: visible;
-    top: -45px;
-  }
-  
-  // CORES (Aplicando ao Filled e ao Tooltip ao mesmo tempo)
-  & a[data-social="favorite"] {
-    &::before { background-color: $tertiary; }
-    & ~ .tooltip { background-color: $tertiary; } // Seleciona o tooltip vizinho
-  }
-
-  & a[data-social="edit"] {
-    &::before { background-color: $secondary; }
-    & ~ .tooltip { background-color: $secondary; }
-    &:hover { color: $color-gray-slate-hex; }
-  }
-
-  & a[data-social="delete"] {
-    &::before { background-color: $danger; }
-    & ~ .tooltip { background-color: $danger; }
-  }
-}
+    top: var(--tt-offset-active);
 }
 
-/* Responsiveness para Tooltips */
-@media (max-width: 768px) {
-  .tooltip-wrapper {
+/* ==========================================================================
+   2. ESTILOS ESPECÍFICOS E IMPLEMENTAÇÃO
+   ========================================================================== */
+
+/* --- TIPO 1: BOTÕES DE INFO --- */
+.tooltip-wrapper {
+    position: relative;
     display: inline-block;
-  }
 
-  .tooltip-content {
-    width: 140px;
-    padding: 10px;
-    font-size: 0.8rem;
-    border-radius: 3px;
-  }
+    .icon {
+        transition: transform 0.5s ease;
+        cursor: pointer;
+    }
 
-  .tooltip-content::before {
-    width: 14px;
-    height: 14px;
-    bottom: -7px;
-  }
+    &:hover .icon {
+        transform: rotate(360deg) scale(1.1);
+    }
+}
 
-  .example-2 {
-    gap: 15px;
-  }
+.tooltip-content {
+    @extend %tooltip-base;
+    border-radius: 4px;
+    
+    // Configurações para o balão ficar ACIMA do ícone e a seta apontar para BAIXO
+    --tt-w: 160px;
+    --tt-offset-init: -10px;    // Começa um pouco mais abaixo (escondido)
+    --tt-offset-active: -50px;  // Sobe no hover ficando acima do ícone
+    
+    top: auto;
+    bottom: calc(100% + var(--tt-offset-init)); // Posiciona baseado no topo do ícone
+    
+    // Força o fundo a ser preto ou a cor do texto padrão
+    background-color: var(--text-color);
+    color: var(--white-color);
 
-  .icon-content a {
-    width: 40px;
-    height: 40px;
-  }
+    // Remove o ::after modificado do outro tipo de botão
+    &::after { display: none; }
 
-  .icon-content a svg {
-    width: 18px;
-    height: 18px;
-  }
+    // Configura o ::before para ser a seta apontando para BAIXO
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 50%;
+        bottom: calc((var(--tt-arrow-size) / 2) * -1); // Trava na borda inferior do balão
+        transform: translateX(-50%) rotate(45deg);
+        width: var(--tt-arrow-size);
+        height: var(--tt-arrow-size);
+        background-color: var(--text-color); // Mesma cor do balão
+        z-index: -1;
+    }
+}
+.tooltip-wrapper:hover .tooltip-content {
+    opacity: 1;
+    visibility: visible;
+    bottom: calc(100% - var(--tt-offset-active)); // Sobe suavemente para a posição final
+}
 
-  .icon-content .tooltip {
-    font-size: 1.1em;
-    padding: 4px 8px;
-    border: 2px solid var(--black-color);
-    top: -8px;
-  }
+/* --- TIPO 2: BARRA BRUTALISTA DE AÇÕES (FAVORITO/EDITAR/DELETAR) --- */
+.example-2 {
+    display: flex;
+    gap: clamp(6px, 2.5vw, 20px);
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    flex-wrap: wrap;
 
-  .icon-content:hover .tooltip {
-    top: -40px;
-  }
+    .icon-content {
+        position: relative;
+        list-style: none;
+        display: flex;
+        justify-content: center;
+
+        @media (max-width: 480px) { gap: 8px; }
+
+        a {
+            position: relative;
+            width: var(--btn-size, 45px);
+            height: var(--btn-size, 45px);
+            border-radius: 50%;
+            background: $white;
+            border: var(--btn-border-w, 2px) solid #e8e8e8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            z-index: 2;
+            transition: all 0.3s ease;
+
+            svg {
+                width: var(--svg-size, 20px);
+                height: var(--svg-size, 20px);
+                z-index: 3;
+                position: relative;
+                fill: var(--gray-medium);
+                color: var(--gray-medium);
+                pointer-events: none; 
+                transition: transform 0.3s ease;
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                bottom: 0; left: 0; width: 100%; height: 0;
+                z-index: 1;
+                transition: all 0.3s ease-in-out;
+            }
+
+            &:hover {
+                border: var(--btn-border-hover, 3px) solid var(--black-color);
+                transform: scale(1.05);
+
+                &::before { height: 100%; }
+                svg { 
+                    transform: scale(var(--svg-hover-scale, 1.1)); 
+                    fill: var(--gray-dark);
+                }
+            }
+        }
+
+        // Customização do Tooltip Brutalismo
+        .tooltip {
+            @extend %tooltip-base;
+            --tt-w: auto;
+            --tt-pad: 5px 10px;
+            --tt-font: 1.2em;
+            --tt-color: var(--gray-light);
+            --tt-arrow-size: 12px;
+            --tt-offset-init: -10px;
+            --tt-offset-active: -45px;
+
+            border-radius: 6px;
+            border: var(--tt-border-w, 3px) solid var(--black-color);
+
+            &::after {
+                border-style: solid;
+                border-color: var(--black-color);
+                border-width: 0 var(--tt-border-w, 3px) var(--tt-border-w, 3px) 0;
+            }
+            &::before { display: none; }
+        }
+
+        &:hover .tooltip {
+            @extend %tooltip-visible;
+        }
+
+        /* LOGICA DE CORES DOS DOIS COMPONENTES */
+        & a[data-social="favorite"] {
+            &::before { background-color: $tertiary; }
+            & ~ .tooltip { --tt-bg: #{$tertiary}; }
+        }
+
+        & a[data-social="edit"] {
+            &::before { background-color: $secondary; }
+            & ~ .tooltip { --tt-bg: #{$secondary}; }
+            &:hover { color: $color-gray-slate-hex; }
+        }
+
+        & a[data-social="delete"] {
+            &::before { background-color: $danger; }
+            & ~ .tooltip { --tt-bg: #{$danger}; }
+        }
+    }
+}
+
+/* ==========================================================================
+   3. RESPONSIVIDADE CENTRALIZADA VIA VARIÁVEIS
+   ========================================================================== */
+@media (max-width: 768px) {
+    %tooltip-base {
+        --tt-w: 140px;
+        --tt-pad: 10px;
+        --tt-font: 0.8rem;
+        --tt-arrow-size: 14px;
+        --tt-offset-active: -40px;
+        --tt-border-w: 2px;
+    }
+    .example-2 .icon-content a {
+        --btn-size: 40px;
+        --svg-size: 18px;
+    }
 }
 
 @media (max-width: 480px) {
-  .tooltip-wrapper {
-    display: inline-block;
-  }
-
-  .tooltip-content {
-    width: 120px;
-    padding: 8px;
-    font-size: 0.75rem;
-    border-radius: 2px;
-    bottom: 1.5rem;
-  }
-
-  .tooltip-content::before {
-    width: 12px;
-    height: 12px;
-    bottom: -6px;
-  }
-
-  .tooltip-trigger:hover + .tooltip-content {
-    bottom: 2.8rem;
-  }
-
-  .example-2 {
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .icon-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-  }
-
-  .icon-content a {
-    width: 36px;
-    height: 36px;
-    border: 2px solid #e8e8e8;
-  }
-
-  .icon-content a svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  .icon-content a:hover {
-    border: 2px solid var(--black-color);
-    transform: scale(1.02);
-  }
-
-  .icon-content a:hover svg {
-    transform: scale(1.5);
-  }
-
-  .icon-content .tooltip {
-    font-size: 0.95em;
-    padding: 3px 6px;
-    border: 2px solid var(--black-color);
-    top: -6px;
-    white-space: nowrap;
-  }
-
-  .icon-content:hover .tooltip {
-    opacity: 1;
-    visibility: visible;
-    top: -38px;
-  }
+    %tooltip-base {
+        --tt-w: 120px;
+        --tt-pad: 8px;
+        --tt-font: 0.75rem;
+        --tt-arrow-size: 12px;
+        --tt-offset-init: -6px;
+        --tt-offset-active: -38px;
+        --tt-border-w: 2px;
+    }
+    .tooltip-content {
+        --tt-offset-init: 1.5rem;
+        --tt-offset-active: 2.8rem;
+    }
+    .example-2 .icon-content a {
+        --btn-size: 36px;
+        --svg-size: 16px;
+        --svg-hover-scale: 1.5;
+        --btn-border-hover: 2px;
+    }
 }
 
 @media (max-width: 320px) {
-  .tooltip-wrapper {
-    display: inline-block;
-  }
-
-  .tooltip-content {
-    width: 100px;
-    padding: 6px;
-    font-size: 0.7rem;
-    bottom: 1.2rem;
-  }
-
-  .tooltip-content::before {
-    width: 10px;
-    height: 10px;
-    bottom: -5px;
-  }
-
-  .tooltip-trigger:hover + .tooltip-content {
-    bottom: 2.5rem;
-  }
-
-  .example-2 {
-    gap: 6px;
-  }
-
-  .icon-content {
-    gap: 6px;
-  }
-
-  .icon-content a {
-    width: 32px;
-    height: 32px;
-    border: 1px solid #e8e8e8;
-  }
-
-  .icon-content a svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  .icon-content a:hover {
-    border: 2px solid var(--black-color);
-    transform: scale(1.01);
-  }
-
-  .icon-content .tooltip {
-    font-size: 0.8em;
-    padding: 2px 4px;
-    border: 1px solid var(--black-color);
-    top: -4px;
-  }
-
-  .icon-content:hover .tooltip {
-    top: -34px;
-  }
+    %tooltip-base {
+        --tt-w: 100px;
+        --tt-pad: 6px;
+        --tt-font: 0.7rem;
+        --tt-arrow-size: 10px;
+        --tt-offset-init: -4px;
+        --tt-offset-active: -34px;
+        --tt-border-w: 1px;
+    }
+    .tooltip-content {
+        --tt-offset-init: 1.2rem;
+        --tt-offset-active: 2.5rem;
+    }
+    .example-2 .icon-content a {
+        --btn-size: 32px;
+        --svg-size: 14px;
+        --btn-border-w: 1px;
+    }
 }

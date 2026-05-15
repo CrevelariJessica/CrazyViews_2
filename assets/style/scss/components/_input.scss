@@ -1,254 +1,174 @@
+/* CONTAINER PRINCIPAL */
 .brutalist-container {
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: clamp(8px, 2vw, 15px);
     position: relative;
     width: 100%;
-    padding: 10px;
+    padding: clamp(5px, 1.5vh, 10px);
     flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 }
 
+/* O CAMPO DE INPUT BRUTALISTA */
 .brutalist-input {
-  width: 100%;
-  padding: 25px 20px;
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--gray-dark);
-  background-color: var(--gray-light);
-  border: 4px solid var(--gray-dark);
-  position: relative;
-  overflow: hidden;
-  border-radius: 0;
-  outline: none;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 5px 5px 0 var(--gray-dark), 10px 10px 0 var(--quaternary-color);
-  min-height: 50px;
-  max-width: 100%;
-  box-sizing: border-box;
+    width: 100%;
+    padding: clamp(15px, 3vh, 25px) clamp(12px, 2vw, 20px);
+    font-size: clamp(14px, 1.5vw, 18px);
+    font-weight: bold;
+    color: var(--gray-dark);
+    background-color: var(--gray-light);
+    border: 4px solid var(--gray-dark);
+    position: relative;
+    overflow: hidden;
+    border-radius: 0;
+    outline: none;
+    box-sizing: border-box;
+    min-height: 50px;
+    max-width: 100%;
+    
+    // Sombras dinâmicas controladas via CSS variables
+    --shadow-main: 5px;
+    --shadow-sub: 10px;
+    box-shadow: var(--shadow-main) var(--shadow-main) 0 var(--gray-dark), 
+                var(--shadow-sub) var(--shadow-sub) 0 var(--quaternary-color);
+    
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    &::placeholder {
+        color: var(--senary-color);
+        transition: color 0.3s ease;
+    }
+
+    /* ESTADOS FOCADOS */
+    &:focus {
+        animation: focus-pulse 4s cubic-bezier(0.25, 0.8, 0.25, 1) infinite,
+                   glitch 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+
+        &::placeholder {
+            color: transparent;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            background: var(--gray-light);
+            z-index: -1;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--gray-dark);
+            z-index: -2;
+            clip-path: inset(0 100% 0 0);
+            animation: glitch-slice 4s steps(2, end) infinite;
+        }
+
+        // Interação casada com a label adjacente
+        & + .brutalist-label {
+            transform: rotate(0deg) scale(1.05);
+            background-color: var(--info-color);
+        }
+    }
+
+    /* RESPONSIVIDADE INTERNA DO INPUT */
+    @media (max-width: 768px) {
+        --shadow-main: 3px;
+        --shadow-sub: 6px;
+    }
+
+    @media (max-width: 480px) {
+        border-width: 3px;
+        --shadow-main: 2px;
+        --shadow-sub: 4px;
+    }
+
+    @media (max-width: 320px) {
+        border-width: 2px;
+        --shadow-main: 1px;
+        --shadow-sub: 2px;
+        min-height: 40px;
+
+        &:focus::before {
+            box-shadow: 1px 1px 0 var(--gray-dark);
+        }
+    }
 }
 
+/* A LABEL FLUTUANTE */
+.brutalist-label {
+    position: absolute;
+    left: -3px;
+    top: clamp(-25px, -3vh, -16px);
+    font-size: clamp(11px, 1.2vw, 14px);
+    font-weight: bold;
+    color: var(--gray-light);
+    background-color: var(--gray-dark);
+    padding: clamp(3px, 0.8vh, 5px) clamp(6px, 1.2vw, 10px);
+    transform: rotate(-1deg);
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    @media (max-width: 320px) {
+        left: -2px;
+    }
+}
+
+/* EFEITO DE GRADIENTE SUAVE */
+.smooth-type {
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, var(--gray-light) 0%, rgba(255, 255, 255, 0) 100%);
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &:focus::before {
+        opacity: 1;
+        animation: type-gradient 2s linear infinite;
+    }
+}
+
+/* --- ANIMAÇÕES (KEYFRAMES) --- */
 @keyframes glitch {
-  0% {
-    transform: translate(0);
-  }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
-  }
-  100% {
-    transform: translate(0);
-  }
-}
-
-.brutalist-input:focus {
-  animation: focus-pulse 4s cubic-bezier(0.25, 0.8, 0.25, 1) infinite,
-    glitch 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
-}
-
-.brutalist-input:focus::after {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: var(--gray-light);
-  z-index: -1;
-}
-
-.brutalist-input:focus::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--gray-dark);
-  z-index: -2;
-  clip-path: inset(0 100% 0 0);
-  animation: glitch-slice 4s steps(2, end) infinite;
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
 }
 
 @keyframes glitch-slice {
-  0% {
-    clip-path: inset(0 100% 0 0);
-  }
-  10% {
-    clip-path: inset(0 5% 0 0);
-  }
-  20% {
-    clip-path: inset(0 80% 0 0);
-  }
-  30% {
-    clip-path: inset(0 10% 0 0);
-  }
-  40% {
-    clip-path: inset(0 50% 0 0);
-  }
-  50% {
-    clip-path: inset(0 30% 0 0);
-  }
-  60% {
-    clip-path: inset(0 70% 0 0);
-  }
-  70% {
-    clip-path: inset(0 15% 0 0);
-  }
-  80% {
-    clip-path: inset(0 90% 0 0);
-  }
-  90% {
-    clip-path: inset(0 5% 0 0);
-  }
-  100% {
-    clip-path: inset(0 100% 0 0);
-  }
-}
-
-.brutalist-label {
-  position: absolute;
-  left: -3px;
-  top: -25px;
-  font-size: 14px;
-  font-weight: bold;
-  color: var(--gray-light);
-  background-color: var(--gray-dark);
-  padding: 5px 10px;
-  transform: rotate(-1deg);
-  z-index: 1;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.brutalist-input:focus + .brutalist-label {
-  transform: rotate(0deg) scale(1.05);
-  background-color: var(--info-color);
-}
-
-.smooth-type {
-  position: relative;
-  overflow: hidden;
-}
-
-.smooth-type::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(90deg, var(--gray-light) 0%, rgba(255, 255, 255, 0) 100%);
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.smooth-type:focus::before {
-  opacity: 1;
-  animation: type-gradient 2s linear infinite;
+    0%, 100% { clip-path: inset(0 100% 0 0); }
+    10% { clip-path: inset(0 5% 0 0); }
+    20% { clip-path: inset(0 80% 0 0); }
+    30% { clip-path: inset(0 10% 0 0); }
+    40% { clip-path: inset(0 50% 0 0); }
+    50% { clip-path: inset(0 30% 0 0); }
+    60% { clip-path: inset(0 70% 0 0); }
+    70% { clip-path: inset(0 15% 0 0); }
+    80% { clip-path: inset(0 90% 0 0); }
+    90% { clip-path: inset(0 5% 0 0); }
 }
 
 @keyframes type-gradient {
-  0% {
-    background-position: 300px 0;
-  }
-  100% {
-    background-position: 0 0;
-  }
-}
-
-.brutalist-input::placeholder {
-  color: var(--senary-color);
-  transition: color 0.3s ease;
-}
-
-.brutalist-input:focus::placeholder {
-  color: transparent;
-}
-
-.brutalist-input:focus {
-  animation: focus-pulse 4s cubic-bezier(0.25, 0.8, 0.25, 1) infinite;
+    0% { background-position: 300px 0; }
+    100% { background-position: 0 0; }
 }
 
 @keyframes focus-pulse {
-  0%,
-  100% {
-    border-color: var(--gray-dark);
-  }
-  50% {
-    border-color: var(--quaternary-color);
-  }
-}
-
-/* Responsiveness para Inputs */
-@media (max-width: 768px) {
-    .brutalist-container {
-        gap: 10px;
-        flex-direction: column;
-    }
-
-    .brutalist-input {
-        font-size: 16px;
-        padding: 20px 15px;
-        box-shadow: 3px 3px 0 var(--gray-dark), 6px 6px 0 var(--quaternary-color);
-    }
-
-    .brutalist-label {
-        font-size: 12px;
-        top: -20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .brutalist-container {
-        padding: 5px;
-        gap: 8px;
-    }
-
-    .brutalist-input {
-        font-size: 14px;
-        padding: 15px 12px;
-        border: 3px solid var(--gray-dark);
-        box-shadow: 2px 2px 0 var(--gray-dark), 4px 4px 0 var(--quaternary-color);
-    }
-
-    .brutalist-label {
-        font-size: 11px;
-        padding: 3px 8px;
-        top: -18px;
-    }
-}
-
-@media (max-width: 320px) {
-    .brutalist-container {
-        padding: 3px;
-        gap: 5px;
-        flex-direction: column;
-    }
-
-    .brutalist-input {
-        font-size: 12px;
-        padding: 12px 10px;
-        border: 2px solid var(--gray-dark);
-        box-shadow: 1px 1px 0 var(--gray-dark), 2px 2px 0 var(--quaternary-color);
-        min-height: 40px;
-    }
-
-    .brutalist-label {
-        font-size: 10px;
-        padding: 2px 6px;
-        top: -16px;
-        left: -2px;
-    }
-
-    .brutalist-input:focus::before {
-        box-shadow: 1px 1px 0 var(--gray-dark);
-    }
+    0%, 100% { border-color: var(--gray-dark); }
+    50% { border-color: var(--quaternary-color); }
 }
