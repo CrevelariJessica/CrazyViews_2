@@ -42,40 +42,47 @@ var EdtRender = {
     console.log("URL Final da Capa:", capaUrl);
             
         div.innerHTML = `
-            <div class="edition-actions-container">
-                <button class="btn-edition-menu">...</button>
-                
-                <div class="edition-menu-options" style="display: none;">
-                    <a href="#" class="menu-option btn-edit-info" 
-                       data-id="${edicao.id}" 
-                       data-numero="${edicao.edicao}" 
-                       data-date="${edicao.data_lancamento}">
-                       Editar Informações
-                    </a>
-                    
-                    <a href="#" class="menu-option btn-edit-pages" 
-                       data-id="${edicao.id}">
-                       Editar Páginas
-                    </a>
-                    
-                    <a href="#" class="menu-option btn-open-delete" 
-                       data-id="${edicao.id}" 
-                       data-numero="${edicao.edicao}">
-                       Deletar Edição
-                    </a>
-                </div>
-            </div>
-            
-            <div class="cardImage">
-                <img src="${capaUrl}" alt="Capa da Edição #${edicao.edicao}" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            
-            <div class="cardText">
+        <img src="${capaUrl}" alt="Capa da Edição #${edicao.edicao}" class="capa-background">
+
+           
+
+            <div class="conteudo-overlay">
+
+             
+
+              <div class="lombada-conteudo">
+
                 <h3 class="cardTitle">Edição #${edicao.edicao}</h3>
-                <p class="cardDateP">Data da Edição: ${edicao.data_lancamento_formatada}</p>
+
+              </div>
+
+             
+
+              <div class="detalhes-edicao">
+
+                <p class="cardDateP">Data: ${edicao.data_lancamento_formatada}</p>
+
                 <p class="cardDateP">${edicao.paginas} páginas</p>
+
                 <a href="${leituraUrl}" class="cardLink">Ler</a>
-            </div>
+
+              </div>
+
+             
+
+              <div class="acoes-edicao">
+
+                <button class="btn-editar" data-id="${edicao.id}">Editar</button>
+
+                <button class="btn-deletar" data-id="${edicao.id}">Deletar</button>
+
+              </div>
+
+
+
+            </div> 
+
+
         `;
         return div;
     }

@@ -95,59 +95,59 @@
         </div>
             </div>
                 
-                <div id="modalEdicaoTitulo" class="modal" style="display: none;">
-    <div class="modal-content modal-edit-style">
+        <div id="modalEdicaoTitulo" class="modal" style="display: none;">
+            <div class="modal-content modal-edit-style">
 
-        <div>
-            <h3>EDITAR DETALHES</h3>
-            <span class="close-button" onclick="fecharModalEdicao()">&times;</span>
-        </div>
+                <div>
+                    <h3>EDITAR DETALHES</h3>
+                    <span class="close-button" onclick="fecharModalEdicao()">&times;</span>
+                </div>
 
-        <form id="formEdicaoTitulo">
+            <form id="formEdicaoTitulo">
 
-            <input type="hidden" id="edit_id_titulo" name="id_titulo">
+                <input type="hidden" id="edit_id_titulo" name="id_titulo">
 
-            <div class="id_ContainerGroupFav">
-                <label>Título Local:</label>
-                <input type="text" id="edit_titulo" name="titulo" maxlength="100" required>
-            </div>
-
-            <div class="id_ContainerGroupFav">
-                <label>Título Original:</label>
-                <input type="text" id="edit_original" name="original" maxlength="100">
-            </div>
-
-            <div class="modal-row-group">
                 <div class="id_ContainerGroupFav">
-                    <label>Gênero:</label>
-                    <input type="text" id="edit_genero" name="genero" maxlength="50" required>
+                    <label>Título Local:</label>
+                    <input type="text" id="edit_titulo" name="titulo" maxlength="100" required>
                 </div>
 
                 <div class="id_ContainerGroupFav">
-                    <label>Editora:</label>
-                    <input type="text" id="edit_Publisher" name="editora" maxlength="50" required>
+                    <label>Título Original:</label>
+                    <input type="text" id="edit_original" name="original" maxlength="100">
                 </div>
-            </div>
 
+                <div class="modal-row-group">
+                    <div class="id_ContainerGroupFav">
+                        <label>Gênero:</label>
+                        <input type="text" id="edit_genero" name="genero" maxlength="50" required>
+                    </div>
 
-            <div class="id_ContainerGroupFav">
-                <label>Ano:</label>
-                <input type="text" id="edit_lancamento" name="lancamento" maxlength="4" required pattern="\d{4}">
-                <div class="cont_error">
-                    <div class="id_ContErr">
-                        <span id="edit_feedback_message" class="messageErro"></span> 
-                        <span id="edit_loading_message" class="messageErro" style="display:none;"></span>
+                    <div class="id_ContainerGroupFav">
+                        <label>Editora:</label>
+                        <input type="text" id="edit_Publisher" name="editora" maxlength="50" required>
                     </div>
                 </div>
-            </div>
 
-            <div class="modal-actions-wrapper">
-                <button type="button" id="cancelButton" onclick="fecharModalEdicao()">Cancelar</button>
-                <button type="submit" id="saveButton" class="btn-save-modal">Salvar alterações<span id="editSpinner" class="spinner"></span></button>
-            </div>
-        </form>
+
+                <div class="id_ContainerGroupFav">
+                    <label>Ano:</label>
+                    <input type="text" id="edit_lancamento" name="lancamento" maxlength="4" required pattern="\d{4}">
+                    <div class="cont_error">
+                        <div class="id_ContErr">
+                            <span id="edit_feedback_message" class="messageErro"></span> 
+                            <span id="edit_loading_message" class="messageErro" style="display:none;"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions-wrapper">
+                    <button type="button" id="cancelButton" onclick="fecharModalEdicao()">Cancelar</button>
+                    <button type="submit" id="saveButton" class="btn-save-modal">Salvar alterações<span id="editSpinner" class="spinner"></span></button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
 <div id="modalConfirmacaoExclusao" class="modal" style="display: none;">
     <div class="modal-content modal-delete-style">

@@ -81,7 +81,7 @@ async function carregarEdicoes(idTitulo, offset, limite, anexar = false) {
                 container.innerHTML = ''; 
             }
             
-            renderizarEdicoes(data.edicoes, anexar); 
+            EdtRender.renderList(data.edicoes, 'EditionList', anexar);
             
             return data;
 
@@ -106,58 +106,7 @@ async function carregarEdicoes(idTitulo, offset, limite, anexar = false) {
         return null;
     }
 }
-function renderizarEdicoes(edicoes, anexar = false){
-    const container = document.getElementById('EditionList');
-    
-    let htmlContent = '';
-    
-    edicoes.forEach(edicao => {
-        if(!edicao.id || !edicao.edicao){
-            console.warn("Edição inválida ou incompleta encontrada, pulando renderização.", edicao);
-            return;
-        }
-        const leituraUrl = `../view/read.html?id=${edicao.id}`;
-        const capaUrl = edicao.caminho_capa_cb ? edicao.caminho_capa_cb : '../assets/img/placeholder.jpg';
-        
-        htmlContent += `
-            <div class="cardEdition">
-                <div class="edition-actions-container" data-edition-id="${edicao.id}">
-                    <button class="btn-edition-menu">...</button>
-                    
-                    <div class="edition-menu-options" style="display: none;">
-                        
-                        <a href="#" 
-                            class="menu-option btn-edit-all" 
-                            data-id="${edicao.id}" 
-                            data-numero="${edicao.edicao}" 
-                            data-date="${edicao.data_lancamento}">
-                            Editar Informações
-                        </a>
-                        
-                        <a href="#" class="menu-option delete-action" data-id="${edicao.id}" data-numero="${edicao.edicao}">Deletar Edição</a>
-                    </div>
-                </div>
-                
-                <div class="cardImage"><img src="${capaUrl}" alt="Capa da Edição #${edicao.edicao}" style="width: 100%; height: 100%; object-fit: cover;"></div>
-                    <div class="cardText">
-                        <h3 class="cardTitle">Edição #${edicao.edicao}</h3>
-                        <p class="cardDateP">Data da Edição: ${edicao.data_lancamento_formatada}</p>
-                        <p class="cardDateP">${edicao.paginas} páginas</p>
-                        <a href="${leituraUrl}" class="cardLink">Ler</a>
-                    </div>
-                </div>
-            </div>
-        `;
-    });
-    
-    if (htmlContent) {
-        if(anexar){
-            container.insertAdjacentHTML('beforeend', htmlContent);
-        } else {
-            container.innerHTML = htmlContent;
-        }
-    }
-}
+
 async function carregarDadosBanner(idTitulo) {
     if (!idTitulo) return;
     

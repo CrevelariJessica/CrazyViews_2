@@ -808,6 +808,265 @@ header .container {
   border-bottom: 2px solid var(--body-dot-color);
 }
 
+/* Estante que agrupa os livros horizontais */
+.estante-grid {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  background: #141414;
+  border-radius: 8px;
+  min-height: 360px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto; /* Permite scroll horizontal caso haja muitas edições */
+}
+
+/* O item da edição (Lombada individual) */
+.edicao-item {
+  height: 340px;
+  flex: 1;
+  min-width: 60px; /* Garante que ela fique fininha como uma lombada quando fechada */
+  max-width: 300px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 90, 145, 0.2);
+  /* ISSO É CRUCIAL: Cria a âncora para a imagem e o overlay não vazarem */
+  position: relative;
+  /* Transição suave para o efeito sanfona funcionar */
+  transition: flex 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s;
+}
+
+/* Ativa o efeito sanfona */
+.edicao-item:hover {
+  flex: 5;
+  min-width: 240px; /* Força o card a abrir espaço suficiente para os textos */
+  border-color: #ff5a91;
+}
+
+/* Imagem de fundo ajustada */
+.capa-background {
+  /* ISSO FAZ A IMAGEM IR PRO FUNDO E IGNORAR O FLUXO DO TEXTO */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover; /* Impede a imagem de ficar esticada ou achatada */
+  z-index: 1; /* Camada mais baixa (no fundo) */
+  pointer-events: none; /* Garante que o mouse interaja com o card, não com a imagem */
+  transition: transform 0.4s ease;
+}
+
+.edicao-item:hover .capa-background {
+  transform: scale(1.03);
+}
+
+/* Camada que escurece e embaça o fundo */
+.conteudo-overlay {
+  /* Ocupa 100% do card, exatamente em cima da imagem */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2; /* Fica NA FRENTE da imagem (z-index 2 ganha do z-index 1) */
+  /* Organiza os textos em formato de coluna: Titulo no topo, infos no meio, botões embaixo */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px;
+  box-sizing: border-box; /* Impede que o padding quebre o tamanho do container */
+  background: rgba(0, 0, 0, 0.6); /* Escurece a imagem de fundo para dar leitura ao título */
+  transition: background 0.4s ease, backdrop-filter 0.4s ease;
+}
+
+/* Quando abrir, ativa o embaçado */
+.edicao-item:hover .conteudo-overlay {
+  background: rgba(15, 15, 15, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Alinhamento dos títulos rotacionados */
+.lombada-conteudo {
+  width: 100%;
+  height: 40px; /* Dá uma área fixa para o título */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.cardTitle {
+  position: absolute; /* Não disputa espaço com as bordas da div */
+  white-space: nowrap;
+  transform: rotate(-90deg); /* Em pé quando fechado */
+  transition: transform 0.4s ease, color 0.3s;
+  color: #fff;
+  text-shadow: 0 2px 4px rgb(0, 0, 0);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Quando a lombada abre, o título deita de forma limpa */
+.edicao-item:hover .cardTitle {
+  position: relative;
+  transform: rotate(0);
+  color: #ff5a91;
+  text-shadow: none;
+}
+
+/* Informações internas adicionais */
+.detalhes-edicao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  opacity: 0;
+  max-height: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease;
+  overflow: hidden;
+}
+
+.edicao-item:hover .detalhes-edicao {
+  opacity: 1;
+  max-height: 120px;
+  transform: translateY(0);
+}
+
+.cardDateP {
+  color: #ddd;
+  font-size: 0.85rem;
+  margin: 0;
+  text-align: center;
+}
+
+.cardLink {
+  display: inline-block;
+  background: #fff;
+  color: #000;
+  text-decoration: none;
+  padding: 5px 22px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.cardLink:hover {
+  background: #ff5a91;
+  color: #fff;
+}
+
+/* Botões Administrativos (Editar/Deletar) */
+.acoes-edicao {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.edicao-item:hover .acoes-edicao {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.acoes-edicao button {
+  flex: 1;
+  padding: 7px 0;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+
+.btn-editar {
+  background: #ff5a91;
+  border: none;
+  color: #fff;
+}
+
+.btn-deletar {
+  background: transparent;
+  border: 1px solid rgba(255, 90, 145, 0.6);
+  color: #ff5a91;
+}
+
+.acoes-edicao button:hover {
+  filter: brightness(1.2);
+}
+
+/* Desfocar os irmãos na mesma estante */
+.estante-grid:hover .edicao-item {
+  filter: blur(2px) opacity(0.4);
+}
+
+.estante-grid:hover .edicao-item:hover {
+  filter: blur(0) opacity(1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+/* ==========================================================================
+   3. GRID DE LISTAGEM & COMPONENTES MENU CONTEXTUAL (ATUALIZADO PARA ESTANTE)
+   ========================================================================== */
+.view_edition {
+  width: 100%;
+  padding-top: 5px;
+  position: relative;
+  z-index: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#EditionList {
+  display: flex; /* Mudado de grid para flex para ativar o efeito sanfona */
+  gap: 10px;
+  padding: 20px 0;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto; /* Se houver muitas edições, cria um scroll horizontal elegante */
+  min-height: 360px;
+  /* Estilização opcional da barra de rolagem (scrollbar) para ficar discreta */
+}
+#EditionList::-webkit-scrollbar {
+  height: 6px;
+}
+#EditionList::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+#EditionList::-webkit-scrollbar-thumb {
+  background: #ff5a91;
+  border-radius: 10px;
+}
+#EditionList {
+  /* Ajustes responsivos para telas menores */
+}
+@media (max-width: 768px) {
+  #EditionList {
+    gap: 8px;
+    padding: 15px 0;
+  }
+}
+@media (max-width: 480px) {
+  #EditionList {
+    gap: 6px;
+    padding: 10px 5px;
+  }
+}
+
 .comic-radio-group, .comic-group {
   --nav-bg: var(--comic-nav-bg);
   --nav-border: var(--comic-text-dark);
@@ -3590,315 +3849,4 @@ select {
   background-color: var(--tertiary-color);
   transform: translateY(3px);
   color: var(--background-color);
-}
-
-/* ==========================================================================
-   3. GRID DE LISTAGEM & COMPONENTES MENU CONTEXTUAL
-   ========================================================================== */
-.view_edition {
-  width: 100%;
-  height: 95%;
-  padding-top: 5px;
-  position: relative;
-  z-index: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-#EditionList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px 0;
-  width: 100%;
-}
-@media (max-width: 768px) {
-  #EditionList {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-    padding: 15px 0;
-  }
-}
-@media (max-width: 480px) {
-  #EditionList {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 10px 5px;
-  }
-}
-@media (max-width: 320px) {
-  #EditionList {
-    gap: 8px;
-    padding: 8px 3px;
-  }
-}
-
-/* --- MENUS SUSPENSOS DAS EDIDÕES --- */
-.edition-actions-container {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 10;
-}
-
-.btn-edition-menu {
-  background: var(--quaternary-color);
-  color: var(--background-color);
-  border: none;
-  border-radius: 5px;
-  padding: 3px 8px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1.2em;
-  transition: color 0.2s;
-}
-.btn-edition-menu:hover {
-  background: var(--tertiary-color);
-  color: var(--background-color);
-}
-@media (max-width: 480px) {
-  .btn-edition-menu {
-    font-size: 1em;
-    padding: 2px 6px;
-  }
-}
-@media (max-width: 320px) {
-  .btn-edition-menu {
-    font-size: 0.8em;
-    padding: 1px 4px;
-  }
-}
-
-.edition-menu-options {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  width: 200px;
-  background-color: var(--quaternary-color);
-  box-shadow: 0 4px 8px rgba(17, 17, 17, 0.1);
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-@media (max-width: 480px) {
-  .edition-menu-options {
-    width: 150px;
-  }
-}
-@media (max-width: 320px) {
-  .edition-menu-options {
-    width: 120px;
-  }
-}
-
-.menu-option {
-  padding: 10px;
-  text-decoration: none;
-  color: var(--background-color);
-  display: block;
-  white-space: nowrap;
-  transition: color 0.2s;
-}
-.menu-option:hover {
-  background-color: var(--tertiary-color);
-}
-
-.delete-action:hover {
-  background-color: var(--danger-color);
-}
-
-/* ==========================================================================
-   4. CARDS DE EXIBIÇÃO DE EDIÇÃO (VOLUMES)
-   ========================================================================== */
-.cardEdition {
-  height: 350px;
-  width: 200px;
-  background-color: var(--secondary-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(17, 17, 17, 0.1);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s;
-  position: relative;
-}
-.cardEdition:hover {
-  transform: translateX(-5px);
-  box-shadow: 0 8px 16px rgba(17, 17, 17, 0.2);
-}
-@media (max-width: 768px) {
-  .cardEdition {
-    height: 280px;
-    width: 150px;
-  }
-}
-@media (max-width: 480px) {
-  .cardEdition {
-    height: 250px;
-    width: 100%;
-    max-width: 100%;
-  }
-}
-@media (max-width: 320px) {
-  .cardEdition {
-    height: 220px;
-  }
-}
-
-.cardImage {
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  color: var(--quinary-color);
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(109, 40, 217, 0.3);
-}
-@media (max-width: 768px) {
-  .cardImage {
-    height: 220px;
-  }
-}
-@media (max-width: 480px) {
-  .cardImage {
-    height: 180px;
-  }
-}
-@media (max-width: 320px) {
-  .cardImage {
-    height: 150px;
-  }
-}
-
-.cardText {
-  padding: 15px;
-  flex-grow: 1;
-  text-align: center;
-}
-@media (max-width: 480px) {
-  .cardText {
-    padding: 10px;
-  }
-}
-
-.cardTitle {
-  margin-top: 0;
-  font-size: 1.2em;
-  color: var(--text-color);
-  padding: 2px;
-}
-@media (max-width: 768px) {
-  .cardTitle {
-    font-size: 1em;
-  }
-}
-@media (max-width: 480px) {
-  .cardTitle {
-    font-size: 0.95em;
-    word-break: break-word;
-  }
-}
-@media (max-width: 320px) {
-  .cardTitle {
-    font-size: 0.85em;
-  }
-}
-
-.cardDateP {
-  color: var(--senary-color);
-  font-size: 0.8em;
-  margin: 5px;
-}
-@media (max-width: 480px) {
-  .cardDateP {
-    font-size: 0.75em;
-    margin: 3px;
-  }
-}
-@media (max-width: 320px) {
-  .cardDateP {
-    font-size: 0.65em;
-  }
-}
-
-.cardLink {
-  display: inline-block;
-  padding: 8px 15px;
-  color: var(--secondary-color);
-  background-color: var(--quaternary-color);
-  border-radius: 4px;
-  text-decoration: none;
-  text-align: center;
-  margin-top: auto;
-  width: 100%;
-  transition: color 0.2s;
-}
-.cardLink:hover {
-  box-shadow: 0 3px 16px rgba(17, 17, 17, 0.1);
-  color: var(--background-color);
-  background-color: var(--tertiary-color);
-}
-@media (max-width: 480px) {
-  .cardLink {
-    padding: 6px 12px;
-    font-size: 0.9em;
-  }
-}
-@media (max-width: 320px) {
-  .cardLink {
-    padding: 4px 10px;
-    font-size: 0.8em;
-  }
-}
-
-/* --- BOTÃO CARREGAR MAIS EDIDÕES --- */
-.btnMoreEdt {
-  position: relative;
-  display: flex;
-  height: 40px;
-  justify-content: center;
-  padding: 5px;
-  margin-bottom: 20px;
-}
-@media (max-width: 480px) {
-  .btnMoreEdt {
-    padding: 3px;
-    margin-bottom: 10px;
-  }
-}
-@media (max-width: 320px) {
-  .btnMoreEdt {
-    padding: 2px;
-    margin-bottom: 8px;
-  }
-}
-
-#btnLoadMore {
-  background-color: var(--quaternary-color);
-  color: var(--secondary-color);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: color 0.2s;
-}
-#btnLoadMore:hover {
-  transform: translateY(5px);
-  color: var(--background-color);
-  background-color: var(--tertiary-color);
-}
-@media (max-width: 480px) {
-  #btnLoadMore {
-    font-size: 0.9em;
-    padding: 8px 16px;
-  }
-}
-@media (max-width: 320px) {
-  #btnLoadMore {
-    font-size: 0.8em;
-    padding: 6px 12px;
-  }
 }/*# sourceMappingURL=main.css.map */
