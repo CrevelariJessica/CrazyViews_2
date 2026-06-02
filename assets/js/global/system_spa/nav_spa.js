@@ -6,9 +6,6 @@ import {
     buildRouteUrl 
 } from '../system/confg_global.js';
 
-// Precisamos importar também o sincronizador que vai ficar no pilar, ou passá-lo depois.
-// Para evitar dependência circular, vamos assumir que o syncMenuWithURL estará no escopo global ou passado via callback.
-
 export async function switchPage(url, addHistory = true, syncMenuCallback) {
     if (navigationState.isNavigating || !contentDiv) return;
 
@@ -48,6 +45,8 @@ export async function switchPage(url, addHistory = true, syncMenuCallback) {
             document.querySelectorAll('.page-script').forEach(s => s.remove());
 
             // --- GESTÃO DE DEPENDÊNCIAS ---
+            
+            // 1. Dependências da página Template Update
             if (cleanPath.includes('templateUpdate')) {
                 const dependencias = [
                     'assets/js/page_edition.js',
@@ -55,6 +54,28 @@ export async function switchPage(url, addHistory = true, syncMenuCallback) {
                     'assets/js/global/api/api_t.js'
                 ];
                 for (const src of dependencias) {
+                    await new Promise((resolve) => {
+                        const s = document.createElement('script');
+                        s.src = buildAppUrl(src) + '?v=' + Date.now();
+                        s.className = 'page-script';
+                        s.onload = resolve;
+                        s.onerror = resolve;
+                        document.body.appendChild(s);
+                    });
+                }
+            }
+
+            // 2. Dependências da página de Leitura/Detalhes (read.html)
+            // A ordem aqui importa: ajudantes primeiro, ações depois, e o pilar por último.
+            if (cleanPath.includes('read')) {
+                const dependenciasRead = [
+                    'assets/js/titles/tit_render/detail_helpers.js',
+                    'assets/js/global/modal/detail_modals.js',
+                    'assets/js/editions/ed_render/detail_list_loader.js',
+                    'assets/js/editions/ed_button/detail_actions.js',
+                    'assets/js/pages/read/read_detail_manager.js' // Arquivo Pilar
+                ];
+                for (const src of dependenciasRead) {
                     await new Promise((resolve) => {
                         const s = document.createElement('script');
                         s.src = buildAppUrl(src) + '?v=' + Date.now();
