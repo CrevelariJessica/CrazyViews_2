@@ -808,263 +808,192 @@ header .container {
   border-bottom: 2px solid var(--body-dot-color);
 }
 
-/* Estante que agrupa os livros horizontais */
-.estante-grid {
-  display: flex;
-  gap: 10px;
-  padding: 15px;
-  background: #141414;
-  border-radius: 8px;
-  min-height: 360px;
-  width: 100%;
-  box-sizing: border-box;
-  overflow-x: auto; /* Permite scroll horizontal caso haja muitas edições */
-}
-
-/* O item da edição (Lombada individual) */
-.edicao-item {
-  height: 340px;
-  flex: 1;
-  min-width: 60px; /* Garante que ela fique fininha como uma lombada quando fechada */
-  max-width: 300px;
-  overflow: hidden;
-  cursor: pointer;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 90, 145, 0.2);
-  /* ISSO É CRUCIAL: Cria a âncora para a imagem e o overlay não vazarem */
-  position: relative;
-  /* Transição suave para o efeito sanfona funcionar */
-  transition: flex 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s;
-}
-
-/* Ativa o efeito sanfona */
-.edicao-item:hover {
-  flex: 5;
-  min-width: 240px; /* Força o card a abrir espaço suficiente para os textos */
-  border-color: #ff5a91;
-}
-
-/* Imagem de fundo ajustada */
-.capa-background {
-  /* ISSO FAZ A IMAGEM IR PRO FUNDO E IGNORAR O FLUXO DO TEXTO */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover; /* Impede a imagem de ficar esticada ou achatada */
-  z-index: 1; /* Camada mais baixa (no fundo) */
-  pointer-events: none; /* Garante que o mouse interaja com o card, não com a imagem */
-  transition: transform 0.4s ease;
-}
-
-.edicao-item:hover .capa-background {
-  transform: scale(1.03);
-}
-
-/* Camada que escurece e embaça o fundo */
-.conteudo-overlay {
-  /* Ocupa 100% do card, exatamente em cima da imagem */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2; /* Fica NA FRENTE da imagem (z-index 2 ganha do z-index 1) */
-  /* Organiza os textos em formato de coluna: Titulo no topo, infos no meio, botões embaixo */
+#EditionList {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 10px;
-  box-sizing: border-box; /* Impede que o padding quebre o tamanho do container */
-  background: rgba(0, 0, 0, 0.6); /* Escurece a imagem de fundo para dar leitura ao título */
-  transition: background 0.4s ease, backdrop-filter 0.4s ease;
-}
-
-/* Quando abrir, ativa o embaçado */
-.edicao-item:hover .conteudo-overlay {
-  background: rgba(15, 15, 15, 0.8);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-/* Alinhamento dos títulos rotacionados */
-.lombada-conteudo {
+  gap: 20px;
   width: 100%;
-  height: 40px; /* Dá uma área fixa para o título */
+  box-sizing: border-box;
+}
+#EditionList .hq-shelf-row {
   display: flex;
+  gap: 8px;
+  padding: 0.6em;
+  background: #1a1a1a;
+  border-radius: 6px;
+  min-height: 230px;
+  width: 100%;
+  box-sizing: border-box;
+}
+#EditionList .hq-shelf-item {
+  height: 230px;
+  flex: 1 1 60px;
+  max-width: 80px;
+  background: #212121;
+  border: 1px solid #ff5a91;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+  overflow: hidden;
+  padding: 1em;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: flex 0.4s ease, max-width 0.4s ease, background-color 0.4s ease, filter 0.4s ease, opacity 0.4s ease;
 }
-
-.cardTitle {
-  position: absolute; /* Não disputa espaço com as bordas da div */
-  white-space: nowrap;
-  transform: rotate(-90deg); /* Em pé quando fechado */
-  transition: transform 0.4s ease, color 0.3s;
-  color: #fff;
-  text-shadow: 0 2px 4px rgb(0, 0, 0);
-  font-size: 1.1rem;
-  margin: 0;
+#EditionList .hq-shelf-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  transition: all 0.4s ease;
 }
-
-/* Quando a lombada abre, o título deita de forma limpa */
-.edicao-item:hover .cardTitle {
+#EditionList .hq-shelf-item .hq-shelf-title, #EditionList .hq-shelf-item .hq-shelf-info-block, #EditionList .hq-shelf-item .hq-shelf-read-wrapper, #EditionList .hq-shelf-item .hq-shelf-actions-block {
   position: relative;
-  transform: rotate(0);
-  color: #ff5a91;
-  text-shadow: none;
+  z-index: 2;
 }
-
-/* Informações internas adicionais */
-.detalhes-edicao {
+#EditionList .hq-shelf-item .hq-shelf-title {
+  min-width: 14em;
+  text-align: center;
+  transform: rotate(-90deg);
+  transition: all 0.4s ease;
+  text-transform: uppercase;
+  color: #ff568e;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  white-space: nowrap;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+#EditionList .hq-shelf-item .hq-shelf-info-block {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
+  gap: 4px;
   opacity: 0;
+  visibility: hidden;
   max-height: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.3s ease;
-  overflow: hidden;
-}
-
-.edicao-item:hover .detalhes-edicao {
-  opacity: 1;
-  max-height: 120px;
-  transform: translateY(0);
-}
-
-.cardDateP {
-  color: #ddd;
-  font-size: 0.85rem;
-  margin: 0;
+  transition: all 0.3s ease;
   text-align: center;
 }
-
-.cardLink {
-  display: inline-block;
-  background: #fff;
-  color: #000;
-  text-decoration: none;
-  padding: 5px 22px;
-  border-radius: 20px;
+#EditionList .hq-shelf-item .hq-shelf-info-block .hq-shelf-info-text {
+  margin: 0;
   font-size: 0.85rem;
-  font-weight: bold;
-  transition: background 0.2s;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
 }
-
-.cardLink:hover {
-  background: #ff5a91;
-  color: #fff;
-}
-
-/* Botões Administrativos (Editar/Deletar) */
-.acoes-edicao {
-  display: flex;
-  gap: 8px;
-  width: 100%;
-  box-sizing: border-box;
-  justify-content: center;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
-}
-
-.edicao-item:hover .acoes-edicao {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.acoes-edicao button {
-  flex: 1;
-  padding: 7px 0;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: background 0.2s;
-}
-
-.btn-editar {
-  background: #ff5a91;
-  border: none;
-  color: #fff;
-}
-
-.btn-deletar {
-  background: transparent;
-  border: 1px solid rgba(255, 90, 145, 0.6);
+#EditionList .hq-shelf-item .hq-shelf-info-block .hq-shelf-info-text strong {
   color: #ff5a91;
 }
-
-.acoes-edicao button:hover {
-  filter: brightness(1.2);
-}
-
-/* Desfocar os irmãos na mesma estante */
-.estante-grid:hover .edicao-item {
-  filter: blur(2px) opacity(0.4);
-}
-
-.estante-grid:hover .edicao-item:hover {
-  filter: blur(0) opacity(1);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-}
-
-/* ==========================================================================
-   3. GRID DE LISTAGEM & COMPONENTES MENU CONTEXTUAL (ATUALIZADO PARA ESTANTE)
-   ========================================================================== */
-.view_edition {
-  width: 100%;
-  padding-top: 5px;
+#EditionList .hq-shelf-item .hq-shelf-read-wrapper {
   position: relative;
-  z-index: auto;
+  margin-top: 15px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  transition: all 0.3s ease;
+}
+#EditionList .hq-shelf-item .hq-shelf-read-wrapper .hq-shelf-btn-read {
+  position: relative;
+  z-index: 2;
+  padding: 8px 24px;
+  border: 2px solid #ff5a91;
+  color: #ff5a91;
+  font-weight: bold;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  background: #212121;
+  transition: all 0.2s ease;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+}
+#EditionList .hq-shelf-item .hq-shelf-read-wrapper .hq-shelf-btn-read-dashed {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 2px dashed #ff5a91;
+  border-radius: 6px;
+  opacity: 0.4;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+#EditionList .hq-shelf-item .hq-shelf-read-wrapper:hover .hq-shelf-btn-read {
+  transform: translate(3px, 3px);
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.8);
+  background: #2b2b2b;
+}
+#EditionList .hq-shelf-item .hq-shelf-read-wrapper:hover .hq-shelf-btn-read-dashed {
+  opacity: 1;
+}
+#EditionList .hq-shelf-item .hq-shelf-actions-block {
   display: flex;
-  flex-direction: column;
+  gap: 16px;
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  transition: all 0.3s ease;
 }
-
-#EditionList {
-  display: flex; /* Mudado de grid para flex para ativar o efeito sanfona */
-  gap: 10px;
-  padding: 20px 0;
-  width: 100%;
-  box-sizing: border-box;
-  overflow-x: auto; /* Se houver muitas edições, cria um scroll horizontal elegante */
-  min-height: 360px;
-  /* Estilização opcional da barra de rolagem (scrollbar) para ficar discreta */
+#EditionList .hq-shelf-item .hq-shelf-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 5px;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
-#EditionList::-webkit-scrollbar {
-  height: 6px;
+#EditionList .hq-shelf-item .hq-shelf-btn:hover {
+  transform: scale(1.15);
 }
-#EditionList::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+#EditionList .hq-shelf-item .hq-shelf-btn.hq-shelf-btn-edit:hover {
+  color: #00adb5;
 }
-#EditionList::-webkit-scrollbar-thumb {
-  background: #ff5a91;
-  border-radius: 10px;
+#EditionList .hq-shelf-item .hq-shelf-btn.hq-shelf-btn-delete:hover {
+  color: #ff2e63;
 }
-#EditionList {
-  /* Ajustes responsivos para telas menores */
+#EditionList .hq-shelf-item.is-expanded {
+  flex: 5 1 300px;
+  max-width: 400px;
+  background: #2b2b2b;
+  justify-content: flex-start;
+  z-index: 10;
 }
-@media (max-width: 768px) {
-  #EditionList {
-    gap: 8px;
-    padding: 15px 0;
-  }
+#EditionList .hq-shelf-item.is-expanded::before {
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.7);
 }
-@media (max-width: 480px) {
-  #EditionList {
-    gap: 6px;
-    padding: 10px 5px;
-  }
+#EditionList .hq-shelf-item.is-expanded .hq-shelf-title {
+  transform: rotate(0);
+  min-width: auto;
+  margin-bottom: 12px;
+}
+#EditionList .hq-shelf-item.is-expanded .hq-shelf-info-block {
+  opacity: 1;
+  visibility: visible;
+  max-height: 50px;
+  margin-top: 5px;
+}
+#EditionList .hq-shelf-item.is-expanded .hq-shelf-read-wrapper {
+  opacity: 1;
+  visibility: visible;
+  max-height: 50px;
+}
+#EditionList .hq-shelf-item.is-expanded .hq-shelf-actions-block {
+  opacity: 1;
+  visibility: visible;
+  max-height: 40px;
+  margin-top: 18px;
+}
+#EditionList .hq-shelf-item.is-blocked {
+  filter: blur(4px);
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 .comic-radio-group, .comic-group {
