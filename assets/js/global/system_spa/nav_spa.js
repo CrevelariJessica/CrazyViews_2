@@ -46,10 +46,13 @@ export async function switchPage(url, addHistory = true, syncMenuCallback) {
 
             // --- GESTÃO DE DEPENDÊNCIAS ---
             
-            // 1. Dependências da página Template Update
+            // 1. Dependências da página Template Update (page_edition.js implodido)
             if (cleanPath.includes('templateUpdate')) {
                 const dependencias = [
-                    'assets/js/page_edition.js',
+                    'assets/js/editions/ed_render/edition_date_helpers.js',
+                    'assets/js/editions/ed_render/edition_masks.js',
+                    'assets/js/editions/ed_render/edition_validators.js',
+                    'assets/js/editions/page_edition_manager.js', // O Pilar por último
                     'assets/js/editions/ed_render/edt_render.js',
                     'assets/js/global/api/api_t.js'
                 ];
