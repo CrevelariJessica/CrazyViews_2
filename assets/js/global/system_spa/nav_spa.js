@@ -87,6 +87,26 @@ export async function switchPage(url, addHistory = true, syncMenuCallback) {
                 }
             }
 
+            // 3. Dependências da listagem de títulos e favoritos (title_list.js quebrado)
+            if (cleanPath.includes('titlesUp') || cleanPath.includes('favorite')) {
+                const dependenciasTitles = [
+                    'assets/js/titles/tit_render/title_card_render.js',
+                    'assets/js/titles/tit_render/title_fetcher.js',
+                    'assets/js/titles/tit_render/title_pagination.js',
+                    'assets/js/titles/title_list_manager.js' // Arquivo Pilar por último
+                ];
+                for (const src of dependenciasTitles) {
+                    await new Promise((resolve) => {
+                        const s = document.createElement('script');
+                        s.src = buildAppUrl(src) + '?v=' + Date.now();
+                        s.className = 'page-script';
+                        s.onload = resolve;
+                        s.onerror = resolve;
+                        document.body.appendChild(s);
+                    });
+                }
+            }
+
             // --- CARREGAMENTO DO SCRIPT DA PÁGINA ---
             let scriptPath = fetchPath.replace('.html', '.js');
             scriptPath = buildAppUrl(scriptPath);

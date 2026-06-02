@@ -14,6 +14,7 @@
         delete window.toggleFavorito;
         delete window.mostrarModalConfirmacao;
         delete window.deletarTitulo;
+        delete window.TitleListCtx; // Limpa o contexto global da lista
 
         if (typeof window.titleListCleanup === 'function') window.titleListCleanup();
     };
@@ -21,9 +22,10 @@
     // Configuração do caminho da API para esta página
     window.PATH_API = 'php/api_title_list.php'; 
 
-    const load = (path) => new Promise((resolve, reject) => {
+    // Função auxiliar para carregar scripts dinamicamente
+    const load = (fullPath) => new Promise((resolve, reject) => {
         const s = document.createElement('script');
-        s.src = `/assets/js/titles/tit_button/${path}?v=${Date.now()}`;
+        s.src = `${fullPath}?v=${Date.now()}`;
         s.className = 'page-script'; 
         s.onload = resolve;
         s.onerror = reject;
@@ -34,13 +36,16 @@
         try {
             // 1. Carrega todos os comportamentos dos botões (Módulos Individuais)
             await Promise.all([
-                load("btn_favorite.js"),
-                load("btn_edit.js"),
-                load("btn_delete.js")
+                load("/assets/js/titles/tit_button/btn_favorite.js"),
+                load("/assets/js/titles/tit_button/btn_edit.js"),
+                load("/assets/js/titles/tit_button/btn_delete.js")
             ]);
 
-            // 2. Importa o motor da lista de títulos
-            await import(`/assets/js/title_list.js?v=${Date.now()}`);
+            // 2. Carrega a engrenagem e os pedaços da lista que separamos
+            await load("/assets/js/titles/tit_render/title_card_render.js");
+            await load("/assets/js/titles/tit_render/title_fetcher.js");
+            await load("/assets/js/titles/tit_render/title_pagination.js");
+            await load("/assets/js/titles/title_list_manager.js"); // O Pilar da lista
 
             // 3. Ativa o ouvinte do formulário de edição que reside no modal global
             if (typeof window.setupEditFormListener === 'function') {

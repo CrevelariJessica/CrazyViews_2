@@ -6,20 +6,25 @@
         // Remove scripts injetados nesta navegação
         document.querySelectorAll('.page-script').forEach(s => s.remove());
         
-        // Limpa as funções dos botões para evitar conflitos na próxima página
+        // Limpa as funções dos botões e referências globais para evitar conflitos na próxima página
+        delete window.PATH_API;
         delete window.abrirModalEdicao;
         delete window.fecharModalEdicao;
         delete window.setupEditFormListener;
         delete window.toggleFavorito;
         delete window.mostrarModalConfirmacao;
         delete window.deletarTitulo;
+        delete window.TitleListCtx; // Limpa o contexto global da lista
+
+        if (typeof window.titleListCleanup === 'function') window.titleListCleanup();
     };
 
     window.PATH_API = 'php/api_title_list.php'; 
 
-    const load = (path) => new Promise((resolve, reject) => {
+    // Função auxiliar para carregar scripts de forma dinâmica e limpa
+    const load = (fullPath) => new Promise((resolve, reject) => {
         const s = document.createElement('script');
-        s.src = `/assets/js/titles/tit_button/${path}?v=${Date.now()}`;
+        s.src = `${fullPath}?v=${Date.now()}`;
         s.className = 'page-script'; 
         s.onload = resolve;
         s.onerror = reject;
@@ -30,20 +35,20 @@
         try {
             // 1. Carrega os comportamentos dos botões (Módulos Individuais)
             await Promise.all([
-                load("btn_favorite.js"),
-                load("btn_edit.js"),
-                load("btn_delete.js")
+                load("/assets/js/titles/tit_button/btn_favorite.js"),
+                load("/assets/js/titles/tit_button/btn_edit.js"),
+                load("/assets/js/titles/tit_button/btn_delete.js")
             ]);
 
-            // 2. Importa o motor da lista
-            await import(`/assets/js/title_list.js?v=${Date.now()}`);
-            
+            // 2. O nav_spa.js já injetou a engrenagem da lista (render, fetcher, pagination, manager).
+                        
             // 3. Ativa o formulário de edição que agora está no modal global
             if (typeof window.setupEditFormListener === 'function') {
                 window.setupEditFormListener();
+                console.log("Formulário de edição vinculado ao Modal Global (Favoritos).");
             }
 
-            // 4. Carrega os dados da API
+            // 4. Carrega os dados da API focando apenas nos favoritos
             if (typeof window.carregarListaTitulos === 'function') {
                 window.carregarListaTitulos('mode=favorites', false);
             }
