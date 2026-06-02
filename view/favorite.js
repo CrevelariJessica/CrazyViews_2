@@ -19,7 +19,7 @@
 
     const load = (path) => new Promise((resolve, reject) => {
         const s = document.createElement('script');
-        s.src = `/assets/js/${path}?v=${Date.now()}`;
+        s.src = `/assets/js/titles/tit_button/${path}?v=${Date.now()}`;
         s.className = 'page-script'; 
         s.onload = resolve;
         s.onerror = reject;

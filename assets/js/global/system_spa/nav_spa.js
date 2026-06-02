@@ -51,8 +51,8 @@ export async function switchPage(url, addHistory = true, syncMenuCallback) {
             if (cleanPath.includes('templateUpdate')) {
                 const dependencias = [
                     'assets/js/page_edition.js',
-                    'assets/js/edt_render.js',
-                    'assets/js/api_t.js'
+                    'assets/js/editions/ed_render/edt_render.js',
+                    'assets/js/global/api/api_t.js'
                 ];
                 for (const src of dependencias) {
                     await new Promise((resolve) => {

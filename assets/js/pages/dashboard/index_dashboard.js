@@ -268,7 +268,7 @@ function renderizarPaginacao(container) {
 
     container.innerHTML = html;
 }
-// Dentro do seu arquivo assets/js/index_dashboard.js
+// Dentro do arquivo assets/js/pages/dashboard/index_dashboard.js
 
 function iniciarFiltros() {
     console.log("Anexando eventos de filtro ao Dashboard...");
@@ -296,7 +296,7 @@ function lidarSubmit(e) {
 }
 
 // EXPORTAÇÃO PARA O MESTRE
-// Removemos o DOMContentLoaded daqui porque quem manda agora é o dashboard.js (view)
+// Remover o DOMContentLoaded daqui porque quem manda agora é o dashboard.js (view)
 window.iniciarFiltros = iniciarFiltros; 
 window.carregarContadoresGerais = carregarContadoresGerais;
 window.aplicarFiltros = aplicarFiltros;
