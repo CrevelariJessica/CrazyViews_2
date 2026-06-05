@@ -201,8 +201,6 @@ a:hover {
 #sucesso_feedback {
   color: var(--success-color);
   font-weight: bold;
-  border: 1px solid currentColor;
-  padding: 8px;
 }
 
 .style_error {
@@ -819,7 +817,6 @@ header .container {
   display: flex;
   gap: 8px;
   padding: 0.6em;
-  background: #1a1a1a;
   border-radius: 6px;
   min-height: 230px;
   width: 100%;
@@ -829,8 +826,8 @@ header .container {
   height: 230px;
   flex: 1 1 60px;
   max-width: 80px;
-  background: #212121;
-  border: 1px solid #ff5a91;
+  background: var(--black-color);
+  border: 2px solid var(--secondary-color);
   border-radius: 4px;
   cursor: pointer;
   display: flex;
@@ -867,7 +864,7 @@ header .container {
   transform: rotate(-90deg);
   transition: all 0.4s ease;
   text-transform: uppercase;
-  color: #ff568e;
+  color: var(--secondary-color);
   letter-spacing: 0.1em;
   font-weight: bold;
   white-space: nowrap;
@@ -886,11 +883,11 @@ header .container {
 #EditionList .hq-shelf-item .hq-shelf-info-block .hq-shelf-info-text {
   margin: 0;
   font-size: 0.85rem;
-  color: #ffffff;
+  color: var(--white-color);
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
 }
 #EditionList .hq-shelf-item .hq-shelf-info-block .hq-shelf-info-text strong {
-  color: #ff5a91;
+  color: var(--secondary-color);
 }
 #EditionList .hq-shelf-item .hq-shelf-read-wrapper {
   position: relative;
@@ -905,12 +902,12 @@ header .container {
   position: relative;
   z-index: 2;
   padding: 8px 24px;
-  border: 2px solid #ff5a91;
-  color: #ff5a91;
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
   font-weight: bold;
   font-size: 0.95rem;
   border-radius: 6px;
-  background: #212121;
+  background: var(--black-color);
   transition: all 0.2s ease;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
 }
@@ -918,7 +915,7 @@ header .container {
   position: absolute;
   inset: 0;
   z-index: 1;
-  border: 2px dashed #ff5a91;
+  border: 2px dashed var(--secondary-color);
   border-radius: 6px;
   opacity: 0.4;
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -926,7 +923,7 @@ header .container {
 #EditionList .hq-shelf-item .hq-shelf-read-wrapper:hover .hq-shelf-btn-read {
   transform: translate(3px, 3px);
   box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.8);
-  background: #2b2b2b;
+  background: var(--black-color);
 }
 #EditionList .hq-shelf-item .hq-shelf-read-wrapper:hover .hq-shelf-btn-read-dashed {
   opacity: 1;
@@ -952,15 +949,15 @@ header .container {
   transform: scale(1.15);
 }
 #EditionList .hq-shelf-item .hq-shelf-btn.hq-shelf-btn-edit:hover {
-  color: #00adb5;
+  color: var(--quaternary-color);
 }
 #EditionList .hq-shelf-item .hq-shelf-btn.hq-shelf-btn-delete:hover {
-  color: #ff2e63;
+  color: var(--danger-color);
 }
 #EditionList .hq-shelf-item.is-expanded {
   flex: 5 1 300px;
   max-width: 400px;
-  background: #2b2b2b;
+  background: var(--black-color);
   justify-content: flex-start;
   z-index: 10;
 }
