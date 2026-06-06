@@ -8,7 +8,6 @@
 }
 
 .back_image {
-    background-image: url('../img/ph_banner01.png');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -25,9 +24,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: var(--reader-overlay);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
         z-index: 50;
     }
 }

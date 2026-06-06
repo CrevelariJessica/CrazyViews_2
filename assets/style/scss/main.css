@@ -194,7 +194,7 @@ a:hover {
 
 /* 4. FEEDBACK E ERROS (Apenas cores e fontes) */
 .messageErro, #erro_inicial {
-  color: var(--danger-color); /* Use suas variáveis aqui */
+  color: var(--danger-color);
   font-size: 0.8em;
 }
 
@@ -505,7 +505,7 @@ header .container {
   border-color: var(--secondary-color);
 }
 
-/* BOTÃO PRINCIPAL (ESTILO UIVERSE) */
+/* BOTÃO PRINCIPAL */
 .button {
   --btn-shadow: var(--gray-dark);
   font-size: clamp(0.8rem, 2vw, 1rem);
@@ -609,6 +609,48 @@ header .container {
 .close-button:hover {
   transform: scale(1.1);
   color: var(--tertiary-color);
+}
+
+.hq-form-input-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.hq-form-input-wrapper .hq-form-btn-input {
+  position: relative;
+  z-index: 2;
+  padding: 10px 28px;
+  border: 4px solid var(--gray-dark, var(--gray-dark));
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  background: var(--secondary-color);
+  cursor: pointer;
+  outline: none;
+  -webkit-appearance: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+}
+.hq-form-input-wrapper .hq-form-btn-input-dashed {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 4px solid var(--gray-dark, var(--gray-dark));
+  border-radius: 6px;
+  opacity: 0.4;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.hq-form-input-wrapper:hover .hq-form-btn-input {
+  transform: translate(3px, 3px);
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.8);
+  background: var(--primary-color);
+  color: var(--secondary-color);
+}
+.hq-form-input-wrapper:hover .hq-form-btn-input-dashed {
+  opacity: 1;
 }
 
 .theme-switch-container {
@@ -1519,9 +1561,11 @@ header .container {
 .tooltip-wrapper .icon {
   transition: transform 0.5s ease;
   cursor: pointer;
+  fill: var(--primary-color);
 }
 .tooltip-wrapper:hover .icon {
   transform: rotate(360deg) scale(1.1);
+  fill: var(--secondary-color);
 }
 
 .tooltip-content {
@@ -2862,7 +2906,6 @@ select {
 }
 
 .back_image {
-  background-image: url("../img/ph_banner01.png");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -2879,9 +2922,6 @@ select {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--reader-overlay);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   z-index: 50;
 }
 

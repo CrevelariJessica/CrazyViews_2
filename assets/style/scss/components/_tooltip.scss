@@ -63,10 +63,12 @@
     .icon {
         transition: transform 0.5s ease;
         cursor: pointer;
+        fill: var(--primary-color);
     }
 
     &:hover .icon {
         transform: rotate(360deg) scale(1.1);
+        fill: var(--secondary-color);
     }
 }
 
