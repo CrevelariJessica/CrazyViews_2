@@ -9,6 +9,8 @@ header {
     padding: clamp(8px, 2vh, 15px) 10px;
     color: var(--text-color);
     box-sizing: border-box;
+    backdrop-filter: blur(2px);
+
 
     .container {
         display: flex;

@@ -65,7 +65,7 @@ html[data-theme=dark] {
   color-scheme: dark;
   --background-color: #110f1a;
   --text-color: #f8f3e7;
-  --primary-color: #a97cff;
+  --primary-color: #fff7de;
   --secondary-color: #ffd54f;
   --tertiary-color: #ff7b5c;
   --quaternary-color: #74c8ff;
@@ -73,7 +73,7 @@ html[data-theme=dark] {
   --senary-color: #b4a8cf;
   --gray-light: #E0E8FF;
   --gray-medium: #5b5078;
-  --gray-dark: #f8f1d8;
+  --gray-dark: #ffd54f;
   --surface-color: rgba(26, 20, 44, 0.94);
   --surface-strong: #352657;
   --shadow-color: rgba(3, 3, 12, 0.48);
@@ -106,9 +106,9 @@ html[data-theme=dark] {
   --body-gradient-start: rgba(20, 15, 31, 0.88);
   --body-gradient-mid: rgba(41, 28, 72, 0.92);
   --body-gradient-end: rgba(16, 22, 48, 0.9);
-  --comic-nav-bg: #24193d;
-  --comic-text-light: #fff7de;
-  --comic-text-dark: #f8f1d8;
+  --comic-nav-bg: #6D28D9;
+  --comic-text-light: #FFD84D;
+  --comic-text-dark: #140F1F;
   --comic-accent-a: #ff647f;
   --comic-accent-b: #68c7ff;
   --comic-accent-c: #48d89d;
@@ -312,7 +312,7 @@ body::after {
   justify-content: center;
 }
 
-/* Use clamp para margens fluidas sem precisar de media queries */
+/* clamp para margens fluidas sem precisar de media queries */
 .my-8 {
   margin-top: clamp(1rem, 5vh, 2rem);
 }
@@ -379,6 +379,7 @@ header {
   padding: clamp(8px, 2vh, 15px) 10px;
   color: var(--text-color);
   box-sizing: border-box;
+  backdrop-filter: blur(2px);
 }
 header .container {
   display: flex;
@@ -1527,7 +1528,7 @@ header .container {
   border-radius: 4px;
   --tt-w: 160px;
   --tt-offset-init: -10px;
-  --tt-offset-active: -50px;
+  --tt-offset-active: -20px;
   top: auto;
   bottom: calc(100% + var(--tt-offset-init));
   background-color: var(--text-color);
@@ -1903,7 +1904,7 @@ header .container {
   }
 }
 .index_container .index_infoInfo span {
-  color: var(--quaternary-color);
+  color: var(--gray-dark);
   font-weight: bold;
   font-size: 2.2em;
 }

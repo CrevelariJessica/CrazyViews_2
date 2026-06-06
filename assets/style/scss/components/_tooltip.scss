@@ -77,7 +77,7 @@
     // Configurações para o balão ficar ACIMA do ícone e a seta apontar para BAIXO
     --tt-w: 160px;
     --tt-offset-init: -10px;    // Começa um pouco mais abaixo (escondido)
-    --tt-offset-active: -50px;  // Sobe no hover ficando acima do ícone
+    --tt-offset-active: -20px;  // Sobe no hover ficando acima do ícone
     
     top: auto;
     bottom: calc(100% + var(--tt-offset-init)); // Posiciona baseado no topo do ícone

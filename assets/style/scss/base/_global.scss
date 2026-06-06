@@ -73,7 +73,7 @@ body {
 /* 4. UTILITÁRIOS (FIXES) */
 .flex { display: flex; }
 .justify-center { justify-content: center; }
-/* Use clamp para margens fluidas sem precisar de media queries */
+/* clamp para margens fluidas sem precisar de media queries */
 .my-8 { margin-top: clamp(1rem, 5vh, 2rem); }
 .mt-3 { margin-top: clamp(0.5rem, 2vh, 1rem); }
 
