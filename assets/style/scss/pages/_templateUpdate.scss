@@ -45,9 +45,8 @@
 }
 
 .banner_inner {
-    padding-left: 15px;
+    padding-left: 10px;
     padding-top: 10px;
-    margin-top: 120px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -55,17 +54,15 @@
     position: relative;
     z-index: 300;
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .banner_content {
-    height: 200px;
-    width: 600px;
+    height: 100px;
+    width: 200px;
     margin-left: 40px;
-    color: $bg;
-    background-color: rgba($color-gray-light-hex, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-sizing: border-box;
+    color: var(--text-color);
     max-width: 100%;
 
     @media (max-width: 768px) { height: 150px; width: 70%; margin-left: 20px; }
